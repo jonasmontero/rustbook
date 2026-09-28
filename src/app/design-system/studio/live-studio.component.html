@@ -1,0 +1,340 @@
+<!-- Floating Trigger Button -->
+<button
+  type="button"
+  class="live-studio__trigger"
+  (click)="studioService.toggleStudio()"
+  [attr.aria-expanded]="studioService.isStudioOpen()"
+  title="Open Live Design Studio"
+>
+  <atom-icon name="settings" size="md" />
+  <span class="live-studio__trigger-text">Design Studio</span>
+  <span class="live-studio__trigger-badge">Live</span>
+</button>
+
+<!-- Backdrop on mobile -->
+@if (studioService.isStudioOpen()) {
+  <div class="live-studio__backdrop" (click)="studioService.toggleStudio()"></div>
+}
+
+<!-- Slide-out Drawer Panel -->
+<aside class="live-studio__drawer" [class.live-studio__drawer--open]="studioService.isStudioOpen()">
+  <!-- Header -->
+  <div class="live-studio__header">
+    <div class="live-studio__header-title">
+      <atom-icon name="settings" size="md" />
+      <h3>Design System Studio</h3>
+    </div>
+    <button
+      type="button"
+      class="live-studio__close-btn"
+      (click)="studioService.toggleStudio()"
+      title="Close Studio"
+    >
+      <atom-icon name="x" size="sm" />
+    </button>
+  </div>
+
+  <!-- Domain & Navigation Tabs -->
+  <nav class="live-studio__tabs">
+    <button
+      type="button"
+      class="live-studio__tab-btn"
+      [class.active]="activeTab() === 'theme'"
+      (click)="activeTab.set('theme')"
+    >
+      Tokens & Styles
+    </button>
+    <button
+      type="button"
+      class="live-studio__tab-btn"
+      [class.active]="activeTab() === 'knobs'"
+      (click)="activeTab.set('knobs')"
+    >
+      Component Knobs
+    </button>
+    <button
+      type="button"
+      class="live-studio__tab-btn"
+      [class.active]="activeTab() === 'export'"
+      (click)="activeTab.set('export')"
+    >
+      Export Code
+    </button>
+  </nav>
+
+  <!-- Toast Notification -->
+  @if (copiedToast()) {
+    <div class="live-studio__toast">
+      {{ copiedToast() }}
+    </div>
+  }
+
+  <!-- Drawer Body -->
+  <div class="live-studio__body">
+    <!-- TAB 1: THEME & TOKENS -->
+    @if (activeTab() === 'theme') {
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Theme Presets</h4>
+        <div class="live-studio__preset-grid">
+          @for (preset of presets; track preset.id) {
+            <button
+              type="button"
+              class="live-studio__preset-card"
+              (click)="onPresetClick(preset)"
+            >
+              <div class="live-studio__preset-colors">
+                <span [style.background]="preset.tokens.primaryColor"></span>
+                <span [style.background]="preset.tokens.secondaryColor"></span>
+                <span [style.background]="preset.tokens.accentColor"></span>
+              </div>
+              <span class="live-studio__preset-name">{{ preset.name }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Color Tokens (Live CSS Variables)</h4>
+
+        <div class="live-studio__field">
+          <label>Primary Brand Color</label>
+          <div class="live-studio__color-input-wrapper">
+            <input
+              type="color"
+              [value]="studioService.tokens().primaryColor"
+              (input)="onColorChange('primary', $any($event.target).value)"
+            />
+            <input
+              type="text"
+              [value]="studioService.tokens().primaryColor"
+              (change)="onColorChange('primary', $any($event.target).value)"
+              class="live-studio__hex-input"
+            />
+          </div>
+        </div>
+
+        <div class="live-studio__field">
+          <label>Secondary / Supporting Color</label>
+          <div class="live-studio__color-input-wrapper">
+            <input
+              type="color"
+              [value]="studioService.tokens().secondaryColor"
+              (input)="onColorChange('secondary', $any($event.target).value)"
+            />
+            <input
+              type="text"
+              [value]="studioService.tokens().secondaryColor"
+              (change)="onColorChange('secondary', $any($event.target).value)"
+              class="live-studio__hex-input"
+            />
+          </div>
+        </div>
+
+        <div class="live-studio__field">
+          <label>Accent / Highlight Color</label>
+          <div class="live-studio__color-input-wrapper">
+            <input
+              type="color"
+              [value]="studioService.tokens().accentColor"
+              (input)="onColorChange('accent', $any($event.target).value)"
+            />
+            <input
+              type="text"
+              [value]="studioService.tokens().accentColor"
+              (change)="onColorChange('accent', $any($event.target).value)"
+              class="live-studio__hex-input"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Border Radius Scale</h4>
+        <div class="live-studio__slider-wrapper">
+          <input
+            type="range"
+            min="0"
+            max="24"
+            step="1"
+            [value]="studioService.tokens().borderRadius"
+            (input)="onRadiusChange($any($event.target).value)"
+          />
+          <span class="live-studio__slider-val">{{ studioService.tokens().borderRadius }}px</span>
+        </div>
+        <div class="live-studio__radius-preview" [style.border-radius.px]="studioService.tokens().borderRadius">
+          Sample Card Shape Preview
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Typography & Mode</h4>
+
+        <div class="live-studio__field">
+          <label>Font Family</label>
+          <select
+            [value]="studioService.tokens().fontFamily"
+            (change)="onFontChange($any($event.target).value)"
+            class="live-studio__select"
+          >
+            @for (font of fontOptions; track font.value) {
+              <option [value]="font.value">{{ font.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="live-studio__field live-studio__field--row">
+          <label>Theme Appearance</label>
+          <button
+            type="button"
+            class="live-studio__toggle-btn"
+            (click)="onModeToggle()"
+          >
+            {{ studioService.tokens().mode === 'light' ? '☀️ Light Mode' : '🌙 Dark Mode' }}
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- TAB 2: COMPONENT KNOBS -->
+    @if (activeTab() === 'knobs') {
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Interactive Component: ButtonAtom</h4>
+
+        <div class="live-studio__knob-preview">
+          <atom-button
+            [label]="buttonLabel()"
+            [variant]="buttonVariant()"
+            [size]="buttonSize()"
+            [loading]="buttonLoading()"
+            [disabled]="buttonDisabled()"
+          />
+        </div>
+
+        <div class="live-studio__field">
+          <label>Button Label Text</label>
+          <input
+            type="text"
+            [value]="buttonLabel()"
+            (input)="buttonLabel.set($any($event.target).value)"
+            class="live-studio__text-input"
+          />
+        </div>
+
+        <div class="live-studio__field">
+          <label>Variant</label>
+          <div class="live-studio__button-group">
+            <button
+              type="button"
+              [class.active]="buttonVariant() === 'primary'"
+              (click)="buttonVariant.set('primary')"
+            >
+              Primary
+            </button>
+            <button
+              type="button"
+              [class.active]="buttonVariant() === 'secondary'"
+              (click)="buttonVariant.set('secondary')"
+            >
+              Secondary
+            </button>
+            <button
+              type="button"
+              [class.active]="buttonVariant() === 'danger'"
+              (click)="buttonVariant.set('danger')"
+            >
+              Danger
+            </button>
+            <button
+              type="button"
+              [class.active]="buttonVariant() === 'ghost'"
+              (click)="buttonVariant.set('ghost')"
+            >
+              Ghost
+            </button>
+          </div>
+        </div>
+
+        <div class="live-studio__field">
+          <label>Size</label>
+          <div class="live-studio__button-group">
+            <button [class.active]="buttonSize() === 'sm'" (click)="buttonSize.set('sm')">Small</button>
+            <button [class.active]="buttonSize() === 'md'" (click)="buttonSize.set('md')">Medium</button>
+            <button [class.active]="buttonSize() === 'lg'" (click)="buttonSize.set('lg')">Large</button>
+          </div>
+        </div>
+
+        <div class="live-studio__checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              [checked]="buttonLoading()"
+              (change)="buttonLoading.set($any($event.target).checked)"
+            />
+            Loading State
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              [checked]="buttonDisabled()"
+              (change)="buttonDisabled.set($any($event.target).checked)"
+            />
+            Disabled State
+          </label>
+        </div>
+
+        <div class="live-studio__code-block">
+          <pre><code>{{ getKnobButtonCode() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(getKnobButtonCode(), 'Angular Template')"
+          >
+            Copy Snippet
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- TAB 3: EXPORT CODE -->
+    @if (activeTab() === 'export') {
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Generated CSS Custom Properties</h4>
+        <p class="live-studio__section-desc">
+          Drop these tokens directly into your global <code>index.css</code> or theme stylesheet.
+        </p>
+
+        <div class="live-studio__code-block">
+          <pre><code>{{ studioService.exportCss() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(studioService.exportCss(), 'CSS Tokens')"
+          >
+            Copy CSS Variables
+          </button>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">JSON Token Schema</h4>
+        <div class="live-studio__code-block">
+          <pre><code>{{ studioService.exportJson() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(studioService.exportJson(), 'JSON Tokens')"
+          >
+            Copy JSON Schema
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Footer Actions -->
+  <div class="live-studio__footer">
+    <button type="button" class="live-studio__reset-btn" (click)="onReset()">
+      Reset Defaults
+    </button>
+  </div>
+</aside>
