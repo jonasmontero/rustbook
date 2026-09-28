@@ -20,11 +20,13 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 280px; // Sidebar width
+    margin-left: 280px;
+    min-width: 0;
     transition: margin-left 0.3s ease;
+  }
 
-    // Quando sidebar está colapsada
-    &:has(.template-dashboard-layout__sidebar organism-sidebar.organism-sidebar--collapsed) {
+  &--sidebar-collapsed {
+    .template-dashboard-layout__main {
       margin-left: 80px;
     }
   }
@@ -47,6 +49,7 @@
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   // Responsive
@@ -55,11 +58,15 @@
       margin-left: 0;
     }
 
-    &__sidebar {
-      transform: translateX(-100%);
+    &--sidebar-collapsed .template-dashboard-layout__main {
+      margin-left: 0;
+    }
 
-      &.template-dashboard-layout__sidebar--open {
-        transform: translateX(0);
+    &__sidebar {
+      transform: translateX(0);
+
+      &--collapsed {
+        transform: translateX(-100%);
       }
     }
   }

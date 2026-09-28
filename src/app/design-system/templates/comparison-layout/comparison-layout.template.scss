@@ -1,17 +1,36 @@
-/**
- * omparisonLayoutTemplate Styles
- */
-
 .template-comparison-layout {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
   background: var(--bg-secondary);
+
+  &__sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 280px;
+    min-width: 0;
+    transition: margin-left 0.3s ease;
+  }
+
+  &--sidebar-collapsed {
+    .template-comparison-layout__main {
+      margin-left: 80px;
+    }
+  }
 
   &__header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 90;
   }
 
   &__title-section {
@@ -39,9 +58,6 @@
   }
 
   &__tabs {
-    position: sticky;
-    top: 64px; // Altura do header
-    z-index: 90;
     background: var(--bg-primary);
     border-bottom: 2px solid #E2E8F0;
     box-shadow: var(--shadow-sm);
@@ -66,7 +82,7 @@
     border-bottom: 3px solid transparent;
     transition: all 0.2s ease;
     position: relative;
-    top: 2px; // Para cobrir a borda inferior
+    top: 2px;
 
     &:hover {
       color: var(--text-primary);
@@ -92,6 +108,7 @@
     max-width: 1400px;
     width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   &__tab-panel {
@@ -99,6 +116,24 @@
   }
 
   // Responsive
+  @media (max-width: 1024px) {
+    &__main {
+      margin-left: 0;
+    }
+
+    &--sidebar-collapsed .template-comparison-layout__main {
+      margin-left: 0;
+    }
+
+    &__sidebar {
+      transform: translateX(0);
+
+      &--collapsed {
+        transform: translateX(-100%);
+      }
+    }
+  }
+
   @media (max-width: 768px) {
     &__title-section {
       padding: var(--space-lg);
@@ -110,10 +145,6 @@
 
     &__subtitle {
       font-size: var(--font-size-md);
-    }
-
-    &__tabs {
-      top: 56px; // Header height mobile
     }
 
     &__tabs-container {

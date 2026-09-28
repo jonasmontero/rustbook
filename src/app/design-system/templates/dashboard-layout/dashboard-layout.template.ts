@@ -65,24 +65,27 @@ export class DashboardLayoutTemplate implements OnInit {
   @Output() userClick = new EventEmitter<void>();
 
   ngOnInit(): void {
-    // Atualizar activeRoute com base na rota atual
+    const current = this.navigationService.getCurrentRoute();
+    if (current && current !== '/') {
+      this.activeRoute = current;
+    }
     this.navigationService.currentRoute$.subscribe(route => {
       this.activeRoute = route;
     });
   }
 
   onSidebarToggle(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
     this.sidebarToggle.emit();
   }
 
   onMenuClick(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
     this.menuClick.emit();
   }
 
   onNavigate(route: string): void {
-    // Usar NavigationService para navegação real
     this.navigationService.navigateTo(route);
-    // Manter evento para compatibilidade com implementações existentes
     this.navigate.emit(route);
   }
 

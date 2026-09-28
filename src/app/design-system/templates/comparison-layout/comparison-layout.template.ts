@@ -28,9 +28,10 @@
  * ```
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderOrganism } from '../../organisms';
+import { HeaderOrganism, SidebarOrganism } from '../../organisms';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 export type ComparisonTab = 'prices' | 'benefits' | 'history';
 
@@ -43,40 +44,64 @@ interface TabConfig {
 @Component({
   selector: 'template-comparison-layout',
   standalone: true,
-  imports: [CommonModule, HeaderOrganism],
+  imports: [CommonModule, HeaderOrganism, SidebarOrganism],
   templateUrl: './comparison-layout.template.html',
   styleUrls: ['./comparison-layout.template.scss'],
 })
-export class ComparisonLayoutTemplate {
-  /** ab atualmente ativa */
+export class ComparisonLayoutTemplate implements OnInit {
+  private navigationService = inject(NavigationService);
+
+  /** Tab atualmente ativa */
   @Input() activeTab: ComparisonTab = 'prices';
 
-  /** ome do usuário para exibir no header */
+  /** Nome do usuário para exibir no header */
   @Input() userName?: string = 'User';
 
-  /** vatar do usuário */
+  /** Avatar do usuário */
   @Input() userAvatar?: string;
 
-  /** ítulo da página */
+  /** Título da página */
   @Input() title: string = 'Flight Comparison';
 
-  /** ubtítulo opcional */
+  /** Subtítulo opcional */
   @Input() subtitle?: string;
 
-  /** vento emitido quando tab é alterada */
+  /** Estado colapsado da sidebar */
+  @Input() sidebarCollapsed: boolean = false;
+
+  /** Rota ativa */
+  @Input() activeRoute: string = '/compare';
+
+  /** Evento emitido quando tab é alterada */
   @Output() tabChange = new EventEmitter<ComparisonTab>();
 
-  /** vento emitido quando usuário clica no perfil */
+  /** Evento emitido quando usuário clica no perfil */
   @Output() userClick = new EventEmitter<void>();
 
-  /** vento emitido quando menu é clicado */
+  /** Evento emitido quando menu é clicado */
   @Output() menuClick = new EventEmitter<void>();
+
+  /** Evento emitido quando sidebar é alternada */
+  @Output() sidebarToggle = new EventEmitter<void>();
+
+  /** Evento de navegação */
+  @Output() navigate = new EventEmitter<string>();
 
   tabs: TabConfig[] = [
     { id: 'prices', label: 'Prices', icon: 'price' },
     { id: 'benefits', label: 'Benefits', icon: 'star' },
     { id: 'history', label: 'History', icon: 'chart' },
   ];
+
+  ngOnInit(): void {
+    const current = this.navigationService.getCurrentRoute();
+    if (current && current !== '/') {
+      this.activeRoute = current;
+    }
+    this.navigationService.currentRoute$.subscribe(route => {
+      this.activeRoute = route;
+    });
+  }
 
   onTabClick(tabId: ComparisonTab): void {
     this.tabChange.emit(tabId);
@@ -87,7 +112,18 @@ export class ComparisonLayoutTemplate {
   }
 
   onMenuClick(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
     this.menuClick.emit();
+  }
+
+  onSidebarToggle(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.sidebarToggle.emit();
+  }
+
+  onNavigate(route: string): void {
+    this.navigationService.navigateTo(route);
+    this.navigate.emit(route);
   }
 
   isActiveTab(tabId: ComparisonTab): boolean {

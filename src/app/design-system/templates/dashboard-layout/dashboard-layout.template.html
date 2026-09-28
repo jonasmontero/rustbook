@@ -1,7 +1,6 @@
-<!-- Template de Dashboard com Sidebar + Header + Stats + Content -->
-<div class="template-dashboard-layout">
+<div class="template-dashboard-layout" [class.template-dashboard-layout--sidebar-collapsed]="sidebarCollapsed">
   <!-- Sidebar -->
-  <aside class="template-dashboard-layout__sidebar">
+  <aside class="template-dashboard-layout__sidebar" [class.template-dashboard-layout__sidebar--collapsed]="sidebarCollapsed">
     <organism-sidebar
       [collapsed]="sidebarCollapsed"
       [activeRoute]="activeRoute"

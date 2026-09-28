@@ -1,58 +1,70 @@
-<!-- Template de Comparação com Tabs -->
-<div class="template-comparison-layout">
-  <!-- Header -->
-  <header class="template-comparison-layout__header">
-    <organism-header
-      [showSearch]="false"
-      [userName]="userName"
-      [userAvatar]="userAvatar"
-      (menuClick)="onMenuClick()"
-      (userClick)="onUserClick()"
+<div class="template-comparison-layout" [class.template-comparison-layout--sidebar-collapsed]="sidebarCollapsed">
+  <!-- Sidebar -->
+  <aside class="template-comparison-layout__sidebar" [class.template-comparison-layout__sidebar--collapsed]="sidebarCollapsed">
+    <organism-sidebar
+      [collapsed]="sidebarCollapsed"
+      [activeRoute]="activeRoute"
+      (toggleCollapse)="onSidebarToggle()"
+      (navigate)="onNavigate($event)"
     />
-  </header>
+  </aside>
 
-  <!-- Page Title -->
-  <section class="template-comparison-layout__title-section">
-    <div class="template-comparison-layout__title-content">
-      <h1 class="template-comparison-layout__title">{{ title }}</h1>
-      @if (subtitle) {
-        <p class="template-comparison-layout__subtitle">{{ subtitle }}</p>
-      }
-    </div>
-  </section>
+  <!-- Main Content Area -->
+  <div class="template-comparison-layout__main">
+    <!-- Header -->
+    <header class="template-comparison-layout__header">
+      <organism-header
+        [showSearch]="false"
+        [userName]="userName"
+        [userAvatar]="userAvatar"
+        (menuClick)="onMenuClick()"
+        (userClick)="onUserClick()"
+      />
+    </header>
 
-  <!-- Tab Navigation -->
-  <nav class="template-comparison-layout__tabs">
-    <div class="template-comparison-layout__tabs-container">
-      @for (tab of tabs; track tab.id) {
-        <button
-          [class]="getTabClass(tab.id)"
-          (click)="onTabClick(tab.id)"
-          [attr.aria-selected]="isActiveTab(tab.id)"
-          role="tab">
-          <span class="template-comparison-layout__tab-label">{{ tab.label }}</span>
-        </button>
-      }
-    </div>
-  </nav>
+    <!-- Page Title -->
+    <section class="template-comparison-layout__title-section">
+      <div class="template-comparison-layout__title-content">
+        <h1 class="template-comparison-layout__title">{{ title }}</h1>
+        @if (subtitle) {
+          <p class="template-comparison-layout__subtitle">{{ subtitle }}</p>
+        }
+      </div>
+    </section>
 
-  <!-- Tab Content -->
-  <main class="template-comparison-layout__content">
-    <div class="template-comparison-layout__tab-panel" role="tabpanel">
-      <!-- Prices Tab Content -->
-      @if (activeTab === 'prices') {
-        <ng-content select="[prices]"></ng-content>
-      }
+    <!-- Tab Navigation -->
+    <nav class="template-comparison-layout__tabs">
+      <div class="template-comparison-layout__tabs-container">
+        @for (tab of tabs; track tab.id) {
+          <button
+            [class]="getTabClass(tab.id)"
+            (click)="onTabClick(tab.id)"
+            [attr.aria-selected]="isActiveTab(tab.id)"
+            role="tab">
+            <span class="template-comparison-layout__tab-label">{{ tab.label }}</span>
+          </button>
+        }
+      </div>
+    </nav>
 
-      <!-- Benefits Tab Content -->
-      @if (activeTab === 'benefits') {
-        <ng-content select="[benefits]"></ng-content>
-      }
+    <!-- Tab Content -->
+    <main class="template-comparison-layout__content">
+      <div class="template-comparison-layout__tab-panel" role="tabpanel">
+        <!-- Prices Tab Content -->
+        @if (activeTab === 'prices') {
+          <ng-content select="[prices]"></ng-content>
+        }
 
-      <!-- History Tab Content -->
-      @if (activeTab === 'history') {
-        <ng-content select="[history]"></ng-content>
-      }
-    </div>
-  </main>
+        <!-- Benefits Tab Content -->
+        @if (activeTab === 'benefits') {
+          <ng-content select="[benefits]"></ng-content>
+        }
+
+        <!-- History Tab Content -->
+        @if (activeTab === 'history') {
+          <ng-content select="[history]"></ng-content>
+        }
+      </div>
+    </main>
+  </div>
 </div>

@@ -19,45 +19,70 @@
  * ```
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchFormModel } from '../../../core/models';
-import { HeaderOrganism, SearchFormOrganism } from '../../organisms';
+import { HeaderOrganism, SearchFormOrganism, SidebarOrganism } from '../../organisms';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 @Component({
   selector: 'template-search-results-layout',
   standalone: true,
-  imports: [CommonModule, HeaderOrganism, SearchFormOrganism],
+  imports: [CommonModule, HeaderOrganism, SearchFormOrganism, SidebarOrganism],
   templateUrl: './search-results-layout.template.html',
   styleUrls: ['./search-results-layout.template.scss'],
 })
-export class SearchResultsLayoutTemplate {
-  /** ostra/esconde seção de filtros laterais */
+export class SearchResultsLayoutTemplate implements OnInit {
+  private navigationService = inject(NavigationService);
+
+  /** Mostra/esconde seção de filtros laterais */
   @Input() showFilters: boolean = true;
 
-  /** alores iniciais do formulário de busca */
+  /** Valores iniciais do formulário de busca */
   @Input() searchValues?: SearchFormModel;
 
-  /** ndica se está carregando resultados */
+  /** Indica se está carregando resultados */
   @Input() loading: boolean = false;
 
-  /** ome do usuário para exibir no header */
+  /** Nome do usuário para exibir no header */
   @Input() userName?: string = 'User';
 
-  /** vatar do usuário */
+  /** Avatar do usuário */
   @Input() userAvatar?: string;
 
-  /** vento emitido quando busca é submetida */
+  /** Estado colapsado da sidebar */
+  @Input() sidebarCollapsed: boolean = false;
+
+  /** Rota ativa */
+  @Input() activeRoute: string = '/search';
+
+  /** Evento emitido quando busca é submetida */
   @Output() searchSubmit = new EventEmitter<SearchFormModel>();
 
-  /** vento emitido quando usuário clica no perfil */
+  /** Evento emitido quando usuário clica no perfil */
   @Output() userClick = new EventEmitter<void>();
 
-  /** vento emitido quando menu é clicado */
+  /** Evento emitido quando menu é clicado */
   @Output() menuClick = new EventEmitter<void>();
 
-  /** vento emitido para toggle de filtros */
+  /** Evento emitido quando sidebar é alternada */
+  @Output() sidebarToggle = new EventEmitter<void>();
+
+  /** Evento emitido para toggle de filtros */
   @Output() filtersToggle = new EventEmitter<void>();
+
+  /** Evento de navegação */
+  @Output() navigate = new EventEmitter<string>();
+
+  ngOnInit(): void {
+    const current = this.navigationService.getCurrentRoute();
+    if (current && current !== '/') {
+      this.activeRoute = current;
+    }
+    this.navigationService.currentRoute$.subscribe(route => {
+      this.activeRoute = route;
+    });
+  }
 
   onSearchSubmit(formData: SearchFormModel): void {
     this.searchSubmit.emit(formData);
@@ -68,7 +93,18 @@ export class SearchResultsLayoutTemplate {
   }
 
   onMenuClick(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
     this.menuClick.emit();
+  }
+
+  onSidebarToggle(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.sidebarToggle.emit();
+  }
+
+  onNavigate(route: string): void {
+    this.navigationService.navigateTo(route);
+    this.navigate.emit(route);
   }
 
   onFiltersToggle(): void {

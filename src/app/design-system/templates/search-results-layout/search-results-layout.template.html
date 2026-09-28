@@ -1,47 +1,54 @@
-<!-- Template de Results de Busca -->
-<div class="template-search-results-layout">
-  <!-- Header -->
-  <header class="template-search-results-layout__header">
-    <organism-header
-      [showSearch]="false"
-      [userName]="userName"
-      [userAvatar]="userAvatar"
-      (menuClick)="onMenuClick()"
-      (userClick)="onUserClick()"
+<div class="template-search-results-layout" [class.template-search-results-layout--sidebar-collapsed]="sidebarCollapsed">
+  <!-- Sidebar -->
+  <aside class="template-search-results-layout__sidebar" [class.template-search-results-layout__sidebar--collapsed]="sidebarCollapsed">
+    <organism-sidebar
+      [collapsed]="sidebarCollapsed"
+      [activeRoute]="activeRoute"
+      (toggleCollapse)="onSidebarToggle()"
+      (navigate)="onNavigate($event)"
     />
-  </header>
+  </aside>
 
-  <!-- Search Form (Sticky) -->
-  <section class="template-search-results-layout__search">
-    <organism-search-form
-      [initialValues]="searchValues"
-      [loading]="loading"
-      (search)="onSearchSubmit($event)"
-    />
-  </section>
+  <!-- Main Content Area -->
+  <div class="template-search-results-layout__main">
+    <!-- Header -->
+    <header class="template-search-results-layout__header">
+      <organism-header
+        [showSearch]="false"
+        [userName]="userName"
+        [userAvatar]="userAvatar"
+        (menuClick)="onMenuClick()"
+        (userClick)="onUserClick()"
+      />
+    </header>
 
-  <!-- Main Content with Filters -->
-  <div class="template-search-results-layout__body">
-    <!-- Filters Sidebar (Optional) -->
-    @if (showFilters) {
-      <aside class="template-search-results-layout__filters">
-        <div class="template-search-results-layout__filters-header">
-          <h3>Filters</h3>
-          <button
-            class="template-search-results-layout__filters-toggle"
-            (click)="onFiltersToggle()"
-          >
-            
-          </button>
-        </div>
+    <!-- Search Form (In page flow, not sticky) -->
+    <section class="template-search-results-layout__search">
+      <div class="template-search-results-layout__search-container">
+        <organism-search-form
+          [initialValues]="searchValues"
+          [loading]="loading"
+          (search)="onSearchSubmit($event)"
+        />
+      </div>
+    </section>
 
-        <ng-content select="[filters]"></ng-content>
-      </aside>
-    }
+    <!-- Main Content with Filters & Results -->
+    <div class="template-search-results-layout__body">
+      <!-- Filters Sidebar -->
+      @if (showFilters) {
+        <aside class="template-search-results-layout__filters">
+          <div class="template-search-results-layout__filters-header">
+            <h3>Filters</h3>
+          </div>
+          <ng-content select="[filters]"></ng-content>
+        </aside>
+      }
 
-    <!-- Results Area -->
-    <main class="template-search-results-layout__results">
-      <ng-content></ng-content>
-    </main>
+      <!-- Results Area -->
+      <main class="template-search-results-layout__results">
+        <ng-content></ng-content>
+      </main>
+    </div>
   </div>
 </div>
