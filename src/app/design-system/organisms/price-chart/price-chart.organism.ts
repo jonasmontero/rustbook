@@ -49,9 +49,9 @@ export class PriceChartOrganism implements OnChanges {
   yLabels: Array<{ y: number; label: string }> = [];
 
   periodOptions: Array<{ value: PeriodType; label: string }> = [
-    { value: '7d', label: '7 dias' },
-    { value: '30d', label: '30 dias' },
-    { value: '90d', label: '90 dias' },
+    { value: '7d', label: '7 days' },
+    { value: '30d', label: '30 days' },
+    { value: '90d', label: '90 days' },
   ];
 
   airlines = [
@@ -83,7 +83,7 @@ export class PriceChartOrganism implements OnChanges {
     const avgLatam = this.data.reduce((sum, d) => sum + d.prices.latam, 0) / this.data.length;
 
     const minAvg = Math.min(avgAzul, avgGol, avgLatam);
-    return `Melhor média: R$ ${minAvg.toFixed(0)}`;
+    return `Best average: $${minAvg.toFixed(0)}`;
   }
 
   private updateChart(): void {

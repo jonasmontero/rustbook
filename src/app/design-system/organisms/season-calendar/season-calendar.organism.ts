@@ -22,8 +22,8 @@ export class SeasonCalendarOrganism {
   @Output() monthClick = new EventEmitter<number>();
 
   monthNames = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
   onMonthClick(month: number): void {
@@ -40,8 +40,8 @@ export class SeasonCalendarOrganism {
   }
 
   getSeasonLabel(season?: 'low' | 'medium' | 'high'): string {
-    if (!season) return 'N/D';
-    const labels = { low: 'Baixa', medium: 'Média', high: 'Alta' };
+    if (!season) return 'N/A';
+    const labels = { low: 'Low', medium: 'Mid', high: 'Peak' };
     return labels[season];
   }
 
@@ -52,7 +52,7 @@ export class SeasonCalendarOrganism {
   }
 
   formatPrice(price?: number): string {
-    if (!price) return 'N/D';
-    return `R$ ${Math.round(price)}`;
+    if (!price) return 'N/A';
+    return `$${Math.round(price)}`;
   }
 }

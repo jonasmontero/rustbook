@@ -1,8 +1,3 @@
-/**
- * idebarOrganism
- * arra lateral de navegação
- */
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextAtom, IconAtom, DividerAtom } from '../../atoms';
@@ -23,12 +18,12 @@ export interface MenuItem {
 })
 export class SidebarOrganism {
   @Input() collapsed: boolean = false;
-  @Input() activeRoute: string = '';
+  @Input() activeRoute: string = '/dashboard';
   @Input() menuItems: MenuItem[] = [
     { id: '1', label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
     { id: '2', label: 'Search Flights', icon: 'search', route: '/search' },
-    { id: '3', label: 'Comparar', icon: 'compare', route: '/compare' },
-    { id: '4', label: 'History', icon: 'history', route: '/history' },
+    { id: '3', label: 'Compare Flights', icon: 'compare', route: '/compare' },
+    { id: '4', label: 'Analytics', icon: 'analytics', route: '/analytics' },
   ];
 
   @Output() navigate = new EventEmitter<string>();
@@ -43,7 +38,7 @@ export class SidebarOrganism {
   }
 
   isActive(route: string): boolean {
-    return this.activeRoute === route;
+    return this.activeRoute === route || this.activeRoute.startsWith(route + '/');
   }
 
   getItemClass(route: string): string {

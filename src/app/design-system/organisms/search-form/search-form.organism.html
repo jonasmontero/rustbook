@@ -39,19 +39,23 @@
   <div class="organism-search-form__grid">
     <!-- Origin -->
     <div class="organism-search-form__field">
+      <label class="organism-search-form__label">Origin</label>
       <molecule-search-field
-        [placeholder]="'Origin (ex: GRU)'"
+        [placeholder]="'Origin (e.g. GRU)'"
         [value]="origin"
-        (search)="onOriginSearch($event)"
+        (valueChange)="onOriginChange($event)"
+        (search)="onOriginChange($event)"
       />
     </div>
 
     <!-- Destination -->
     <div class="organism-search-form__field">
+      <label class="organism-search-form__label">Destination</label>
       <molecule-search-field
-        [placeholder]="'Destination (ex: GIG)'"
+        [placeholder]="'Destination (e.g. GIG)'"
         [value]="destination"
-        (search)="onDestinationSearch($event)"
+        (valueChange)="onDestinationChange($event)"
+        (search)="onDestinationChange($event)"
       />
     </div>
 

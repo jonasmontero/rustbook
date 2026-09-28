@@ -79,16 +79,16 @@ export class AreaChartOrganism implements OnInit {
 
   formatValue(value: number): string {
     if (value >= 1000000) {
-      return 'R$ ' + (value / 1000000).toFixed(1) + 'M';
+      return '$' + (value / 1000000).toFixed(1) + 'M';
     }
     if (value >= 1000) {
-      return 'R$ ' + (value / 1000).toFixed(0) + 'k';
+      return '$' + (value / 1000).toFixed(0) + 'k';
     }
-    return 'R$ ' + value.toString();
+    return '$' + value.toString();
   }
 
   formatDate(date: Date): string {
-    return date.toLocaleDateString('pt-BR', { month: 'short' });
+    return date.toLocaleDateString('en-US', { month: 'short' });
   }
 
   getXLabels(): { x: number; label: string }[] {

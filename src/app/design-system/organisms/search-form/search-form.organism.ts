@@ -1,9 +1,4 @@
-/**
- * earchFormOrganism
- * ormulário completo de busca de voos com validações
- */
-
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchFormModel } from '../../../core/models';
@@ -30,16 +25,16 @@ import {
   templateUrl: './search-form.organism.html',
   styleUrls: ['./search-form.organism.scss'],
 })
-export class SearchFormOrganism {
+export class SearchFormOrganism implements OnInit {
   @Input() initialValues?: SearchFormModel;
   @Input() loading: boolean = false;
 
   @Output() search = new EventEmitter<SearchFormModel>();
 
-  origin: string = '';
-  destination: string = '';
-  departureDate: Date | null = null;
-  returnDate: Date | null = null;
+  origin: string = 'GRU';
+  destination: string = 'GIG';
+  departureDate: Date | null = new Date();
+  returnDate: Date | null = new Date(Date.now() + 7 * 86400000);
   adults: number = 1;
   children: number = 0;
   infants: number = 0;
@@ -49,28 +44,27 @@ export class SearchFormOrganism {
 
   ngOnInit(): void {
     if (this.initialValues) {
-      this.origin = this.initialValues.origin;
-      this.destination = this.initialValues.destination;
-      this.departureDate = this.initialValues.departureDate;
-      this.returnDate = this.initialValues.returnDate || null;
-      this.adults = this.initialValues.passengers.adults;
-      this.children = this.initialValues.passengers.children;
-      this.infants = this.initialValues.passengers.infants;
-      this.tripType = this.initialValues.tripType;
+      this.origin = this.initialValues.origin || 'GRU';
+      this.destination = this.initialValues.destination || 'GIG';
+      this.departureDate = this.initialValues.departureDate || new Date();
+      this.returnDate = this.initialValues.returnDate || new Date(Date.now() + 7 * 86400000);
+      this.adults = this.initialValues.passengers?.adults ?? 1;
+      this.children = this.initialValues.passengers?.children ?? 0;
+      this.infants = this.initialValues.passengers?.infants ?? 0;
+      this.tripType = this.initialValues.tripType || 'roundtrip';
     }
   }
 
-  onOriginSearch(value: string): void {
+  onOriginChange(value: string): void {
     this.origin = value;
   }
 
-  onDestinationSearch(value: string): void {
+  onDestinationChange(value: string): void {
     this.destination = value;
   }
 
   onDepartureDateChange(dateString: string): void {
     this.departureDate = dateString ? this.parseDateFromPicker(dateString) : null;
-    // Reset return date if it's before new departure date
     if (this.returnDate && this.departureDate && this.departureDate > this.returnDate) {
       this.returnDate = null;
     }
@@ -110,32 +104,32 @@ export class SearchFormOrganism {
   validate(): boolean {
     this.validationErrors = [];
 
-    if (!this.origin) {
-      this.validationErrors.push('Origin é obrigatória');
+    if (!this.origin || !this.origin.trim()) {
+      this.validationErrors.push('Origin is required.');
     }
 
-    if (!this.destination) {
-      this.validationErrors.push('Destination é obrigatório');
+    if (!this.destination || !this.destination.trim()) {
+      this.validationErrors.push('Destination is required.');
     }
 
     if (!this.departureDate) {
-      this.validationErrors.push('Data de ida é obrigatória');
+      this.validationErrors.push('Departure date is required.');
     }
 
     if (this.tripType === 'roundtrip' && !this.returnDate) {
-      this.validationErrors.push('Data de volta é obrigatória para ida e volta');
+      this.validationErrors.push('Return date is required for round trips.');
     }
 
     if (this.returnDate && this.departureDate && this.returnDate < this.departureDate) {
-      this.validationErrors.push('Data de volta deve ser posterior à data de ida');
+      this.validationErrors.push('Return date must be on or after departure date.');
     }
 
     if (this.adults < 1) {
-      this.validationErrors.push('Pelo menos 1 adulto é obrigatório');
+      this.validationErrors.push('At least 1 adult passenger is required.');
     }
 
     if (this.infants > this.adults) {
-      this.validationErrors.push('Máximo de 1 bebê por adulto');
+      this.validationErrors.push('Maximum 1 infant per adult.');
     }
 
     return this.validationErrors.length === 0;
@@ -147,8 +141,8 @@ export class SearchFormOrganism {
     }
 
     const formData: SearchFormModel = {
-      origin: this.origin,
-      destination: this.destination,
+      origin: this.origin.trim(),
+      destination: this.destination.trim(),
       departureDate: this.departureDate!,
       returnDate: this.returnDate || undefined,
       passengers: {
@@ -170,21 +164,20 @@ export class SearchFormOrganism {
     return this.departureDate || undefined;
   }
 
-  /** onverte Date para string no formato YYYY-MM-DD para o date picker */
   formatDateForPicker(date: Date | null): string {
     if (!date) return '';
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return '';
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
 
-  /** onverte string YYYY-MM-DD para Date */
   parseDateFromPicker(dateString: string): Date {
     return new Date(dateString + 'T00:00:00');
   }
 
-  /** etorna data mínima de retorno formatada para o picker */
   getMinReturnDateString(): string {
     return this.formatDateForPicker(this.departureDate);
   }

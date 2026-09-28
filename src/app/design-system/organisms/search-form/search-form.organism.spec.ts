@@ -18,8 +18,8 @@ describe('SearchFormOrganism', () => {
     const fixture = TestBed.createComponent(SearchFormOrganism);
     const component = fixture.componentInstance;
 
-    expect(component.origin).toBe('');
-    expect(component.destination).toBe('');
+    expect(component.origin).toBe('GRU');
+    expect(component.destination).toBe('GIG');
     expect(component.adults).toBe(1);
     expect(component.children).toBe(0);
     expect(component.infants).toBe(0);
@@ -31,8 +31,8 @@ describe('SearchFormOrganism', () => {
     const component = fixture.componentInstance;
 
     const initialValues: SearchFormModel = {
-      origin: 'GRU',
-      destination: 'GIG',
+      origin: 'BSB',
+      destination: 'SSA',
       departureDate: new Date('2026-02-15'),
       returnDate: new Date('2026-02-22'),
       passengers: { adults: 2, children: 1, infants: 0 },
@@ -42,8 +42,8 @@ describe('SearchFormOrganism', () => {
     component.initialValues = initialValues;
     component.ngOnInit();
 
-    expect(component.origin).toBe('GRU');
-    expect(component.destination).toBe('GIG');
+    expect(component.origin).toBe('BSB');
+    expect(component.destination).toBe('SSA');
     expect(component.adults).toBe(2);
     expect(component.children).toBe(1);
   });
@@ -51,6 +51,8 @@ describe('SearchFormOrganism', () => {
   it('should validate required fields', () => {
     const fixture = TestBed.createComponent(SearchFormOrganism);
     const component = fixture.componentInstance;
+    component.origin = '';
+    component.destination = '';
 
     const isValid = component.validate();
 
@@ -68,7 +70,7 @@ describe('SearchFormOrganism', () => {
     const isValid = component.validate();
 
     expect(isValid).toBe(false);
-    expect(component.validationErrors).toContain('Máximo de 1 bebê por adulto');
+    expect(component.validationErrors).toContain('Maximum 1 infant per adult.');
   });
 
   it('should validate return date >= departure date', () => {
@@ -84,7 +86,7 @@ describe('SearchFormOrganism', () => {
 
     expect(isValid).toBe(false);
     expect(component.validationErrors).toContain(
-      'Data de volta deve ser posterior à data de ida'
+      'Return date must be on or after departure date.'
     );
   });
 
@@ -98,15 +100,15 @@ describe('SearchFormOrganism', () => {
     component.returnDate = new Date('2026-02-22');
     component.adults = 2;
 
-    let emittedData: SearchFormModel | null = null;
-    component.search.subscribe((data) => (emittedData = data));
+    let emittedData: SearchFormModel | undefined;
+    component.search.subscribe((data: SearchFormModel) => (emittedData = data));
 
     component.onSubmit();
 
-    expect(emittedData).not.toBeNull();
-    expect(emittedData?.origin).toBe('GRU');
-    expect(emittedData?.destination).toBe('GIG');
-    expect(emittedData?.passengers.adults).toBe(2);
+    expect(emittedData).toBeDefined();
+    expect(emittedData!.origin).toBe('GRU');
+    expect(emittedData!.destination).toBe('GIG');
+    expect(emittedData!.passengers.adults).toBe(2);
   });
 
   it('should auto-adjust infants when adults decrease', () => {

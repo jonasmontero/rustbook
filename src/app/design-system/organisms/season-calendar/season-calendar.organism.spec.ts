@@ -28,17 +28,17 @@ describe('SeasonCalendarOrganism', () => {
     const fixture = TestBed.createComponent(SeasonCalendarOrganism);
     const component = fixture.componentInstance;
 
-    expect(component.getSeasonLabel('low')).toBe('Baixa');
-    expect(component.getSeasonLabel('medium')).toBe('Média');
-    expect(component.getSeasonLabel('high')).toBe('Alta');
-    expect(component.getSeasonLabel(undefined)).toBe('N/D');
+    expect(component.getSeasonLabel('low')).toBe('Low');
+    expect(component.getSeasonLabel('medium')).toBe('Mid');
+    expect(component.getSeasonLabel('high')).toBe('Peak');
+    expect(component.getSeasonLabel(undefined)).toBe('N/A');
   });
 
   it('should format price correctly', () => {
     const fixture = TestBed.createComponent(SeasonCalendarOrganism);
     const component = fixture.componentInstance;
 
-    expect(component.formatPrice(450.75)).toBe('R$ 451');
-    expect(component.formatPrice(undefined)).toBe('N/D');
+    expect(component.formatPrice(450.75)).toBe('$451');
+    expect(component.formatPrice(undefined)).toBe('N/A');
   });
 });

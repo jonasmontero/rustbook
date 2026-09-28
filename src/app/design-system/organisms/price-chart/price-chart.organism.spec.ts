@@ -57,8 +57,8 @@ describe('PriceChartOrganism', () => {
     component.data = mockData;
 
     const bestPeriod = component.getBestPeriod();
-    expect(bestPeriod).toContain('Melhor média');
-    expect(bestPeriod).toContain('R$');
+    expect(bestPeriod).toContain('Best average');
+    expect(bestPeriod).toContain('$');
   });
 
   it('should generate SVG paths from data', () => {
