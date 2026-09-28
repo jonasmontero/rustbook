@@ -1,34 +1,28 @@
 /**
- * ️ Application Configuration
+ * Application Configuration
  *
- * onfiguração principal da aplicação SkyCompare.
- * nclui routing, hydration e error handling.
+ * Core application providers, router configuration, and zoneless change detection.
  */
 
 import {
   ApplicationConfig,
-  provideZoneChangeDetection,
-  provideBrowserGlobalErrorListeners
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import {
   provideRouter,
   withComponentInputBinding,
-  withViewTransitions
+  withViewTransitions,
 } from '@angular/router';
-import {
-  provideClientHydration,
-  withEventReplay
-} from '@angular/platform-browser';
 
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(
       routes,
-      withComponentInputBinding()
-    ),
-    provideClientHydration(withEventReplay())
+      withComponentInputBinding(),
+      withViewTransitions()
+    )
   ]
 };
