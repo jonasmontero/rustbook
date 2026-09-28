@@ -11,3 +11,4 @@ export * from './home-page';
 export * from './search-page';
 export * from './comparison-page';
 export * from './analytics-page';
+export * from './workbench-page';

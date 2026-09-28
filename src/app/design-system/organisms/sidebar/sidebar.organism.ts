@@ -24,6 +24,7 @@ export class SidebarOrganism {
     { id: '2', label: 'Search Flights', icon: 'search', route: '/search' },
     { id: '3', label: 'Compare Flights', icon: 'compare', route: '/compare' },
     { id: '4', label: 'Analytics', icon: 'analytics', route: '/analytics' },
+    { id: '5', label: 'Component Workbench', icon: 'settings', route: '/workbench' },
   ];
 
   @Output() navigate = new EventEmitter<string>();

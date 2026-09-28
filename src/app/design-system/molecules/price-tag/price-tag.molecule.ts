@@ -78,10 +78,10 @@ export class PriceTagMolecule {
   /** estacar preço */
   @Input() highlighted: boolean = false;
 
-  /** ormata preço */
+  /** Format price */
   formatPrice(price: number): string {
-    return `${this.currency} ${price.toLocaleString('pt-BR', {
-      minimumFractionDigits: 2,
+    return `${this.currency}${price.toLocaleString('en-US', {
+      minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     })}`;
   }

@@ -44,6 +44,13 @@ export const routes: Routes = [
     title: 'Analytics - SkyCompare'
   },
   {
+    path: 'workbench',
+    loadComponent: () =>
+      import('./design-system/pages/workbench-page/workbench-page.component')
+        .then(m => m.WorkbenchPageComponent),
+    title: 'Component Workbench - Design System'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

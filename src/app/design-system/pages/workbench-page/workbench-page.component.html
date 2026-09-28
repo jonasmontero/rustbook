@@ -1,0 +1,295 @@
+<template-dashboard-layout [activeRoute]="'/workbench'">
+  <div class="workbench">
+    <!-- Header Banner -->
+    <header class="workbench__header">
+      <div class="workbench__header-content">
+        <span class="workbench__badge">Design System Workbench</span>
+        <h1 class="workbench__title">Interactive Component Gallery</h1>
+        <p class="workbench__desc">
+          Test, preview, and customize every atom, molecule, and organism live in your browser.
+          Open the floating <strong>Design Studio</strong> at the bottom right to tweak colors, radius, and fonts in real time.
+        </p>
+      </div>
+      <div class="workbench__header-actions">
+        <atom-button
+          label="Open Design Studio"
+          variant="primary"
+          size="md"
+          (clicked)="studioService.toggleStudio()"
+        />
+      </div>
+    </header>
+
+    <!-- Section 1: Buttons & Actions -->
+    <section class="workbench__section">
+      <div class="workbench__section-header">
+        <h2>Atoms: Buttons & Variants</h2>
+        <p>Interactive button atoms with states, sizes, and icon variations.</p>
+      </div>
+
+      <div class="workbench__grid workbench__grid--4">
+        <div class="workbench__card">
+          <span class="workbench__card-label">Primary Variant</span>
+          <div class="workbench__preview">
+            <atom-button label="Primary Action" variant="primary" size="md" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Secondary Variant</span>
+          <div class="workbench__preview">
+            <atom-button label="Secondary Action" variant="secondary" size="md" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Danger Variant</span>
+          <div class="workbench__preview">
+            <atom-button label="Delete / Cancel" variant="danger" size="md" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Ghost / Flat Variant</span>
+          <div class="workbench__preview">
+            <atom-button label="Ghost Action" variant="ghost" size="md" />
+          </div>
+        </div>
+      </div>
+
+      <div class="workbench__grid workbench__grid--3">
+        <div class="workbench__card">
+          <span class="workbench__card-label">Button Sizes (sm, md, lg)</span>
+          <div class="workbench__preview workbench__preview--row">
+            <atom-button label="Small" variant="primary" size="sm" />
+            <atom-button label="Medium" variant="primary" size="md" />
+            <atom-button label="Large" variant="primary" size="lg" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Loading State</span>
+          <div class="workbench__preview">
+            <atom-button label="Submitting..." variant="primary" [loading]="true" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Disabled State</span>
+          <div class="workbench__preview">
+            <atom-button label="Disabled Action" variant="primary" [disabled]="true" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Badges & Tags -->
+    <section class="workbench__section">
+      <div class="workbench__section-header">
+        <h2>Atoms & Molecules: Badges & Price Tags</h2>
+        <p>Status indicators, pill tags, and currency price badges.</p>
+      </div>
+
+      <div class="workbench__grid workbench__grid--4">
+        <div class="workbench__card">
+          <span class="workbench__card-label">Status Badges</span>
+          <div class="workbench__preview workbench__preview--row">
+            <atom-badge label="Active" variant="success" />
+            <atom-badge label="Pending" variant="warning" />
+            <atom-badge label="Delayed" variant="danger" />
+            <atom-badge label="Info" variant="default" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Price Tags</span>
+          <div class="workbench__preview workbench__preview--row">
+            <molecule-price-tag [price]="380" [currency]="'$'" />
+            <molecule-price-tag [price]="520" [currency]="'$'" [discount]="20" trend="down" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Airline Badges</span>
+          <div class="workbench__preview workbench__preview--row">
+            <molecule-airline-logo airline="azul" size="md" />
+            <molecule-airline-logo airline="gol" size="md" />
+            <molecule-airline-logo airline="latam" size="md" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Avatars</span>
+          <div class="workbench__preview workbench__preview--row">
+            <atom-avatar alt="Alex Rivera" size="sm" />
+            <atom-avatar alt="Sarah Connor" size="md" />
+            <atom-avatar alt="David Beckham" size="lg" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Inputs & Controls -->
+    <section class="workbench__section">
+      <div class="workbench__section-header">
+        <h2>Molecules: Interactive Form Fields</h2>
+        <p>Search inputs, date pickers, and alerts with live change binding.</p>
+      </div>
+
+      <div class="workbench__grid workbench__grid--2">
+        <div class="workbench__card">
+          <span class="workbench__card-label">Live SearchField Molecule</span>
+          <div class="workbench__preview">
+            <molecule-search-field
+              [placeholder]="'Type to search...'"
+              [value]="testSearch()"
+              (valueChange)="testSearch.set($event)"
+            />
+            <span class="workbench__hint">Value: "{{ testSearch() }}"</span>
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">DatePicker Molecule</span>
+          <div class="workbench__preview">
+            <molecule-date-picker
+              label="Departure Date"
+              [value]="testDate()"
+              (dateChange)="testDate.set($event)"
+            />
+            <span class="workbench__hint">Selected Date: {{ testDate() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbench__grid workbench__grid--3">
+        <div class="workbench__card">
+          <span class="workbench__card-label">Input Atom</span>
+          <div class="workbench__preview">
+            <atom-input
+              placeholder="Type anything here..."
+              [value]="testInputValue()"
+              (valueChange)="testInputValue.set($event)"
+            />
+            <atom-text variant="caption">Live value: {{ testInputValue() }}</atom-text>
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Spinners & Loading Atoms</span>
+          <div class="workbench__preview workbench__preview--row">
+            <atom-spinner size="sm" />
+            <atom-spinner size="md" />
+            <atom-spinner size="lg" />
+          </div>
+        </div>
+
+        <div class="workbench__card">
+          <span class="workbench__card-label">Tooltips</span>
+          <div class="workbench__preview">
+            <atom-tooltip text="Verified SkyCompare Token">
+              <atom-badge label="Hover over me" variant="default" />
+            </atom-tooltip>
+          </div>
+        </div>
+      </div>
+
+      <atom-divider orientation="horizontal" [spacing]="'md'" />
+
+      <div class="workbench__grid workbench__grid--3">
+        <div class="workbench__card">
+          <molecule-stat-card
+            title="Total Routes"
+            value="1,420"
+            trend="+12%"
+            trendDirection="up"
+            icon="plane"
+          />
+        </div>
+        <div class="workbench__card">
+          <molecule-stat-card
+            title="Active Fares"
+            value="$420 avg"
+            trend="-5%"
+            trendDirection="down"
+            icon="price"
+          />
+        </div>
+        <div class="workbench__card">
+          <molecule-stat-card
+            title="Searches Today"
+            value="28.4k"
+            trend="+18%"
+            trendDirection="up"
+            icon="search"
+          />
+        </div>
+      </div>
+
+      <div class="workbench__card">
+        <span class="workbench__card-label">Feedback Alerts</span>
+        <div class="workbench__preview workbench__preview--col">
+          <molecule-alert-message
+            type="success"
+            message="Your flight booking was confirmed successfully."
+            [dismissible]="true"
+          />
+          <molecule-alert-message
+            type="error"
+            message="Please provide a valid destination city before searching."
+            [dismissible]="true"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Visual SVG Icons Catalog -->
+    <section class="workbench__section">
+      <div class="workbench__section-header">
+        <h2>Atoms: Complete SVG Icon Library</h2>
+        <p>Pure vectorized SVG icons scale seamlessly to any size and inherit CSS token colors.</p>
+      </div>
+
+      <div class="workbench__icon-grid">
+        @for (iconName of allIcons; track iconName) {
+          <div class="workbench__icon-card">
+            <atom-icon [name]="iconName" size="lg" />
+            <span class="workbench__icon-name">{{ iconName }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- Section 5: Data Visualization Organisms -->
+    <section class="workbench__section">
+      <div class="workbench__section-header">
+        <h2>Organisms: SVG Data Visualization</h2>
+        <p>Custom SVG charts built with zero heavy external chart dependencies.</p>
+      </div>
+
+      <div class="workbench__grid workbench__grid--3">
+        <div class="workbench__card">
+          <organism-pie-chart
+            title="Flight Distribution"
+            [data]="pieData"
+            [showPercentages]="true"
+          />
+        </div>
+
+        <div class="workbench__card">
+          <organism-column-chart
+            title="Weekly Traffic Volume"
+            [data]="columnData"
+          />
+        </div>
+
+        <div class="workbench__card">
+          <organism-bar-chart
+            title="Bookings by Airline"
+            [data]="barData"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</template-dashboard-layout>
