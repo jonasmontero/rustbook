@@ -1,0 +1,127 @@
+/**
+ * riceChartOrganism Styles
+ */
+
+.organism-price-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  &__filters {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  &__chart-container {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+  }
+
+  &__svg {
+    width: 100%;
+    height: 300px;
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+
+  &__legend {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  &__legend-color {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  &__legend-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__chart-container {
+      min-height: 250px;
+    }
+
+    &__svg {
+      height: 250px;
+    }
+  }
+}
+
+// SVG Styles
+.axis-label {
+  font-size: 10px;
+  fill: var(--text-secondary);
+  font-family: var(--font-family);
+}
+
+.grid-line {
+  stroke: #E2E8F0;
+  stroke-width: 0.5;
+  stroke-dasharray: 2, 2;
+}
+
+.price-line {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-width 0.2s;
+
+  &--azul {
+    stroke: var(--color-azul);
+  }
+
+  &--gol {
+    stroke: var(--color-gol);
+  }
+
+  &--latam {
+    stroke: var(--color-latam);
+  }
+
+  &:hover {
+    stroke-width: 3.5;
+  }
+}

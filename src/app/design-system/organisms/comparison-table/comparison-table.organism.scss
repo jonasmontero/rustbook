@@ -1,0 +1,73 @@
+/**
+ * omparisonTableOrganism Styles
+ */
+
+.organism-comparison-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  &__header,
+  &__row {
+    display: grid;
+    grid-template-columns: 200px repeat(3, 1fr);
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  &__label {
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+  }
+
+  &__cell {
+    padding: var(--space-md);
+    text-align: center;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-sm);
+  }
+
+  // Responsive
+  @media (max-width: 1024px) {
+    &__header,
+    &__row {
+      grid-template-columns: 150px repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+
+    &__header,
+    &__row {
+      grid-template-columns: 1fr;
+    }
+
+    &__label {
+      display: none;
+    }
+
+    &__cell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+      }
+    }
+  }
+}

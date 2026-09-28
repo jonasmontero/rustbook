@@ -1,0 +1,21 @@
+/**
+ * lightTimeMolecule Styles
+ */
+
+.molecule-flight-time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+
+  &__time {
+    //  Estilos herdados
+  }
+
+  &__duration {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex: 1;
+    justify-content: center;
+  }
+}

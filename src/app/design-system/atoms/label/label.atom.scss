@@ -1,0 +1,21 @@
+/**
+ * abelAtom Styles
+ * EM: .atom-label
+ */
+
+.atom-label {
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+  cursor: pointer;
+
+  // Required indicator
+  &__required {
+    margin-left: 2px;
+    color: var(--color-danger);
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,79 @@
+<div class="organism-area-chart">
+  <div class="organism-area-chart__header">
+    <atom-text [variant]="'h2'" [weight]="'semibold'">{{ title }}</atom-text>
+  </div>
+
+  <div class="organism-area-chart__chart-container">
+    @if (data.length > 0) {
+      <svg
+        [attr.viewBox]="getViewBox()"
+        class="organism-area-chart__svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" [attr.stop-color]="fillColor" stop-opacity="0.3" />
+            <stop offset="100%" [attr.stop-color]="fillColor" stop-opacity="0.05" />
+          </linearGradient>
+        </defs>
+
+        <!-- Y-axis grid -->
+        <g class="y-axis-grid">
+          @for (label of getYLabels(); track label.y) {
+            <line
+              [attr.x1]="padding.left"
+              [attr.y1]="label.y"
+              [attr.x2]="chartWidth - padding.right"
+              [attr.y2]="label.y"
+              class="grid-line"
+            />
+            <text
+              [attr.x]="padding.left - 10"
+              [attr.y]="label.y + 4"
+              class="axis-label"
+              text-anchor="end"
+            >
+              {{ label.label }}
+            </text>
+          }
+        </g>
+
+        <!-- Area -->
+        <path
+          [attr.d]="areaPath"
+          fill="url(#areaGradient)"
+          class="organism-area-chart__area"
+        />
+
+        <!-- Line -->
+        <path
+          [attr.d]="linePath"
+          [attr.stroke]="fillColor"
+          fill="none"
+          stroke-width="3"
+          class="organism-area-chart__line"
+        />
+
+        <!-- X-axis labels -->
+        <g class="x-axis">
+          @for (label of getXLabels(); track label.x) {
+            <text
+              [attr.x]="label.x"
+              [attr.y]="chartHeight - padding.bottom + 20"
+              class="axis-label"
+              text-anchor="middle"
+            >
+              {{ label.label }}
+            </text>
+          }
+        </g>
+      </svg>
+    } @else {
+      <div class="organism-area-chart__empty">
+        <atom-text [variant]="'body'" [color]="'var(--text-secondary)'">
+          Sem dados disponíveis
+        </atom-text>
+      </div>
+    }
+  </div>
+</div>

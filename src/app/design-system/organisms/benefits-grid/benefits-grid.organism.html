@@ -1,0 +1,27 @@
+<div class="organism-benefits-grid">
+  <atom-text [variant]="'h2'" [weight]="'semibold'">Benefícios por Companhia</atom-text>
+
+  <div class="organism-benefits-grid__container">
+    @for (airlineBenefit of benefits; track airlineBenefit.airline) {
+      <div class="organism-benefits-grid__column">
+        <div class="organism-benefits-grid__header">
+          <molecule-airline-logo
+            [airline]="airlineBenefit.airline"
+            [size]="'md'"
+            [showName]="true"
+            [showBadge]="false"
+          />
+        </div>
+
+        <div class="organism-benefits-grid__items">
+          @for (item of airlineBenefit.items; track item.text) {
+            <molecule-benefit-item
+              [text]="item.text"
+              [included]="item.included"
+            />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

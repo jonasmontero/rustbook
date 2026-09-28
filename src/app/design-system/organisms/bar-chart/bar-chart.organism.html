@@ -1,0 +1,83 @@
+<div class="organism-bar-chart">
+  <div class="organism-bar-chart__header">
+    <atom-text [variant]="'h2'" [weight]="'semibold'">{{ title }}</atom-text>
+  </div>
+
+  <div class="organism-bar-chart__chart-container">
+    @if (data.length > 0) {
+      <svg
+        [attr.viewBox]="getViewBox()"
+        class="organism-bar-chart__svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <!-- X-axis grid lines -->
+        <g class="x-axis-grid">
+          @for (i of [0, 1, 2, 3, 4]; track i) {
+            <line
+              [attr.x1]="padding.left + (dataWidth * i / 4)"
+              [attr.y1]="padding.top"
+              [attr.x2]="padding.left + (dataWidth * i / 4)"
+              [attr.y2]="chartHeight - padding.bottom"
+              class="grid-line"
+            />
+            <text
+              [attr.x]="padding.left + (dataWidth * i / 4)"
+              [attr.y]="chartHeight - padding.bottom + 20"
+              class="axis-label"
+              text-anchor="middle"
+            >
+              {{ formatValue(calculatedMaxValue * (i / 4)) }}
+            </text>
+          }
+        </g>
+
+        <!-- Bars -->
+        <g class="bars">
+          @for (item of data; track item.label; let i = $index) {
+            <rect
+              [attr.x]="padding.left"
+              [attr.y]="getBarY(i)"
+              [attr.width]="getBarWidth(item.value)"
+              [attr.height]="getBarHeight()"
+              [attr.fill]="getBarColor(i, item.color)"
+              class="organism-bar-chart__bar"
+            />
+          }
+        </g>
+
+        <!-- Y-axis labels -->
+        <g class="y-axis">
+          @for (item of data; track item.label; let i = $index) {
+            <text
+              [attr.x]="padding.left - 10"
+              [attr.y]="getBarY(i) + getBarHeight() / 2 + 4"
+              class="axis-label"
+              text-anchor="end"
+            >
+              {{ item.label }}
+            </text>
+          }
+        </g>
+
+        <!-- Value labels -->
+        <g class="value-labels">
+          @for (item of data; track item.label; let i = $index) {
+            <text
+              [attr.x]="padding.left + getBarWidth(item.value) + 8"
+              [attr.y]="getBarY(i) + getBarHeight() / 2 + 4"
+              class="value-label"
+            >
+              {{ formatValue(item.value) }}
+            </text>
+          }
+        </g>
+      </svg>
+    } @else {
+      <div class="organism-bar-chart__empty">
+        <atom-text [variant]="'body'" [color]="'var(--text-secondary)'">
+          Sem dados disponíveis
+        </atom-text>
+      </div>
+    }
+  </div>
+</div>

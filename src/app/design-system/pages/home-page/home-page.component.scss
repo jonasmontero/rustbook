@@ -1,0 +1,31 @@
+/**
+ * omePageComponent Styles
+ */
+
+.page-home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  &__section-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    gap: var(--space-lg);
+
+    &__section-title {
+      font-size: 20px;
+    }
+  }
+}

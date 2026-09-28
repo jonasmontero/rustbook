@@ -1,0 +1,47 @@
+<!-- AnalyticsPage - Dashboard de Analytics com 5 Gráficos -->
+<template-dashboard-layout>
+
+  <div class="page-analytics">
+    <!-- Chart 1: Line Chart - Histórico de Reservas (Full Width) -->
+    <div class="page-analytics__chart page-analytics__chart--full">
+      <organism-price-chart
+        [data]="reservationHistory"
+        [period]="'90d'"
+      />
+    </div>
+
+    <!-- Charts 2 & 3: Pie Chart + Column Chart (Side by Side) -->
+    <div class="page-analytics__chart page-analytics__chart--half">
+      <organism-pie-chart
+        [title]="'Distribuição de Voos por Companhia'"
+        [data]="distributionData"
+        [showPercentages]="true"
+      />
+    </div>
+
+    <div class="page-analytics__chart page-analytics__chart--half">
+      <organism-column-chart
+        [title]="'Voos por Mês'"
+        [data]="monthlyFlightsData"
+      />
+    </div>
+
+    <!-- Chart 4: Bar Chart - Top 10 Rotas (Full Width) -->
+    <div class="page-analytics__chart page-analytics__chart--full">
+      <organism-bar-chart
+        [title]="'Top 10 Rotas Mais Vendidas'"
+        [data]="topRoutesData"
+      />
+    </div>
+
+    <!-- Chart 5: Area Chart - Receita Acumulada (Full Width) -->
+    <div class="page-analytics__chart page-analytics__chart--full">
+      <organism-area-chart
+        [title]="'Receita Acumulada Mensal'"
+        [data]="cumulativeRevenueData"
+        [fillColor]="'#10B981'"
+      />
+    </div>
+  </div>
+
+</template-dashboard-layout>

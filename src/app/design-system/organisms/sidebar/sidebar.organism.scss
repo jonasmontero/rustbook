@@ -1,0 +1,115 @@
+/**
+ * idebarOrganism Styles
+ */
+
+.organism-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  height: 100vh;
+  padding: var(--space-lg);
+  background: var(--bg-primary);
+  border-right: 1px solid #E2E8F0;
+  box-shadow: var(--shadow-sm);
+  transition: width 0.3s ease;
+
+  &--collapsed {
+    width: 80px;
+    padding: var(--space-md);
+
+    .organism-sidebar__header {
+      justify-content: center;
+    }
+
+    .organism-sidebar__item {
+      justify-content: center;
+      padding: var(--space-md);
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
+
+  &__toggle {
+    padding: var(--space-sm);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: var(--bg-secondary);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: all 0.2s;
+    text-align: left;
+    width: 100%;
+
+    &:hover {
+      background: var(--bg-secondary);
+    }
+
+    &--active {
+      background: var(--color-primary);
+      color: white;
+
+      .organism-sidebar__item-label {
+        color: white;
+      }
+
+      atom-icon {
+        color: white;
+      }
+    }
+  }
+
+  &__item-label {
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__footer {
+    padding-top: var(--space-md);
+    text-align: center;
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    position: fixed;
+    z-index: 99;
+    transform: translateX(-100%);
+
+    &.organism-sidebar--open {
+      transform: translateX(0);
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="organism-season-calendar">
+  <div class="organism-season-calendar__header">
+    <atom-text [variant]="'h2'" [weight]="'semibold'">
+      {{ 'Calendário de Temporadas ' + year }}
+    </atom-text>
+  </div>
+
+  <div class="organism-season-calendar__grid">
+    @for (month of monthNames; track month; let i = $index) {
+      @let monthData = getMonthData(i + 1);
+      <div
+        [class]="getSeasonClass(monthData?.season)"
+        (click)="onMonthClick(i + 1)"
+      >
+        <div class="organism-season-calendar__month-name">
+          {{ month }}
+        </div>
+
+        <div class="organism-season-calendar__month-season">
+          <atom-badge
+            [text]="getSeasonLabel(monthData?.season)"
+            [variant]="getSeasonBadgeVariant(monthData?.season)"
+            [size]="'sm'"
+          />
+        </div>
+
+        <div class="organism-season-calendar__month-price">
+          <atom-text
+            [variant]="'body'"
+            [weight]="'semibold'"
+          >{{ formatPrice(monthData?.avgPrice) }}</atom-text>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="organism-season-calendar__legend">
+    <div class="organism-season-calendar__legend-item">
+      <atom-badge [text]="'Baixa Temporada'" [variant]="'success'" [size]="'sm'" />
+      <span>Melhores preços</span>
+    </div>
+    <div class="organism-season-calendar__legend-item">
+      <atom-badge [text]="'Média Temporada'" [variant]="'warning'" [size]="'sm'" />
+      <span>Preços moderados</span>
+    </div>
+    <div class="organism-season-calendar__legend-item">
+      <atom-badge [text]="'Alta Temporada'" [variant]="'danger'" [size]="'sm'" />
+      <span>Preços elevados</span>
+    </div>
+  </div>
+</div>

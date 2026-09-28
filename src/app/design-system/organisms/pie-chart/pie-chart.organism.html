@@ -1,0 +1,70 @@
+<div class="organism-pie-chart">
+  <!-- Header -->
+  <div class="organism-pie-chart__header">
+    <atom-text [variant]="'h2'" [weight]="'semibold'">{{ title }}</atom-text>
+  </div>
+
+  <!-- Chart -->
+  <div class="organism-pie-chart__chart-container">
+    @if (data.length > 0) {
+      <svg
+        [attr.viewBox]="getViewBox()"
+        class="organism-pie-chart__svg"
+      >
+        <!-- Slices -->
+        <g class="slices">
+          @for (slice of slices; track slice.startAngle; let i = $index) {
+            <path
+              [attr.d]="slice.path"
+              [attr.fill]="slice.color"
+              class="organism-pie-chart__slice"
+            />
+          }
+        </g>
+
+        <!-- Center circle (donut style - opcional) -->
+        <circle
+          [attr.cx]="centerX"
+          [attr.cy]="centerY"
+          [attr.r]="radius * 0.5"
+          fill="white"
+          class="organism-pie-chart__center"
+        />
+
+        <!-- Center text -->
+        <text
+          [attr.x]="centerX"
+          [attr.y]="centerY + 6"
+          class="organism-pie-chart__center-text"
+          text-anchor="middle"
+        >
+          {{ total }}
+        </text>
+      </svg>
+    } @else {
+      <div class="organism-pie-chart__empty">
+        <atom-text [variant]="'body'" [color]="'var(--text-secondary)'">
+          Sem dados disponíveis
+        </atom-text>
+      </div>
+    }
+  </div>
+
+  <!-- Legend -->
+  <div class="organism-pie-chart__legend">
+    @for (item of data; track item.label; let i = $index) {
+      <div class="organism-pie-chart__legend-item">
+        <div
+          class="organism-pie-chart__legend-color"
+          [style.background-color]="item.color"
+        ></div>
+        <span class="organism-pie-chart__legend-label">{{ item.label }}</span>
+        @if (showPercentages) {
+          <span class="organism-pie-chart__legend-value">
+            {{ formatPercentage(slices[i]?.percentage || 0) }}
+          </span>
+        }
+      </div>
+    }
+  </div>
+</div>

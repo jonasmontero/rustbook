@@ -1,0 +1,66 @@
+/**
+ * vatarAtom Styles
+ * EM: .atom-avatar
+ */
+
+.atom-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  flex-shrink: 0;
+
+  // Sizes
+  &--sm {
+    width: 32px;
+    height: 32px;
+  }
+
+  &--md {
+    width: 40px;
+    height: 40px;
+  }
+
+  &--lg {
+    width: 56px;
+    height: 56px;
+  }
+
+  &--xl {
+    width: 80px;
+    height: 80px;
+  }
+
+  // Elements
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__fallback {
+    font-family: var(--font-family);
+    font-weight: 600;
+    color: var(--text-secondary);
+    user-select: none;
+  }
+
+  // Size-specific fallback text
+  &--sm &__fallback {
+    font-size: 12px;
+  }
+
+  &--md &__fallback {
+    font-size: var(--font-size-sm);
+  }
+
+  &--lg &__fallback {
+    font-size: var(--font-size-lg);
+  }
+
+  &--xl &__fallback {
+    font-size: 28px;
+  }
+}

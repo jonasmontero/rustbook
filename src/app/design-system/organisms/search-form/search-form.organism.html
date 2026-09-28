@@ -1,0 +1,121 @@
+<div class="organism-search-form">
+  <h2 class="organism-search-form__title">Buscar Voos</h2>
+
+  <!-- Trip Type Toggle -->
+  <div class="organism-search-form__trip-type">
+    <button
+      type="button"
+      [class.active]="tripType === 'roundtrip'"
+      (click)="onTripTypeChange('roundtrip')"
+      class="organism-search-form__trip-button"
+    >
+      Ida e Volta
+    </button>
+    <button
+      type="button"
+      [class.active]="tripType === 'oneway'"
+      (click)="onTripTypeChange('oneway')"
+      class="organism-search-form__trip-button"
+    >
+      Somente Ida
+    </button>
+  </div>
+
+  <!-- Validation Errors -->
+  @if (validationErrors.length > 0) {
+    <div class="organism-search-form__errors">
+      @for (error of validationErrors; track error) {
+        <molecule-alert-message
+          [type]="'error'"
+          [message]="error"
+          [dismissible]="true"
+          (dismiss)="dismissError()"
+        />
+      }
+    </div>
+  }
+
+  <!-- Form Grid -->
+  <div class="organism-search-form__grid">
+    <!-- Origin -->
+    <div class="organism-search-form__field">
+      <molecule-search-field
+        [placeholder]="'Origem (ex: GRU)'"
+        [value]="origin"
+        (search)="onOriginSearch($event)"
+      />
+    </div>
+
+    <!-- Destination -->
+    <div class="organism-search-form__field">
+      <molecule-search-field
+        [placeholder]="'Destino (ex: GIG)'"
+        [value]="destination"
+        (search)="onDestinationSearch($event)"
+      />
+    </div>
+
+    <!-- Departure Date -->
+    <div class="organism-search-form__field">
+      <molecule-date-picker
+        [label]="'Data de Ida'"
+        [value]="formatDateForPicker(departureDate)"
+        (dateChange)="onDepartureDateChange($event)"
+      />
+    </div>
+
+    <!-- Return Date -->
+    <div class="organism-search-form__field">
+      <molecule-date-picker
+        [label]="'Data de Volta'"
+        [value]="formatDateForPicker(returnDate)"
+        [disabled]="tripType === 'oneway'"
+        [minDate]="getMinReturnDateString()"
+        (dateChange)="onReturnDateChange($event)"
+      />
+    </div>
+
+    <!-- Passengers -->
+    <div class="organism-search-form__passengers">
+      <h3 class="organism-search-form__passengers-title">Passageiros</h3>
+
+      <div class="organism-search-form__passengers-grid">
+        <molecule-passenger-selector
+          [label]="'Adultos'"
+          [value]="adults"
+          [min]="1"
+          [max]="9"
+          (valueChange)="onAdultsChange($event)"
+        />
+
+        <molecule-passenger-selector
+          [label]="'Crianças'"
+          [value]="children"
+          [min]="0"
+          [max]="9"
+          (valueChange)="onChildrenChange($event)"
+        />
+
+        <molecule-passenger-selector
+          [label]="'Bebês'"
+          [value]="infants"
+          [min]="0"
+          [max]="adults"
+          (valueChange)="onInfantsChange($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="organism-search-form__actions">
+    <atom-button
+      [label]="'Buscar Voos'"
+      [variant]="'primary'"
+      [size]="'lg'"
+      [loading]="loading"
+      [fullWidth]="true"
+      (clicked)="onSubmit()"
+    />
+  </div>
+</div>

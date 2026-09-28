@@ -1,0 +1,61 @@
+/**
+ * ividerAtom Styles
+ * EM: .atom-divider
+ */
+
+.atom-divider {
+  border: none;
+  background-color: var(--bg-tertiary);
+
+  // Orientations
+  &--horizontal {
+    width: 100%;
+    height: 1px;
+
+    &.atom-divider--spacing-none {
+      margin: 0;
+    }
+
+    &.atom-divider--spacing-sm {
+      margin: var(--space-sm) 0;
+    }
+
+    &.atom-divider--spacing-md {
+      margin: var(--space-md) 0;
+    }
+
+    &.atom-divider--spacing-lg {
+      margin: var(--space-lg) 0;
+    }
+
+    &.atom-divider--spacing-xl {
+      margin: var(--space-xl) 0;
+    }
+  }
+
+  &--vertical {
+    width: 1px;
+    height: 100%;
+    display: inline-block;
+
+    &.atom-divider--spacing-none {
+      margin: 0;
+    }
+
+    &.atom-divider--spacing-sm {
+      margin: 0 var(--space-sm);
+    }
+
+    &.atom-divider--spacing-md {
+      margin: 0 var(--space-md);
+    }
+
+    &.atom-divider--spacing-lg {
+      margin: 0 var(--space-lg);
+    }
+
+    &.atom-divider--spacing-xl {
+      margin: 0 var(--space-xl);
+    }
+  }
+}

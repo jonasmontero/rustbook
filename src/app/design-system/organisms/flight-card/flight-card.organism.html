@@ -1,0 +1,89 @@
+<div [class]="getCardClasses()">
+  <!-- Header: Airline Logo -->
+  <div class="organism-flight-card__header">
+    <molecule-airline-logo
+      [airline]="flight.airline"
+      [size]="compact ? 'sm' : 'md'"
+      [showName]="true"
+      [showBadge]="true"
+    />
+
+    @if (flight.seatsLeft && flight.seatsLeft < 5) {
+      <span class="organism-flight-card__low-seats-badge">
+        Apenas {{ flight.seatsLeft }} vagas
+      </span>
+    }
+  </div>
+
+  <atom-divider [spacing]="compact ? 'sm' : 'md'" />
+
+  <!-- Flight Times -->
+  <div class="organism-flight-card__times">
+    <molecule-flight-time
+      [departureTime]="flight.departureTime"
+      [arrivalTime]="flight.arrivalTime"
+      [duration]="flight.duration"
+    />
+    <div class="organism-flight-card__route">
+      {{ flight.origin }} → {{ flight.destination }}
+    </div>
+    <div class="organism-flight-card__stops">
+      {{ getStopsText() }}
+    </div>
+  </div>
+
+  @if (!compact) {
+    <atom-divider spacing="md" />
+
+    <!-- Benefits Grid -->
+    <div class="organism-flight-card__benefits">
+      @for (benefit of getBenefitsArray(); track benefit.text) {
+        <molecule-benefit-item
+          [text]="benefit.text"
+          [included]="benefit.included"
+        />
+      }
+    </div>
+  }
+
+  <atom-divider [spacing]="compact ? 'sm' : 'md'" />
+
+  <!-- Price and Action -->
+  <div class="organism-flight-card__footer">
+    <div class="organism-flight-card__price-section">
+      <molecule-price-tag
+        [price]="flight.price"
+        [currency]="'BRL'"
+        [trend]="hasDiscount() ? 'down' : undefined"
+      />
+
+      @if (hasDiscount()) {
+        <div class="organism-flight-card__discount">
+          <span class="organism-flight-card__original-price">
+            R$ {{ flight.originalPrice }}
+          </span>
+          <span class="organism-flight-card__discount-badge">
+            -{{ getDiscountPercent() }}%
+          </span>
+        </div>
+      }
+    </div>
+
+    <div class="organism-flight-card__actions">
+      @if (!compact) {
+        <atom-button
+          [label]="'Ver detalhes'"
+          [variant]="'ghost'"
+          [size]="'md'"
+          (clicked)="onDetails()"
+        />
+      }
+      <atom-button
+        [label]="selected ? 'Selecionado' : 'Selecionar'"
+        [variant]="selected ? 'secondary' : 'primary'"
+        [size]="compact ? 'sm' : 'md'"
+        (clicked)="onSelect()"
+      />
+    </div>
+  </div>
+</div>

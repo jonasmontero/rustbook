@@ -1,0 +1,26 @@
+/**
+ * tatsRowOrganism Styles
+ */
+
+.organism-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+
+  // Responsive
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    overflow-x: auto;
+    display: flex;
+    padding: var(--space-md) 0;
+
+    molecule-stat-card {
+      min-width: 250px;
+    }
+  }
+}

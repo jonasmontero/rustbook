@@ -1,0 +1,32 @@
+/**
+ * conAtom Styles
+ * EM: .atom-icon
+ */
+
+.atom-icon {
+  display: inline-block;
+  vertical-align: middle;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+
+  // Sizes (redundante com [attr.width], mas útil para fallback)
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  &--md {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &--xl {
+    width: 32px;
+    height: 32px;
+  }
+}

@@ -1,0 +1,115 @@
+/**
+ * earchFormOrganism Styles
+ */
+
+.organism-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+
+  &__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  &__trip-type {
+    display: flex;
+    gap: var(--space-sm);
+    padding: 4px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    width: fit-content;
+  }
+
+  &__trip-button {
+    padding: var(--space-sm) var(--space-lg);
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &.active {
+      background: var(--bg-primary);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  &__errors {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__passengers {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  &__passengers-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  &__passengers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // Responsivo
+  @media (max-width: 768px) {
+    padding: var(--space-lg);
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__passengers-grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__actions {
+      atom-button {
+        width: 100%;
+      }
+    }
+  }
+}

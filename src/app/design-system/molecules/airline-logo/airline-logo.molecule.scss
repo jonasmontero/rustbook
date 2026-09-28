@@ -1,0 +1,28 @@
+/**
+ * irlineLogoMolecule Styles
+ * EM: .molecule-airline-logo
+ */
+
+.molecule-airline-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-md);
+
+  &__avatar {
+    flex-shrink: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  &__name {
+    line-height: 1.2;
+  }
+
+  &__badge {
+    align-self: flex-start;
+  }
+}

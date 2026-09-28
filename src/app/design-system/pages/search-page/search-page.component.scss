@@ -1,0 +1,52 @@
+/**
+ * earchPageComponent Styles
+ */
+
+.page-search__filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.page-search__filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.page-search__filter-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.page-search__filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.page-search__filter-value {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.page-search__filter-range {
+  width: 100%;
+  cursor: pointer;
+}

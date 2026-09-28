@@ -1,0 +1,51 @@
+<!-- HomePage - Dashboard Principal -->
+<template-dashboard-layout
+  [sidebarCollapsed]="sidebarCollapsed"
+  [stats]="stats"
+  [userName]="userName"
+  [activeRoute]="activeRoute"
+  (sidebarToggle)="onSidebarToggle()"
+  (navigate)="onNavigate($event)">
+
+  <div class="page-home">
+    <!-- Search Section -->
+    <section class="page-home__section">
+      <h2 class="page-home__section-title">Buscar Voos</h2>
+      <organism-search-form
+        [loading]="loading"
+        (search)="onSearch($event)"
+      />
+    </section>
+
+    <!-- Price Chart Section -->
+    <section class="page-home__section">
+      <organism-price-chart
+        [data]="priceHistory"
+        [period]="selectedPeriod"
+        (periodChange)="onPeriodChange($event)"
+      />
+    </section>
+
+    <!-- Season Calendar Section -->
+    <section class="page-home__section">
+      <organism-season-calendar
+        [seasonData]="seasonData"
+        [year]="2026"
+        (monthClick)="onMonthClick($event)"
+      />
+    </section>
+
+    <!-- Recent Flights Section -->
+    <section class="page-home__section">
+      <h2 class="page-home__section-title">Melhores Ofertas</h2>
+      <organism-flight-list
+        [flights]="recentFlights"
+        [totalCount]="recentFlights.length"
+        [loading]="false"
+        [sortBy]="'price'"
+        [hasMore]="false"
+        (flightSelect)="onFlightSelect($event)"
+      />
+    </section>
+  </div>
+</template-dashboard-layout>

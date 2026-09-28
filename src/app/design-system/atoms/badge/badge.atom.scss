@@ -1,0 +1,71 @@
+/**
+ * adgeAtom Styles
+ * EM: .atom-badge
+ */
+
+.atom-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  transition: var(--transition-fast);
+
+  // Sizes
+  &--sm {
+    height: 20px;
+    padding: 0 var(--space-sm);
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  &--md {
+    height: 24px;
+    padding: 0 var(--space-md);
+    font-size: var(--font-size-sm);
+    line-height: 24px;
+  }
+
+  // Variants
+  &--default {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+  }
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  &--success {
+    background-color: var(--color-success);
+    color: white;
+  }
+
+  &--warning {
+    background-color: var(--color-warning);
+    color: white;
+  }
+
+  &--danger {
+    background-color: var(--color-danger);
+    color: white;
+  }
+
+  &--azul {
+    background-color: var(--color-azul);
+    color: white;
+  }
+
+  &--gol {
+    background-color: var(--color-gol);
+    color: white;
+  }
+
+  &--latam {
+    background-color: var(--color-latam);
+    color: white;
+  }
+}

@@ -1,0 +1,114 @@
+<div class="organism-price-chart">
+  <!-- Header -->
+  <div class="organism-price-chart__header">
+    <atom-text
+      [variant]="'h2'"
+      [weight]="'semibold'"
+    >Histórico de Preços</atom-text>
+
+    @if (getBestPeriod()) {
+      <atom-badge
+        [text]="getBestPeriod()"
+        [variant]="'success'"
+      />
+    }
+  </div>
+
+  <!-- Period Filters -->
+  <div class="organism-price-chart__filters">
+    @for (option of periodOptions; track option.value) {
+      <atom-button
+        [label]="option.label"
+        [variant]="getPeriodButtonVariant(option.value)"
+        [size]="'sm'"
+        (clicked)="onPeriodChange(option.value)"
+      />
+    }
+  </div>
+
+  <!-- Chart -->
+  <div class="organism-price-chart__chart-container">
+    @if (data.length > 0) {
+      <svg
+        [attr.viewBox]="getViewBox()"
+        class="organism-price-chart__svg"
+        preserveAspectRatio="none"
+      >
+        <!-- Y-axis labels -->
+        <g class="y-axis">
+          @for (label of yLabels; track label.y) {
+            <text
+              [attr.x]="padding.left - 10"
+              [attr.y]="label.y"
+              class="axis-label"
+              text-anchor="end"
+            >
+              {{ label.label }}
+            </text>
+            <line
+              [attr.x1]="padding.left"
+              [attr.y1]="label.y"
+              [attr.x2]="chartWidth - padding.right"
+              [attr.y2]="label.y"
+              class="grid-line"
+            />
+          }
+        </g>
+
+        <!-- X-axis labels -->
+        <g class="x-axis">
+          @for (label of xLabels; track label.x) {
+            <text
+              [attr.x]="label.x"
+              [attr.y]="chartHeight - padding.bottom + 20"
+              class="axis-label"
+              text-anchor="middle"
+            >
+              {{ label.label }}
+            </text>
+          }
+        </g>
+
+        <!-- Price lines -->
+        <g class="price-lines">
+          <path
+            [attr.d]="azulPath"
+            class="price-line price-line--azul"
+            fill="none"
+          />
+          <path
+            [attr.d]="golPath"
+            class="price-line price-line--gol"
+            fill="none"
+          />
+          <path
+            [attr.d]="latamPath"
+            class="price-line price-line--latam"
+            fill="none"
+          />
+        </g>
+      </svg>
+    } @else {
+      <div class="organism-price-chart__empty">
+        <atom-text
+          >'Sem dados disponíveis'</atom-text>
+          [variant]="'body'"
+          [color]="'var(--text-secondary)'"
+        />
+      </div>
+    }
+  </div>
+
+  <!-- Legend -->
+  <div class="organism-price-chart__legend">
+    @for (airline of airlines; track airline.code) {
+      <div class="organism-price-chart__legend-item">
+        <div
+          class="organism-price-chart__legend-color"
+          [style.background-color]="airline.color"
+        ></div>
+        <span class="organism-price-chart__legend-label">{{ airline.name }}</span>
+      </div>
+    }
+  </div>
+</div>

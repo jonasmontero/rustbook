@@ -1,0 +1,81 @@
+/**
+ * lightListOrganism Styles
+ */
+
+.organism-flight-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  &__sort-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: var(--space-xl) 0;
+    min-height: 300px;
+  }
+
+  &__empty {
+    padding: var(--space-lg) 0;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-md) 0;
+  }
+
+  &__loading-more {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-md) 0;
+  }
+
+  // Responsivo
+  @media (max-width: 768px) {
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__sort {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    &__sort-label {
+      width: 100%;
+      margin-bottom: var(--space-xs);
+    }
+  }
+}

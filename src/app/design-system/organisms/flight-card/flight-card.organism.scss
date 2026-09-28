@@ -1,0 +1,130 @@
+/**
+ * lightCardOrganism Styles
+ */
+
+.organism-flight-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  background: var(--bg-primary);
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &--selected {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  &--compact {
+    padding: var(--space-md);
+  }
+
+  &--low-seats {
+    border-color: var(--color-warning);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__low-seats-badge {
+    padding: var(--space-xs) var(--space-sm);
+    background: #FFFBEB;
+    color: var(--color-warning);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  &__times {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  &__route {
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  &__stops {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+  }
+
+  &__benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-sm);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-md);
+  }
+
+  &__price-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  &__discount {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  &__original-price {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-decoration: line-through;
+  }
+
+  &__discount-badge {
+    padding: 2px var(--space-xs);
+    background: #F0FDF4;
+    color: var(--color-success);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  // Responsivo
+  @media (max-width: 768px) {
+    &__footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__actions {
+      width: 100%;
+
+      atom-button {
+        flex: 1;
+      }
+    }
+
+    &__benefits {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<!-- Template de Resultados de Busca -->
+<div class="template-search-results-layout">
+  <!-- Header -->
+  <header class="template-search-results-layout__header">
+    <organism-header
+      [showSearch]="false"
+      [userName]="userName"
+      [userAvatar]="userAvatar"
+      (menuClick)="onMenuClick()"
+      (userClick)="onUserClick()"
+    />
+  </header>
+
+  <!-- Search Form (Sticky) -->
+  <section class="template-search-results-layout__search">
+    <organism-search-form
+      [initialValues]="searchValues"
+      [loading]="loading"
+      (search)="onSearchSubmit($event)"
+    />
+  </section>
+
+  <!-- Main Content with Filters -->
+  <div class="template-search-results-layout__body">
+    <!-- Filters Sidebar (Optional) -->
+    @if (showFilters) {
+      <aside class="template-search-results-layout__filters">
+        <div class="template-search-results-layout__filters-header">
+          <h3>Filtros</h3>
+          <button
+            class="template-search-results-layout__filters-toggle"
+            (click)="onFiltersToggle()"
+          >
+            
+          </button>
+        </div>
+
+        <ng-content select="[filters]"></ng-content>
+      </aside>
+    }
+
+    <!-- Results Area -->
+    <main class="template-search-results-layout__results">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

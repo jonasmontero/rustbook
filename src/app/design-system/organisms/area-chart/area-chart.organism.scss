@@ -1,0 +1,54 @@
+.organism-area-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  background: var(--surface-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  &__svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &__area {
+    pointer-events: none;
+  }
+
+  &__line {
+    pointer-events: none;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+}
+
+.grid-line {
+  stroke: var(--border-primary);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.axis-label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-caption);
+  fill: var(--text-secondary);
+}

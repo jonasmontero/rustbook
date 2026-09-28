@@ -1,0 +1,37 @@
+<div [class]="collapsed ? 'organism-sidebar organism-sidebar--collapsed' : 'organism-sidebar'">
+  <!-- Logo Section -->
+  <div class="organism-sidebar__header">
+    @if (!collapsed) {
+      <atom-text [variant]="'h3'" [weight]="'bold'" >SkyCompare</atom-text>
+    }
+    <button class="organism-sidebar__toggle" (click)="onToggle()">
+      <atom-icon [name]="collapsed ? 'chevron-right' : 'chevron-left'" size="md" />
+    </button>
+  </div>
+
+  <atom-divider spacing="md" />
+
+  <!-- Menu Items -->
+  <nav class="organism-sidebar__nav">
+    @for (item of menuItems; track item.id) {
+      <button [class]="getItemClass(item.route)" (click)="onNavigate(item.route)">
+        <atom-icon [name]="item.icon" size="md" />
+        @if (!collapsed) {
+          <span class="organism-sidebar__item-label">{{ item.label }}</span>
+        }
+      </button>
+    }
+  </nav>
+
+  <!-- Spacer -->
+  <div class="organism-sidebar__spacer"></div>
+
+  <!-- Footer -->
+  <div class="organism-sidebar__footer">
+    @if (!collapsed) {
+      <atom-text
+      [variant]="'caption'"
+      [color]="'var(--text-secondary)'" >© 2026 SkyCompare</atom-text>
+    }
+  </div>
+</div>

@@ -1,0 +1,32 @@
+/**
+ * atePickerMolecule Styles
+ * EM: .molecule-date-picker
+ */
+
+.molecule-date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  &__label {
+    // Estilos herdados do LabelAtom
+  }
+
+  &__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    flex: 1;
+    padding-right: 40px !important; // Espaço para o ícone
+  }
+
+  &__icon {
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+    color: var(--text-secondary);
+  }
+}

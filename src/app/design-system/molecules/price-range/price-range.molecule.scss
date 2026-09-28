@@ -1,0 +1,32 @@
+/**
+ * riceRangeMolecule Styles
+ * EM: .molecule-price-range
+ */
+
+.molecule-price-range {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  &__prices {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+
+  &__min {
+    //  Verde (menor preço)
+  }
+
+  &__separator {
+    //  Estilos herdados
+  }
+
+  &__max {
+    //  Padrão
+  }
+
+  &__savings {
+    align-self: flex-start;
+  }
+}

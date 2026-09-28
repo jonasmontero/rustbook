@@ -1,0 +1,26 @@
+/* ou can add global styles to this file, and also import other style files */
+
+// SkyCompare Design System Styles
+@use 'styles/tokens' as *;
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+@use 'styles/typography' as *;
+
+// Reset básico
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

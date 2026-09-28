@@ -1,0 +1,71 @@
+.organism-column-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  background: var(--surface-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  &__svg {
+    width: 100%;
+    height: auto;
+  }
+
+  &__column {
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: var(--text-secondary);
+  }
+}
+
+.grid-line {
+  stroke: var(--border-primary);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.axis-label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-caption);
+  fill: var(--text-secondary);
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .organism-column-chart {
+    padding: var(--spacing-md);
+
+    &__chart-container {
+      min-height: 300px;
+    }
+
+    .axis-label {
+      font-size: 10px;
+    }
+  }
+}

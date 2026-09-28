@@ -1,0 +1,80 @@
+<div class="organism-comparison-table">
+  <atom-text [variant]="'h2'" [weight]="'semibold'">Comparação de Voos</atom-text>
+
+  @if (displayFlights.length > 0) {
+    <div class="organism-comparison-table__grid">
+      <!-- Header Row - Airlines -->
+      <div class="organism-comparison-table__header">
+        <div class="organism-comparison-table__label"></div>
+        @for (flight of displayFlights; track flight.id) {
+          <div class="organism-comparison-table__cell">
+            <molecule-airline-logo
+              [airline]="flight.airline"
+              [size]="'md'"
+              [showName]="true"
+              [showBadge]="false"
+            />
+          </div>
+        }
+      </div>
+
+      <atom-divider spacing="md" />
+
+      <!-- Price Row -->
+      <div class="organism-comparison-table__row">
+        <div class="organism-comparison-table__label">
+          <atom-text [variant]="'body'" [weight]="'semibold'">Preço</atom-text>
+        </div>
+        @for (flight of displayFlights; track flight.id) {
+          <div class="organism-comparison-table__cell">
+            <molecule-price-tag [price]="flight.price" [currency]="'BRL'" />
+          </div>
+        }
+      </div>
+
+      <!-- Flight Info -->
+      <div class="organism-comparison-table__row">
+        <div class="organism-comparison-table__label">
+          <atom-text [variant]="'body'" [weight]="'semibold'">Horário</atom-text>
+        </div>
+        @for (flight of displayFlights; track flight.id) {
+          <div class="organism-comparison-table__cell">
+            <atom-text [variant]="'body'">{{ flight.departureTime + ' - ' + flight.arrivalTime }}</atom-text>
+          </div>
+        }
+      </div>
+
+      <div class="organism-comparison-table__row">
+        <div class="organism-comparison-table__label">
+          <atom-text [variant]="'body'" [weight]="'semibold'">Duração</atom-text>
+        </div>
+        @for (flight of displayFlights; track flight.id) {
+          <div class="organism-comparison-table__cell">
+            <atom-text [variant]="'body'">{{ flight.duration }}</atom-text>
+          </div>
+        }
+      </div>
+
+      <atom-divider spacing="md" />
+
+      <!-- Benefits -->
+      @for (benefit of getBenefitsList(); track benefit.key) {
+        <div class="organism-comparison-table__row">
+          <div class="organism-comparison-table__label">
+            <atom-text [variant]="'body'" [weight]="'semibold'">{{ benefit.label }}</atom-text>
+          </div>
+          @for (flight of displayFlights; track flight.id) {
+            <div class="organism-comparison-table__cell">
+              <molecule-benefit-item
+                [text]="''"
+                [included]="flight.benefits[benefit.key]"
+              />
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <atom-text [variant]="'body'">Selecione voos para comparar (máx 3)</atom-text>
+  }
+</div>

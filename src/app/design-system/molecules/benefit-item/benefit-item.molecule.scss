@@ -1,0 +1,13 @@
+/**
+ * enefitItemMolecule Styles
+ */
+
+.molecule-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+
+  &--excluded {
+    opacity: 0.6;
+  }
+}

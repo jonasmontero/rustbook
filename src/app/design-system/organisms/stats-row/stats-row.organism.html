@@ -1,0 +1,9 @@
+<div class="organism-stats-row">
+  @for (stat of stats; track stat.label) {
+    <molecule-stat-card
+      [icon]="stat.icon"
+      [value]="stat.value.toString()"
+      [label]="stat.label"
+    />
+  }
+</div>

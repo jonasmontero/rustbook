@@ -1,0 +1,32 @@
+<div class="organism-header">
+  <!-- Menu Icon -->
+  <button class="organism-header__menu" (click)="onMenuClick()">
+    <atom-icon name="menu" size="lg" />
+  </button>
+
+  <!-- Logo -->
+  <div class="organism-header__logo">
+    <atom-icon name="plane" size="xl" [color]="'var(--color-primary)'" />
+    <atom-text [variant]="'h3'" [weight]="'bold'">SkyCompare</atom-text>
+  </div>
+
+  <!-- Search (optional) -->
+  @if (showSearch) {
+    <div class="organism-header__search">
+      <molecule-search-field
+        [placeholder]="'Buscar voos...'"
+        [value]="searchValue"
+        (search)="onSearch($event)"
+      />
+    </div>
+  }
+
+  <!-- Spacer -->
+  <div class="organism-header__spacer"></div>
+
+  <!-- User Avatar -->
+  <div class="organism-header__user" (click)="onUserClick()">
+    <atom-text [variant]="'body'" [weight]="'medium'">{{ userName }}</atom-text>
+    <atom-avatar [src]="userAvatar" [alt]="userName || 'User'" [size]="'md'" />
+  </div>
+</div>

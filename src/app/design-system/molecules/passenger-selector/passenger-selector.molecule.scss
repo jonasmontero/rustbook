@@ -1,0 +1,42 @@
+/**
+ * assengerSelectorMolecule Styles
+ * EM: .molecule-passenger-selector
+ */
+
+.molecule-passenger-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  &__label {
+    // Estilos herdados do LabelAtom
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  &__button {
+    min-width: 32px !important;
+    width: 32px;
+    height: 32px;
+    padding: 0 !important;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__value {
+    min-width: 40px;
+    text-align: center;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  &__description {
+    font-size: 12px;
+    margin-top: calc(var(--space-xs) * -1);
+  }
+}

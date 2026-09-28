@@ -1,0 +1,79 @@
+<div class="organism-flight-list">
+  <!-- Header with Results Count -->
+  <div class="organism-flight-list__header">
+    <atom-text
+      [variant]="'h2'"
+      [weight]="'semibold'"
+    >{{ getResultsText() }}</atom-text>
+
+    <!-- Sort Buttons -->
+    @if (flights.length > 0 && !loading) {
+      <div class="organism-flight-list__sort">
+        <span class="organism-flight-list__sort-label">Ordenar por:</span>
+        @for (option of sortOptions; track option.value) {
+          <atom-button
+            [label]="option.label"
+            [variant]="getSortButtonVariant(option.value)"
+            [size]="'sm'"
+            (clicked)="onSortChange(option.value)"
+          />
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Loading State -->
+  @if (loading && flights.length === 0) {
+    <div class="organism-flight-list__loading">
+      <atom-spinner [size]="'lg'" />
+      <atom-text
+        [variant]="'body'"
+        [color]="'var(--text-secondary)'"
+      >Buscando voos...</atom-text>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!loading && flights.length === 0) {
+    <div class="organism-flight-list__empty">
+      <molecule-alert-message
+        [type]="'info'"
+        [message]="'Nenhum voo encontrado. Tente ajustar seus filtros de busca.'"
+        [dismissible]="false"
+      />
+    </div>
+  }
+
+  <!-- Flight Cards -->
+  @if (flights.length > 0) {
+    <div class="organism-flight-list__cards">
+      @for (flight of flights; track flight.id) {
+        <organism-flight-card
+          [flight]="flight"
+          [selected]="isFlightSelected(flight.id)"
+          [compact]="true"
+          (select)="onFlightSelect($event)"
+        />
+      }
+    </div>
+  }
+
+  <!-- Load More Button -->
+  @if (hasMore && !loading) {
+    <div class="organism-flight-list__load-more">
+      <atom-button
+        [label]="'Carregar mais voos'"
+        [variant]="'ghost'"
+        [size]="'md'"
+        (clicked)="onLoadMore()"
+      />
+    </div>
+  }
+
+  <!-- Loading More Indicator -->
+  @if (loading && flights.length > 0) {
+    <div class="organism-flight-list__loading-more">
+      <atom-spinner [size]="'md'" />
+    </div>
+  }
+</div>

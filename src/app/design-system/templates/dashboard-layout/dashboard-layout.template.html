@@ -1,0 +1,38 @@
+<!-- Template de Dashboard com Sidebar + Header + Stats + Content -->
+<div class="template-dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="template-dashboard-layout__sidebar">
+    <organism-sidebar
+      [collapsed]="sidebarCollapsed"
+      [activeRoute]="activeRoute"
+      (toggleCollapse)="onSidebarToggle()"
+      (navigate)="onNavigate($event)"
+    />
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="template-dashboard-layout__main">
+    <!-- Header -->
+    <header class="template-dashboard-layout__header">
+      <organism-header
+        [showSearch]="true"
+        [userName]="userName"
+        [userAvatar]="userAvatar"
+        (menuClick)="onMenuClick()"
+        (userClick)="onUserClick()"
+      />
+    </header>
+
+    <!-- Stats Row -->
+    @if (stats.length > 0) {
+      <section class="template-dashboard-layout__stats">
+        <organism-stats-row [stats]="stats" />
+      </section>
+    }
+
+    <!-- Projected Content -->
+    <main class="template-dashboard-layout__content">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

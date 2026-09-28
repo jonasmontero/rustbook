@@ -1,0 +1,72 @@
+<div class="organism-column-chart">
+  <!-- Header -->
+  <div class="organism-column-chart__header">
+    <atom-text [variant]="'h2'" [weight]="'semibold'">{{ title }}</atom-text>
+  </div>
+
+  <!-- Chart -->
+  <div class="organism-column-chart__chart-container">
+    @if (data.length > 0) {
+      <svg
+        [attr.viewBox]="getViewBox()"
+        class="organism-column-chart__svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <!-- Y-axis grid lines -->
+        <g class="y-axis-grid">
+          @for (i of [0, 1, 2, 3, 4]; track i) {
+            <line
+              [attr.x1]="padding.left"
+              [attr.y1]="padding.top + (dataHeight * i / 4)"
+              [attr.x2]="chartWidth - padding.right"
+              [attr.y2]="padding.top + (dataHeight * i / 4)"
+              class="grid-line"
+            />
+            <text
+              [attr.x]="padding.left - 10"
+              [attr.y]="padding.top + (dataHeight * i / 4) + 4"
+              class="axis-label"
+              text-anchor="end"
+            >
+              {{ formatValue(calculatedMaxValue * (1 - i / 4)) }}
+            </text>
+          }
+        </g>
+
+        <!-- Columns -->
+        <g class="columns">
+          @for (item of data; track item.label; let i = $index) {
+            <rect
+              [attr.x]="getColumnX(i)"
+              [attr.y]="getColumnY(item.value)"
+              [attr.width]="getColumnWidth()"
+              [attr.height]="getColumnHeight(item.value)"
+              [attr.fill]="getColumnColor(i)"
+              class="organism-column-chart__column"
+            />
+          }
+        </g>
+
+        <!-- X-axis labels -->
+        <g class="x-axis">
+          @for (item of data; track item.label; let i = $index) {
+            <text
+              [attr.x]="getColumnX(i) + getColumnWidth() / 2"
+              [attr.y]="chartHeight - padding.bottom + 20"
+              class="axis-label"
+              text-anchor="middle"
+            >
+              {{ item.label }}
+            </text>
+          }
+        </g>
+      </svg>
+    } @else {
+      <div class="organism-column-chart__empty">
+        <atom-text [variant]="'body'" [color]="'var(--text-secondary)'">
+          Sem dados disponíveis
+        </atom-text>
+      </div>
+    }
+  </div>
+</div>
