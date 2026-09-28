@@ -14,7 +14,7 @@ import { IconAtom, ButtonAtom } from '../atoms';
 export class LiveStudioComponent {
   studioService = inject(ThemeStudioService);
 
-  activeTab = signal<'theme' | 'knobs' | 'export'>('theme');
+  activeTab = signal<'theme' | 'colorust' | 'knobs' | 'export'>('theme');
   presets = THEME_PRESETS;
   copiedToast = signal<string | null>(null);
 

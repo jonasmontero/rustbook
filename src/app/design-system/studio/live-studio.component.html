@@ -47,6 +47,14 @@
     <button
       type="button"
       class="live-studio__tab-btn"
+      [class.active]="activeTab() === 'colorust'"
+      (click)="activeTab.set('colorust')"
+    >
+      Colorust (Rust)
+    </button>
+    <button
+      type="button"
+      class="live-studio__tab-btn"
       [class.active]="activeTab() === 'knobs'"
       (click)="activeTab.set('knobs')"
     >
@@ -58,7 +66,7 @@
       [class.active]="activeTab() === 'export'"
       (click)="activeTab.set('export')"
     >
-      Export Code
+      Export Multi-Target
     </button>
   </nav>
 
@@ -199,7 +207,73 @@
       </div>
     }
 
-    <!-- TAB 2: COMPONENT KNOBS -->
+    <!-- TAB 2: COLORUST ENGINE (RUST & SCIENCE) -->
+    @if (activeTab() === 'colorust') {
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">🦀 Rustbook Engine: APCA & WCAG Contrast</h4>
+        <p class="live-studio__section-desc">
+          Real-time perceptual math computed by the <strong>Colorust Rust core</strong>.
+        </p>
+
+        <div class="live-studio__contrast-card" [style.background]="studioService.tokens().primaryColor">
+          <div class="live-studio__contrast-sample">
+            <span class="live-studio__contrast-text">White on Primary</span>
+            <div class="live-studio__contrast-badges">
+              <span class="live-studio__badge" [class.live-studio__badge--pass]="studioService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).wcagPass">
+                WCAG {{ studioService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).wcagRatio }}:1
+              </span>
+              <span class="live-studio__badge" [class.live-studio__badge--pass]="studioService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).apcaPass">
+                APCA Lc {{ studioService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).apcaLc }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">OKLCH Tonal Scale (50 — 950)</h4>
+        <p class="live-studio__section-desc">
+          Perceptually uniform 11-step chromatic curve generated in OKLCH space.
+        </p>
+        <div class="live-studio__tonal-grid">
+          @for (step of studioService.generateTonalScale(studioService.tokens().primaryColor); track step.step) {
+            <button
+              type="button"
+              class="live-studio__tonal-step"
+              [style.background]="step.hex"
+              (click)="copyToClipboard(step.hex, 'Color step ' + step.step)"
+              [title]="'Step ' + step.step + ': ' + step.hex + ' (Click to copy)'"
+            >
+              <span class="live-studio__tonal-label" [style.color]="step.step > 400 ? '#FFFFFF' : '#0F172A'">{{ step.step }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Daltonism Simulator (CVD)</h4>
+        <p class="live-studio__section-desc">
+          Simulate how colorblind users experience this interface in real time.
+        </p>
+        <div class="live-studio__button-group">
+          <button [class.active]="studioService.activeCvd() === 'normal'" (click)="studioService.setCvd('normal')">Normal</button>
+          <button [class.active]="studioService.activeCvd() === 'protanopia'" (click)="studioService.setCvd('protanopia')">Protan</button>
+          <button [class.active]="studioService.activeCvd() === 'deuteranopia'" (click)="studioService.setCvd('deuteranopia')">Deuter</button>
+          <button [class.active]="studioService.activeCvd() === 'tritanopia'" (click)="studioService.setCvd('tritanopia')">Tritan</button>
+          <button [class.active]="studioService.activeCvd() === 'achromatopsia'" (click)="studioService.setCvd('achromatopsia')">Mono</button>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Native MCP Server (AI-Ready)</h4>
+        <div class="live-studio__mcp-status">
+          <span class="live-studio__mcp-dot"></span>
+          <span>Endpoint: <code>http://localhost:6006/mcp</code></span>
+        </div>
+      </div>
+    }
+
+    <!-- TAB 3: COMPONENT KNOBS -->
     @if (activeTab() === 'knobs') {
       <div class="live-studio__section">
         <h4 class="live-studio__section-title">Interactive Component: ButtonAtom</h4>
@@ -299,14 +373,10 @@
       </div>
     }
 
-    <!-- TAB 3: EXPORT CODE -->
+    <!-- TAB 4: EXPORT MULTI-TARGET -->
     @if (activeTab() === 'export') {
       <div class="live-studio__section">
-        <h4 class="live-studio__section-title">Generated CSS Custom Properties</h4>
-        <p class="live-studio__section-desc">
-          Drop these tokens directly into your global <code>index.css</code> or theme stylesheet.
-        </p>
-
+        <h4 class="live-studio__section-title">Web: CSS Custom Properties</h4>
         <div class="live-studio__code-block">
           <pre><code>{{ studioService.exportCss() }}</code></pre>
           <button
@@ -314,21 +384,63 @@
             class="live-studio__copy-code-btn"
             (click)="copyToClipboard(studioService.exportCss(), 'CSS Tokens')"
           >
-            Copy CSS Variables
+            Copy CSS
           </button>
         </div>
       </div>
 
       <div class="live-studio__section">
-        <h4 class="live-studio__section-title">JSON Token Schema</h4>
+        <h4 class="live-studio__section-title">Web: Tailwind Theme Config</h4>
         <div class="live-studio__code-block">
-          <pre><code>{{ studioService.exportJson() }}</code></pre>
+          <pre><code>{{ studioService.exportTailwind() }}</code></pre>
           <button
             type="button"
             class="live-studio__copy-code-btn"
-            (click)="copyToClipboard(studioService.exportJson(), 'JSON Tokens')"
+            (click)="copyToClipboard(studioService.exportTailwind(), 'Tailwind Config')"
           >
-            Copy JSON Schema
+            Copy Tailwind
+          </button>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">iOS: SwiftUI Color Extension</h4>
+        <div class="live-studio__code-block">
+          <pre><code>{{ studioService.exportSwift() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(studioService.exportSwift(), 'SwiftUI Colors')"
+          >
+            Copy SwiftUI
+          </button>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Android: Jetpack Compose Color</h4>
+        <div class="live-studio__code-block">
+          <pre><code>{{ studioService.exportKotlin() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(studioService.exportKotlin(), 'Compose Colors')"
+          >
+            Copy Compose
+          </button>
+        </div>
+      </div>
+
+      <div class="live-studio__section">
+        <h4 class="live-studio__section-title">Mobile: Flutter Dart ThemeData</h4>
+        <div class="live-studio__code-block">
+          <pre><code>{{ studioService.exportFlutter() }}</code></pre>
+          <button
+            type="button"
+            class="live-studio__copy-code-btn"
+            (click)="copyToClipboard(studioService.exportFlutter(), 'Flutter Dart')"
+          >
+            Copy Flutter
           </button>
         </div>
       </div>
