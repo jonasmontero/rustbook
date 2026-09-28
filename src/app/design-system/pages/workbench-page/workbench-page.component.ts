@@ -91,6 +91,11 @@ export class WorkbenchPageComponent {
     'tag',
     'settings',
     'help',
+    'sun',
+    'moon',
+    'copy',
+    'refresh',
+    'sparkles',
   ];
 
   pieData = [

@@ -120,7 +120,7 @@ export const BenefitsTab: Story = {
 
         <div benefits style="padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <h2 style="margin: 0 0 1rem 0; color: #0F172A; font-size: 20px; font-weight: 600;">
-            ⭐ Benefits Comparison
+            Benefits Comparison
           </h2>
           <p style="margin: 0 0 1.5rem 0; color: #64748B; line-height: 1.6;">
             Compare amenities and benefits included across each partner airline.

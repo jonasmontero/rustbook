@@ -253,8 +253,8 @@ export const FlightClasses: Story = {
           </div>
 
           <div style="border: 2px solid #2563EB; border-radius: 8px; padding: 16px; background: #F0F9FF;">
-            <div style="font-weight: 600; margin-bottom: 16px; color: #2563EB;">
-              Business ⭐
+            <div style="font-weight: 600; margin-bottom: 16px; color: #2563EB; display: flex; align-items: center; gap: 6px;">
+              <span>Business</span>
             </div>
             <molecule-passenger-selector
               label="Passengers"
@@ -315,7 +315,7 @@ export const WithValidation: Story = {
 
         <div style="margin-top: 16px; padding: 12px; background: #FEF2F2; border-left: 3px solid #EF4444; border-radius: 4px;">
           <div style="font-size: 14px; color: #991B1B;">
-            ️ Atenção: Você selecionou 2 infants mas apenas 1 adulto. Ajuste a quantidade.
+            Attention: You selected 2 infants but only 1 adult. Please adjust the count.
           </div>
         </div>
       </div>
