@@ -14,31 +14,31 @@ const meta: Meta<SearchPageComponent> = {
 
 Página de resultados de busca de voos com filtros e ordenação.
 
-## Características
+## Features
 -  SearchResultsLayout com formulário sticky
--  Filtros laterais (companhias, preço, paradas)
+-  Filters laterais (companhias, preço, stops)
 -  Lista de voos ordenável (preço, duração, horário)
 -  12 voos mock com dados variados
--  Filtros funcionais em tempo real
--  Indicador de voo selecionado
--  Layout responsivo com drawer de filtros em mobile
+-  Filters funcionais em tempo real
+-  Indicador de flight selected
+-  Responsive layout com drawer de filtros em mobile
 
-## Componentes Usados
+## Components Used
 - SearchResultsLayoutTemplate
 - FlightListOrganism
-- Filtros customizados (checkboxes, range slider)
+- Filters customizados (checkboxes, range slider)
 
-## Funcionalidades
+## Functionality
 - Filtrar por companhia aérea (múltipla seleção)
 - Filtrar por faixa de preço (slider)
 - Filtrar apenas voos diretos
-- Ordenar por preço, duração ou horário
-- Selecionar voos para comparação
+- Sort by preço, duração ou horário
+- Select voos para comparação
 - Nova busca através do formulário sticky
 
 ## Dados Mock
 - 12 voos variados (Azul, Gol, Latam)
-- Preços de R$ 280 a R$ 540
+- Prices de R$ 280 a R$ 540
 - Voos diretos e com escalas
 - Diferentes horários ao longo do dia
         `,

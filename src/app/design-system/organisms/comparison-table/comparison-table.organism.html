@@ -1,5 +1,5 @@
 <div class="organism-comparison-table">
-  <atom-text [variant]="'h2'" [weight]="'semibold'">Comparação de Voos</atom-text>
+  <atom-text [variant]="'h2'" [weight]="'semibold'">Flight Comparison</atom-text>
 
   @if (displayFlights.length > 0) {
     <div class="organism-comparison-table__grid">
@@ -23,7 +23,7 @@
       <!-- Price Row -->
       <div class="organism-comparison-table__row">
         <div class="organism-comparison-table__label">
-          <atom-text [variant]="'body'" [weight]="'semibold'">Preço</atom-text>
+          <atom-text [variant]="'body'" [weight]="'semibold'">Price</atom-text>
         </div>
         @for (flight of displayFlights; track flight.id) {
           <div class="organism-comparison-table__cell">
@@ -35,7 +35,7 @@
       <!-- Flight Info -->
       <div class="organism-comparison-table__row">
         <div class="organism-comparison-table__label">
-          <atom-text [variant]="'body'" [weight]="'semibold'">Horário</atom-text>
+          <atom-text [variant]="'body'" [weight]="'semibold'">Schedule</atom-text>
         </div>
         @for (flight of displayFlights; track flight.id) {
           <div class="organism-comparison-table__cell">
@@ -46,7 +46,7 @@
 
       <div class="organism-comparison-table__row">
         <div class="organism-comparison-table__label">
-          <atom-text [variant]="'body'" [weight]="'semibold'">Duração</atom-text>
+          <atom-text [variant]="'body'" [weight]="'semibold'">Duration</atom-text>
         </div>
         @for (flight of displayFlights; track flight.id) {
           <div class="organism-comparison-table__cell">

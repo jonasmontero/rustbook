@@ -14,7 +14,7 @@ import {
 /**
  * omparisonPageComponent
  *
- * ágina de comparação detalhada entre voos selecionados.
+ * ágina de comparação detalhada entre flights selected.
  * ermite análise lado a lado de preços, benefícios e histórico.
  */
 @Component({
@@ -47,7 +47,7 @@ export class ComparisonPageComponent implements OnInit {
   }
 
   /**
-   * arrega voos selecionados para comparação (mock - 3 voos)
+   * arrega flights selected para comparação (mock - 3 voos)
    */
   private loadSelectedFlights(): void {
     this.selectedFlights = MOCK_COMPARISON_FLIGHTS;

@@ -25,7 +25,7 @@ const meta: Meta<IconAtom> = {
         'menu',
         'filter',
       ],
-      description: 'Nome do ícone do registry',
+      description: 'Icon name do registry',
     },
     size: {
       control: 'radio',

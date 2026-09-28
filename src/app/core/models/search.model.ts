@@ -1,6 +1,6 @@
 /**
- * earch Form Model
- * nterface para dados do formulário de busca
+ * Search Form Model
+ * Interface for flight query and filter parameters.
  */
 export interface SearchFormModel {
   origin: string;

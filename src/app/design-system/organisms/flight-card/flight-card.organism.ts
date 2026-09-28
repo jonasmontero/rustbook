@@ -57,8 +57,8 @@ export class FlightCardOrganism {
 
   getBenefitsArray(): Array<{ icon: string; text: string; included: boolean }> {
     return [
-      { icon: 'baggage', text: 'Bagagem', included: this.flight.benefits.baggage },
-      { icon: 'meal', text: 'Refeição', included: this.flight.benefits.meal },
+      { icon: 'baggage', text: 'Baggage', included: this.flight.benefits.baggage },
+      { icon: 'meal', text: 'Meal', included: this.flight.benefits.meal },
       { icon: 'wifi', text: 'Wi-Fi', included: this.flight.benefits.wifi },
       { icon: 'entertainment', text: 'Entretenimento', included: this.flight.benefits.entertainment },
       { icon: 'seat', text: 'Escolha de assento', included: this.flight.benefits.seatSelection },
@@ -66,7 +66,7 @@ export class FlightCardOrganism {
   }
 
   getStopsText(): string {
-    if (this.flight.stops === 0) return 'Voo direto';
+    if (this.flight.stops === 0) return 'Direct flight';
     if (this.flight.stops === 1) return '1 escala';
     return `${this.flight.stops} escalas`;
   }

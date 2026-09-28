@@ -33,7 +33,7 @@ export const Default: Story = {
 
 export const GreenGrowth: Story = {
   args: {
-    title: 'Crescimento de Usuários',
+    title: 'Crescimento de Users',
     fillColor: '#10B981',
     data: [
       { date: new Date(2025, 0, 1), value: 1200 },

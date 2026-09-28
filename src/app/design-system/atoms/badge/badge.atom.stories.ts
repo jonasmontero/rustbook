@@ -18,7 +18,7 @@ const meta: Meta<BadgeAtom> = {
     size: {
       control: 'radio',
       options: ['sm', 'md'],
-      description: 'Tamanho do badge',
+      description: 'Badge size',
     },
   },
 };
@@ -47,17 +47,17 @@ export const Primary: Story = {
 };
 
 /**
- * Badge de sucesso
+ * Success badge
  */
 export const Success: Story = {
   args: {
-    text: 'Menor Preço',
+    text: 'Lowest Price',
     variant: 'success',
   },
 };
 
 /**
- * Badge de aviso
+ * Warning badge
  */
 export const Warning: Story = {
   args: {
@@ -67,7 +67,7 @@ export const Warning: Story = {
 };
 
 /**
- * Badge de perigo
+ * Danger badge
  */
 export const Danger: Story = {
   args: {
@@ -107,7 +107,7 @@ export const Latam: Story = {
 };
 
 /**
- * Badge pequeno
+ * Small badge
  */
 export const Small: Story = {
   args: {
@@ -118,7 +118,7 @@ export const Small: Story = {
 };
 
 /**
- * Badge médio
+ * Medium badge
  */
 export const Medium: Story = {
   args: {
@@ -129,7 +129,7 @@ export const Medium: Story = {
 };
 
 /**
- * Todas as variantes
+ * All variants
  */
 export const AllVariants: Story = {
   render: (args) => ({
@@ -150,7 +150,7 @@ export const AllVariants: Story = {
 };
 
 /**
- * Todos os tamanhos
+ * All sizes
  */
 export const AllSizes: Story = {
   render: (args) => ({
@@ -199,7 +199,7 @@ export const PriceStatus: Story = {
       <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px;">
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="font-size: 24px; font-weight: 600;">R$ 450,00</span>
-          <atom-badge text="Menor Preço" variant="success" size="sm" />
+          <atom-badge text="Lowest Price" variant="success" size="sm" />
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="font-size: 24px; font-weight: 600;">R$ 580,00</span>

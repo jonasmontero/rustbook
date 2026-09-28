@@ -59,7 +59,7 @@ export const WithInput: Story = {
         <input
           id="name-input"
           type="text"
-          placeholder="Digite seu nome"
+          placeholder="Enter your name"
           style="
             width: 100%;
             height: 40px;

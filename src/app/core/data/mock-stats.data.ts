@@ -1,37 +1,34 @@
 /**
- * ock Data - Statistics
- * ados mockados de estatísticas para o dashboard
+ * Mock Data - Dashboard Metrics
+ * Summary metrics and performance indicators for overview dashboards.
  */
 
 import { StatModel } from '../models';
 
-/**
- * statísticas do dashboard
- */
 export const MOCK_DASHBOARD_STATS: StatModel[] = [
   {
     icon: 'plane',
     value: '1,234',
-    label: 'Voos Pesquisados',
+    label: 'Searched Flights',
     trend: 'up',
     trendValue: '+12%',
   },
   {
     icon: 'price',
-    value: 'R$ 380',
-    label: 'Menor Preço Hoje',
+    value: '$380',
+    label: 'Lowest Price Today',
     trend: 'down',
     trendValue: '-5%',
   },
   {
     icon: 'star',
     value: '89',
-    label: 'Voos Favoritos',
+    label: 'Saved Flights',
   },
   {
     icon: 'user',
     value: '3.2K',
-    label: 'Buscas Este Mês',
+    label: 'Monthly Searches',
     trend: 'up',
     trendValue: '+18%',
   },

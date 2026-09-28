@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<BenefitItemMolecule>;
 
 export const Included: Story = {
-  args: { text: 'Bagagem de mão', included: true },
+  args: { text: 'Baggage de mão', included: true },
 };
 
 export const Excluded: Story = {

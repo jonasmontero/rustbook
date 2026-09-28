@@ -8,24 +8,24 @@ const meta: Meta<AvatarAtom> = {
   argTypes: {
     src: {
       control: 'text',
-      description: 'URL da imagem',
+      description: 'Image URL',
     },
     alt: {
       control: 'text',
-      description: 'Texto alternativo',
+      description: 'Alternative text',
     },
     size: {
       control: 'radio',
       options: ['sm', 'md', 'lg', 'xl'],
-      description: 'Tamanho do avatar',
+      description: 'Avatar size',
     },
     fallback: {
       control: 'text',
-      description: 'Texto fallback (iniciais)',
+      description: 'Fallback initials text',
     },
     bgColor: {
       control: 'color',
-      description: 'Cor de fundo do fallback',
+      description: 'Fallback background color',
     },
   },
 };
@@ -34,18 +34,18 @@ export default meta;
 type Story = StoryObj<AvatarAtom>;
 
 /**
- * Avatar com imagem (exemplo placeholder)
+ * Avatar with image
  */
 export const WithImage: Story = {
   args: {
     src: 'https://via.placeholder.com/100/0033A0/FFFFFF?text=AZ',
-    alt: 'Azul Linhas Aéreas',
+    alt: 'Azul Airlines',
     size: 'md',
   },
 };
 
 /**
- * Avatar com fallback (iniciais)
+ * Avatar with initials fallback
  */
 export const WithFallback: Story = {
   args: {
@@ -56,7 +56,7 @@ export const WithFallback: Story = {
 };
 
 /**
- * Avatar pequeno
+ * Small avatar
  */
 export const Small: Story = {
   args: {
@@ -67,7 +67,7 @@ export const Small: Story = {
 };
 
 /**
- * Avatar médio
+ * Medium avatar
  */
 export const Medium: Story = {
   args: {
@@ -78,7 +78,7 @@ export const Medium: Story = {
 };
 
 /**
- * Avatar grande
+ * Large avatar
  */
 export const Large: Story = {
   args: {
@@ -89,7 +89,7 @@ export const Large: Story = {
 };
 
 /**
- * Avatar extra grande
+ * Extra large avatar
  */
 export const ExtraLarge: Story = {
   args: {
@@ -100,12 +100,12 @@ export const ExtraLarge: Story = {
 };
 
 /**
- * Avatar Azul (companhia aérea)
+ * Azul airline avatar
  */
 export const Azul: Story = {
   args: {
     fallback: 'AZ',
-    alt: 'Azul Linhas Aéreas',
+    alt: 'Azul Airlines',
     size: 'lg',
   },
   render: (args) => ({
@@ -113,7 +113,7 @@ export const Azul: Story = {
     template: `
       <atom-avatar
         fallback="AZ"
-        alt="Azul Linhas Aéreas"
+        alt="Azul Airlines"
         [size]="size"
         style="background-color: #0033A0; color: white;"
       />
@@ -122,12 +122,12 @@ export const Azul: Story = {
 };
 
 /**
- * Avatar Gol (companhia aérea)
+ * Gol airline avatar
  */
 export const Gol: Story = {
   args: {
     fallback: 'GL',
-    alt: 'Gol Linhas Aéreas',
+    alt: 'Gol Airlines',
     size: 'lg',
   },
   render: (args) => ({
@@ -135,7 +135,7 @@ export const Gol: Story = {
     template: `
       <atom-avatar
         fallback="GL"
-        alt="Gol Linhas Aéreas"
+        alt="Gol Airlines"
         [size]="size"
         style="background-color: #FF6600; color: white;"
       />
@@ -144,7 +144,7 @@ export const Gol: Story = {
 };
 
 /**
- * Avatar Latam (companhia aérea)
+ * Latam airline avatar
  */
 export const Latam: Story = {
   args: {
@@ -166,7 +166,7 @@ export const Latam: Story = {
 };
 
 /**
- * Avatar com imagem quebrada (mostra fallback)
+ * Avatar with broken image fallback
  */
 export const BrokenImage: Story = {
   args: {
@@ -178,7 +178,7 @@ export const BrokenImage: Story = {
 };
 
 /**
- * Avatar gerando iniciais automaticamente
+ * Avatar with automatic initials
  */
 export const AutoInitials: Story = {
   args: {
@@ -188,7 +188,7 @@ export const AutoInitials: Story = {
 };
 
 /**
- * Todos os tamanhos
+ * All sizes
  */
 export const AllSizes: Story = {
   render: (args) => ({
@@ -205,7 +205,7 @@ export const AllSizes: Story = {
 };
 
 /**
- * Companhias aéreas lado a lado
+ * Airlines side by side
  */
 export const Airlines: Story = {
   render: (args) => ({
@@ -215,12 +215,12 @@ export const Airlines: Story = {
         <div style="display: flex; align-items: center; gap: 12px;">
           <atom-avatar
             fallback="AZ"
-            alt="Azul Linhas Aéreas"
+            alt="Azul Airlines"
             size="lg"
             style="background-color: #0033A0; color: white;"
           />
           <div>
-            <div style="font-weight: 600;">Azul Linhas Aéreas</div>
+            <div style="font-weight: 600;">Azul Airlines</div>
             <div style="font-size: 14px; color: #64748B;">AZ</div>
           </div>
         </div>
@@ -228,12 +228,12 @@ export const Airlines: Story = {
         <div style="display: flex; align-items: center; gap: 12px;">
           <atom-avatar
             fallback="GL"
-            alt="Gol Linhas Aéreas"
+            alt="Gol Airlines"
             size="lg"
             style="background-color: #FF6600; color: white;"
           />
           <div>
-            <div style="font-weight: 600;">Gol Linhas Aéreas</div>
+            <div style="font-weight: 600;">Gol Airlines</div>
             <div style="font-size: 14px; color: #64748B;">GL</div>
           </div>
         </div>

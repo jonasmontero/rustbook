@@ -111,11 +111,11 @@ export class SearchFormOrganism {
     this.validationErrors = [];
 
     if (!this.origin) {
-      this.validationErrors.push('Origem é obrigatória');
+      this.validationErrors.push('Origin é obrigatória');
     }
 
     if (!this.destination) {
-      this.validationErrors.push('Destino é obrigatório');
+      this.validationErrors.push('Destination é obrigatório');
     }
 
     if (!this.departureDate) {

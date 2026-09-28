@@ -13,7 +13,7 @@ const mockStats: StatModel[] = [
   {
     icon: 'price',
     value: 'R$ 450',
-    label: 'Menor Preço',
+    label: 'Lowest Price',
     trend: 'down',
     trendValue: '-5%',
   },
@@ -25,7 +25,7 @@ const mockStats: StatModel[] = [
   {
     icon: 'user',
     value: '3.2K',
-    label: 'Usuários Ativos',
+    label: 'Users Ativos',
     trend: 'up',
     trendValue: '+18%',
   },

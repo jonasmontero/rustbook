@@ -8,12 +8,12 @@ const meta: Meta<TooltipAtom> = {
   argTypes: {
     text: {
       control: 'text',
-      description: 'Texto do tooltip',
+      description: 'Tooltip text',
     },
     position: {
       control: 'select',
       options: ['top', 'bottom', 'left', 'right'],
-      description: 'Posição do tooltip',
+      description: 'Tooltip position',
     },
     delay: {
       control: 'number',
@@ -182,15 +182,15 @@ export const FlightBenefits: Story = {
     props: args,
     template: `
       <div style="padding: 80px;">
-        <h3 style="margin-bottom: 24px;">Benefícios do Voo</h3>
+        <h3 style="margin-bottom: 24px;">Benefits do Voo</h3>
         <div style="display: flex; gap: 24px;">
-          <atom-tooltip text="Bagagem de mão incluída" position="top">
+          <atom-tooltip text="Baggage de mão incluída" position="top">
             <div style="width: 40px; height: 40px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">
               
             </div>
           </atom-tooltip>
 
-          <atom-tooltip text="Refeição a bordo" position="top">
+          <atom-tooltip text="Meal a bordo" position="top">
             <div style="width: 40px; height: 40px; background: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">
               
             </div>
@@ -221,13 +221,13 @@ export const AirlineCards: Story = {
     props: args,
     template: `
       <div style="padding: 80px; display: flex; gap: 24px;">
-        <atom-tooltip text="Azul Linhas Aéreas - Fundada em 2008" position="top">
+        <atom-tooltip text="Azul Airlines - Fundada em 2008" position="top">
           <div style="width: 120px; height: 80px; background: #0033A0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; cursor: pointer;">
             AZUL
           </div>
         </atom-tooltip>
 
-        <atom-tooltip text="Gol Linhas Aéreas - Fundada em 2001" position="top">
+        <atom-tooltip text="Gol Airlines - Fundada em 2001" position="top">
           <div style="width: 120px; height: 80px; background: #FF6600; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; cursor: pointer;">
             GOL
           </div>

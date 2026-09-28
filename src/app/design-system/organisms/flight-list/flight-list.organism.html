@@ -9,7 +9,7 @@
     <!-- Sort Buttons -->
     @if (flights.length > 0 && !loading) {
       <div class="organism-flight-list__sort">
-        <span class="organism-flight-list__sort-label">Ordenar por:</span>
+        <span class="organism-flight-list__sort-label">Sort by:</span>
         @for (option of sortOptions; track option.value) {
           <atom-button
             [label]="option.label"
@@ -38,7 +38,7 @@
     <div class="organism-flight-list__empty">
       <molecule-alert-message
         [type]="'info'"
-        [message]="'Nenhum voo encontrado. Tente ajustar seus filtros de busca.'"
+        [message]="'No flights found. Try adjusting your search filters.'"
         [dismissible]="false"
       />
     </div>

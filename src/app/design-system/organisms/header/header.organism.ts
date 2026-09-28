@@ -18,7 +18,7 @@ import { SearchFieldMolecule } from '../../molecules';
 export class HeaderOrganism {
   @Input() showSearch: boolean = true;
   @Input() userAvatar?: string;
-  @Input() userName?: string = 'Usuário';
+  @Input() userName?: string = 'User';
 
   @Output() menuClick = new EventEmitter<void>();
   @Output() searchSubmit = new EventEmitter<string>();

@@ -1,8 +1,8 @@
 /**
- * avigation Service
+ * Navigation Service
  *
- * erviço centralizado para gerenciamento de navegação.
- * ornece métodos helpers e informações sobre rotas ativas.
+ * Centralized service for application navigation management.
+ * Provides helper utilities and active route information.
  */
 
 import { Injectable, inject } from '@angular/core';
@@ -22,18 +22,17 @@ export class NavigationService {
   private router = inject(Router);
 
   /**
-   * enu items para navegação da aplicação
+   * Primary navigation menu items.
    */
   readonly menuItems: NavigationItem[] = [
     { id: '1', label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
-    { id: '2', label: 'Buscar Voos', icon: 'search', route: '/search' },
-    { id: '3', label: 'Comparar', icon: 'compare', route: '/compare' },
+    { id: '2', label: 'Search Flights', icon: 'search', route: '/search' },
+    { id: '3', label: 'Compare', icon: 'compare', route: '/compare' },
     { id: '4', label: 'Analytics', icon: 'analytics', route: '/analytics' },
   ];
 
   /**
-   * bservable da rota atual
-   * mite toda vez que a navegação é concluída
+   * Observable tracking active navigation state.
    */
   currentRoute$: Observable<string> = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
@@ -41,39 +40,35 @@ export class NavigationService {
   );
 
   /**
-   * avega para uma rota específica
-   * @param route Rota de destino (ex: '/dashboard')
+   * Navigates to target route path.
    */
   navigateTo(route: string): void {
     this.router.navigate([route]);
   }
 
   /**
-   * erifica se uma rota está ativa
-   * @param route Rota para verificar
-   * @returns true se a rota está ativa
+   * Checks whether the specified route matches current URL.
    */
   isActive(route: string): boolean {
     return this.router.url === route || this.router.url.startsWith(route + '/');
   }
 
   /**
-   * etorna a rota atual
-   * @returns URL da rota atual
+   * Returns current URL route path.
    */
   getCurrentRoute(): string {
     return this.router.url;
   }
 
   /**
-   * olta para a página anterior no histórico
+   * Navigates back in browser history.
    */
   goBack(): void {
     window.history.back();
   }
 
   /**
-   * vança para a próxima página no histórico
+   * Navigates forward in browser history.
    */
   goForward(): void {
     window.history.forward();

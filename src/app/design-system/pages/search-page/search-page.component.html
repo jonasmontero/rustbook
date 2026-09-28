@@ -1,4 +1,4 @@
-<!-- SearchPage - Resultados de Busca -->
+<!-- SearchPage - Results de Busca -->
 <template-search-results-layout
   [showFilters]="showFilters"
   [searchValues]="searchValues"
@@ -6,11 +6,11 @@
   [userName]="userName"
   (searchSubmit)="onSearch($event)">
 
-  <!-- Filtros -->
+  <!-- Filters -->
   <div filters class="page-search__filters">
-    <!-- Companhias -->
+    <!-- Airlines -->
     <div class="page-search__filter-group">
-      <h4 class="page-search__filter-title">Companhias</h4>
+      <h4 class="page-search__filter-title">Airlines</h4>
       <label class="page-search__filter-checkbox">
         <input
           type="checkbox"
@@ -37,9 +37,9 @@
       </label>
     </div>
 
-    <!-- Preço -->
+    <!-- Price -->
     <div class="page-search__filter-group">
-      <h4 class="page-search__filter-title">Faixa de Preço</h4>
+      <h4 class="page-search__filter-title">Price Range</h4>
       <p class="page-search__filter-value">Até R$ {{ maxPrice }}</p>
       <input
         type="range"
@@ -52,9 +52,9 @@
       />
     </div>
 
-    <!-- Paradas -->
+    <!-- Stops -->
     <div class="page-search__filter-group">
-      <h4 class="page-search__filter-title">Paradas</h4>
+      <h4 class="page-search__filter-title">Stops</h4>
       <label class="page-search__filter-checkbox">
         <input
           type="checkbox"
@@ -66,7 +66,7 @@
     </div>
   </div>
 
-  <!-- Resultados -->
+  <!-- Results -->
   <organism-flight-list
     [flights]="filteredFlights"
     [totalCount]="filteredFlights.length"

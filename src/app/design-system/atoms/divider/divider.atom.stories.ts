@@ -262,7 +262,7 @@ export const InFlightCard: Story = {
               AZ
             </div>
             <div>
-              <div style="font-weight: 600;">Azul Linhas Aéreas</div>
+              <div style="font-weight: 600;">Azul Airlines</div>
               <div style="font-size: 14px; color: #64748B;">Voo AD 4321</div>
             </div>
           </div>
@@ -292,7 +292,7 @@ export const InFlightCard: Story = {
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="font-size: 24px; font-weight: 600; color: #10B981;">R$ 450,00</span>
             <button style="padding: 8px 16px; background: #2563EB; color: white; border: none; border-radius: 6px; cursor: pointer;">
-              Selecionar
+              Select
             </button>
           </div>
         </div>
@@ -313,7 +313,7 @@ export const InVerticalMenu: Story = {
           <div style="width: 200px; padding: 16px; background: #F8FAFC;">
             <div style="margin-bottom: 12px; font-weight: 600;">Menu</div>
             <div style="padding: 8px; cursor: pointer; border-radius: 4px; background: white;">Dashboard</div>
-            <div style="padding: 8px; cursor: pointer; border-radius: 4px;">Buscar Voos</div>
+            <div style="padding: 8px; cursor: pointer; border-radius: 4px;">Search Flights</div>
             <div style="padding: 8px; cursor: pointer; border-radius: 4px;">Comparar</div>
           </div>
 

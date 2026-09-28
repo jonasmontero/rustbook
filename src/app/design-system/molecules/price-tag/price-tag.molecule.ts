@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TextAtom, BadgeAtom } from '../../atoms';
 
 /**
- * riceTagMolecule - Etiqueta de Preço
+ * riceTagMolecule - Etiqueta de Price
  *
  * olécula que exibe preço com trend e badges opcionais.
  * sado em cards de voo para mostrar preço com indicadores.

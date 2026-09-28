@@ -9,7 +9,7 @@ const meta: Meta<TextAtom> = {
     variant: {
       control: 'select',
       options: ['h1', 'h2', 'h3', 'body', 'caption', 'label'],
-      description: 'Variante tipográfica',
+      description: 'Typography variant',
     },
     color: {
       control: 'color',
@@ -18,12 +18,12 @@ const meta: Meta<TextAtom> = {
     weight: {
       control: 'select',
       options: ['normal', 'medium', 'semibold', 'bold'],
-      description: 'Peso da fonte',
+      description: 'Font weight',
     },
     align: {
       control: 'radio',
       options: ['left', 'center', 'right'],
-      description: 'Alinhamento do texto',
+      description: 'Text alignment',
     },
   },
 };

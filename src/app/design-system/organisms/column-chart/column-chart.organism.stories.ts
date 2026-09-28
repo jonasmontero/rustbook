@@ -12,7 +12,7 @@ type Story = StoryObj<ColumnChartOrganism>;
 
 export const Default: Story = {
   args: {
-    title: 'Voos por Mês',
+    title: 'Voos por Month',
     data: [
       { label: 'Jan', value: 320 },
       { label: 'Fev', value: 280 },

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AvatarAtom, TextAtom, BadgeAtom } from '../../atoms';
 
 /**
- * irlineLogoMolecule - Logo de Companhia Aérea
+ * irlineLogoMolecule - Logo de Airline Aérea
  *
  * olécula que exibe logo, nome e badge da companhia aérea.
  * sado em cards de voo, comparações, etc.

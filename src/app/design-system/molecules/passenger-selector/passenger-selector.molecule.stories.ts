@@ -41,7 +41,7 @@ type Story = StoryObj<PassengerSelectorMolecule>;
  */
 export const Default: Story = {
   args: {
-    label: 'Passageiros',
+    label: 'Passengers',
     value: 1,
   },
 };
@@ -51,7 +51,7 @@ export const Default: Story = {
  */
 export const Adults: Story = {
   args: {
-    label: 'Adultos',
+    label: 'Adults',
     value: 2,
     min: 1,
     max: 9,
@@ -64,7 +64,7 @@ export const Adults: Story = {
  */
 export const Children: Story = {
   args: {
-    label: 'Crianças',
+    label: 'Children',
     value: 0,
     min: 0,
     max: 9,
@@ -77,7 +77,7 @@ export const Children: Story = {
  */
 export const Infants: Story = {
   args: {
-    label: 'Bebês',
+    label: 'Infants',
     value: 0,
     min: 0,
     max: 4,
@@ -90,7 +90,7 @@ export const Infants: Story = {
  */
 export const AtMinimum: Story = {
   args: {
-    label: 'Adultos',
+    label: 'Adults',
     value: 1,
     min: 1,
     max: 9,
@@ -102,7 +102,7 @@ export const AtMinimum: Story = {
  */
 export const AtMaximum: Story = {
   args: {
-    label: 'Passageiros',
+    label: 'Passengers',
     value: 9,
     min: 1,
     max: 9,
@@ -130,7 +130,7 @@ export const PassengerForm: Story = {
 
         <div style="display: flex; flex-direction: column; gap: 24px;">
           <molecule-passenger-selector
-            label="Adultos"
+            label="Adults"
             [value]="2"
             [min]="1"
             [max]="9"
@@ -138,7 +138,7 @@ export const PassengerForm: Story = {
           />
 
           <molecule-passenger-selector
-            label="Crianças"
+            label="Children"
             [value]="1"
             [min]="0"
             [max]="9"
@@ -146,7 +146,7 @@ export const PassengerForm: Story = {
           />
 
           <molecule-passenger-selector
-            label="Bebês"
+            label="Infants"
             [value]="0"
             [min]="0"
             [max]="4"
@@ -157,7 +157,7 @@ export const PassengerForm: Story = {
         <div style="margin-top: 24px; padding: 16px; background: #F8FAFC; border-radius: 8px;">
           <div style="font-weight: 600; margin-bottom: 4px;">Total: 3 passageiros</div>
           <div style="font-size: 14px; color: #64748B;">
-            2 adultos, 1 criança
+            2 adults, 1 criança
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ export const AllStates: Story = {
         <div>
           <h4 style="margin-bottom: 12px;">Valor = 0 (mínimo)</h4>
           <molecule-passenger-selector
-            label="Crianças"
+            label="Children"
             [value]="0"
             [min]="0"
             [max]="9"
@@ -184,9 +184,9 @@ export const AllStates: Story = {
         </div>
 
         <div>
-          <h4 style="margin-bottom: 12px;">Valor = 1 (mínimo para adultos)</h4>
+          <h4 style="margin-bottom: 12px;">Valor = 1 (mínimo para adults)</h4>
           <molecule-passenger-selector
-            label="Adultos"
+            label="Adults"
             [value]="1"
             [min]="1"
             [max]="9"
@@ -196,7 +196,7 @@ export const AllStates: Story = {
         <div>
           <h4 style="margin-bottom: 12px;">Valor intermediário</h4>
           <molecule-passenger-selector
-            label="Passageiros"
+            label="Passengers"
             [value]="5"
             [min]="1"
             [max]="9"
@@ -206,7 +206,7 @@ export const AllStates: Story = {
         <div>
           <h4 style="margin-bottom: 12px;">Valor = 9 (máximo)</h4>
           <molecule-passenger-selector
-            label="Passageiros"
+            label="Passengers"
             [value]="9"
             [min]="1"
             [max]="9"
@@ -216,7 +216,7 @@ export const AllStates: Story = {
         <div>
           <h4 style="margin-bottom: 12px;">Com descrição</h4>
           <molecule-passenger-selector
-            label="Adultos"
+            label="Adults"
             [value]="2"
             [min]="1"
             [max]="9"
@@ -240,9 +240,9 @@ export const FlightClasses: Story = {
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
           <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px;">
-            <div style="font-weight: 600; margin-bottom: 16px;">Econômica</div>
+            <div style="font-weight: 600; margin-bottom: 16px;">Economy</div>
             <molecule-passenger-selector
-              label="Passageiros"
+              label="Passengers"
               [value]="2"
               [min]="1"
               [max]="9"
@@ -254,10 +254,10 @@ export const FlightClasses: Story = {
 
           <div style="border: 2px solid #2563EB; border-radius: 8px; padding: 16px; background: #F0F9FF;">
             <div style="font-weight: 600; margin-bottom: 16px; color: #2563EB;">
-              Executiva ⭐
+              Business ⭐
             </div>
             <molecule-passenger-selector
-              label="Passageiros"
+              label="Passengers"
               [value]="1"
               [min]="1"
               [max]="9"
@@ -268,9 +268,9 @@ export const FlightClasses: Story = {
           </div>
 
           <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px;">
-            <div style="font-weight: 600; margin-bottom: 16px;">Primeira Classe</div>
+            <div style="font-weight: 600; margin-bottom: 16px;">First Class</div>
             <molecule-passenger-selector
-              label="Passageiros"
+              label="Passengers"
               [value]="1"
               [min]="1"
               [max]="4"
@@ -293,11 +293,11 @@ export const WithValidation: Story = {
     props: args,
     template: `
       <div style="padding: 24px; max-width: 500px;">
-        <h3 style="margin-bottom: 16px;">Passageiros</h3>
+        <h3 style="margin-bottom: 16px;">Passengers</h3>
 
         <div style="display: flex; flex-direction: column; gap: 20px;">
           <molecule-passenger-selector
-            label="Adultos"
+            label="Adults"
             [value]="1"
             [min]="1"
             [max]="9"
@@ -305,7 +305,7 @@ export const WithValidation: Story = {
           />
 
           <molecule-passenger-selector
-            label="Bebês"
+            label="Infants"
             [value]="2"
             [min]="0"
             [max]="4"
@@ -315,7 +315,7 @@ export const WithValidation: Story = {
 
         <div style="margin-top: 16px; padding: 12px; background: #FEF2F2; border-left: 3px solid #EF4444; border-radius: 4px;">
           <div style="font-size: 14px; color: #991B1B;">
-            ️ Atenção: Você selecionou 2 bebês mas apenas 1 adulto. Ajuste a quantidade.
+            ️ Atenção: Você selecionou 2 infants mas apenas 1 adulto. Ajuste a quantidade.
           </div>
         </div>
       </div>

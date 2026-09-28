@@ -12,25 +12,25 @@ const meta: Meta<ComparisonPageComponent> = {
         component: `
 # ComparisonPageComponent
 
-Página de comparação detalhada entre voos selecionados com análise lado a lado.
+Detailed side-by-side comparison page for selected flights.
 
-## Características
+## Features
 -  ComparisonLayoutTemplate com 3 abas
--  Aba "Preços" com gráfico de histórico de 30 dias
--  Aba "Benefícios" com grid comparativo
--  Aba "Histórico" com tabela detalhada
+-  Prices tab with 30-day historical pricing chart
+-  Benefits tab with comparative amenities grid
+-  History tab with detailed comparison table
 -  3 voos mock selecionados (Azul, Gol, Latam)
--  Insights automáticos de preços
--  Resumo comparativo com recomendações
--  Layout responsivo
+-  Automated pricing insights
+-  Comparative summary with recommendations
+-  Responsive layout
 
-## Componentes Usados
+## Components Used
 - ComparisonLayoutTemplate
 - PriceChartOrganism
 - BenefitsGridOrganism
 - ComparisonTableOrganism
 
-## Funcionalidades
+## Functionality
 - Comparar até 3 voos lado a lado
 - Analisar histórico de preços (30 dias)
 - Comparar benefícios de cada companhia
@@ -111,7 +111,7 @@ export const TwoFlights: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Comparação com apenas 2 voos selecionados (Azul e Gol)',
+        story: 'Comparação com apenas 2 flights selected (Azul e Gol)',
       },
     },
   },

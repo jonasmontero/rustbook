@@ -11,7 +11,7 @@ import { IconAtom, InputAtom, ButtonAtom, SpinnerAtom } from '../../atoms';
  *
  * @example
  * <molecule-search-field
- *   placeholder="Buscar destino..."
+ *   placeholder="Search destino..."
  *   (search)="handleSearch($event)"
  * />
  */
@@ -60,7 +60,7 @@ import { IconAtom, InputAtom, ButtonAtom, SpinnerAtom } from '../../atoms';
 })
 export class SearchFieldMolecule {
   /** laceholder do input */
-  @Input() placeholder: string = 'Buscar...';
+  @Input() placeholder: string = 'Search...';
 
   /** alor do input */
   @Input() value: string = '';

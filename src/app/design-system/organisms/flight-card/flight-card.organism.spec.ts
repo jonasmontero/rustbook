@@ -74,7 +74,7 @@ describe('FlightCardOrganism', () => {
     const component = fixture.componentInstance;
 
     component.flight = { ...mockFlight, stops: 0 };
-    expect(component.getStopsText()).toBe('Voo direto');
+    expect(component.getStopsText()).toBe('Direct flight');
 
     component.flight = { ...mockFlight, stops: 1 };
     expect(component.getStopsText()).toBe('1 escala');

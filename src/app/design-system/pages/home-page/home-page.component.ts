@@ -4,7 +4,7 @@
  *
  * @description
  * ágina principal que exibe estatísticas, gráfico de preços, calendário sazonal
- * e lista de voos recentes. Usa DashboardLayoutTemplate com dados mock.
+ * and recent flights list. Uses DashboardLayoutTemplate with mock data.
  *
  * @example
  * ```html
@@ -45,7 +45,7 @@ import {
 })
 export class HomePageComponent implements OnInit {
   sidebarCollapsed = false;
-  userName = 'Usuário Demo';
+  userName = 'Demo User';
   activeRoute = '/dashboard';
   loading = false;
 
@@ -84,28 +84,28 @@ export class HomePageComponent implements OnInit {
 
   onNavigate(route: string): void {
     this.activeRoute = route;
-    console.log('Navegando para:', route);
+    console.log('Navigating to:', route);
   }
 
   onSearch(searchData: any): void {
-    console.log('Busca realizada:', searchData);
+    console.log('Search executed:', searchData);
     this.loading = true;
-    // Simular busca
+    // Simulate search
     setTimeout(() => {
       this.loading = false;
     }, 1500);
   }
 
   onFlightSelect(flightId: string): void {
-    console.log('Voo selecionado:', flightId);
+    console.log('Flight selected:', flightId);
   }
 
   onPeriodChange(period: '7d' | '30d' | '90d'): void {
     this.selectedPeriod = period;
-    console.log('Período alterado:', period);
+    console.log('Period changed:', period);
   }
 
   onMonthClick(month: number): void {
-    console.log('Mês clicado:', month);
+    console.log('Month clicado:', month);
   }
 }

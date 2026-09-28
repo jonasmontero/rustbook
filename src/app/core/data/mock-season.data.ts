@@ -1,13 +1,10 @@
 /**
- * ock Data - Seasonal Data
- * ados mockados de temporadas e preços por mês
+ * Mock Data - Seasonal Pricing
+ * Seasonal classification and average flight prices per month.
  */
 
 import { SeasonDataModel } from '../models';
 
-/**
- * ados de temporada e preço médio por mês
- */
 export const MOCK_SEASON_DATA: SeasonDataModel[] = [
   { month: 1, season: 'high', avgPrice: 650 },
   { month: 2, season: 'high', avgPrice: 680 },

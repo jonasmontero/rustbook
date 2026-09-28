@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * pinnerAtom - Loading indicator
- *
- * omponente de loading animado com CSS puro.
- * sado por ButtonAtom, SearchField e páginas.
- *
- * @example
- * <atom-spinner size="md" />
- * <atom-spinner size="lg" color="#0033A0" />
- */
+undefined
 @Component({
   selector: 'atom-spinner',
   standalone: true,

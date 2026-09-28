@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * ividerAtom - Divisor/Separador
- *
- * omponente para criar separadores visuais entre conteúdos.
- * uporta orientação horizontal e vertical.
- *
- * @example
- * <atom-divider orientation="horizontal" />
- * <atom-divider orientation="vertical" spacing="lg" />
- */
+undefined
 @Component({
   selector: 'atom-divider',
   standalone: true,

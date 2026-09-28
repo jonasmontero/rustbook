@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TextAtom, BadgeAtom } from '../../atoms';
 
 /**
- * riceRangeMolecule - Faixa de Preços
+ * riceRangeMolecule - Faixa de Prices
  *
  * olécula que exibe uma faixa de preços (min-max) com indicador de economia.
  * sado para mostrar variação de preços entre companhias.

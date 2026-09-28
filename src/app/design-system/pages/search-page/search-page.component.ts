@@ -31,7 +31,7 @@ type SortOption = 'price' | 'duration' | 'departure';
 export class SearchPageComponent implements OnInit {
   showFilters = true;
   loading = false;
-  userName = 'Usuário Demo';
+  userName = 'Demo User';
 
   searchValues: SearchFormModel = {
     origin: 'GRU',
@@ -47,7 +47,7 @@ export class SearchPageComponent implements OnInit {
   sortBy: SortOption = 'price';
   selectedFlightId?: string;
 
-  // Filtros
+  // Filters
   selectedAirlines: Set<string> = new Set(['azul', 'gol', 'latam']);
   maxPrice = 2000;
   directOnly = false;
@@ -98,7 +98,7 @@ export class SearchPageComponent implements OnInit {
     this.loading = true;
     console.log('Nova busca:', searchData);
 
-    // Simular busca
+    // Simulate search
     setTimeout(() => {
       this.loadFlights();
       this.loading = false;
@@ -112,7 +112,7 @@ export class SearchPageComponent implements OnInit {
 
   onFlightSelect(flightId: string): void {
     this.selectedFlightId = flightId;
-    console.log('Voo selecionado:', flightId);
+    console.log('Flight selected:', flightId);
   }
 
   onAirlineToggle(airline: string): void {

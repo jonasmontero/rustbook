@@ -19,11 +19,11 @@ const meta: Meta<ButtonAtom> = {
     size: {
       control: 'radio',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamanho do botão',
+      description: 'Button size',
     },
     disabled: {
       control: 'boolean',
-      description: 'Estado desabilitado',
+      description: 'Disabled state',
     },
     loading: {
       control: 'boolean',
@@ -63,7 +63,7 @@ export const Primary: Story = {
 };
 
 /**
- * Botão secundário
+ * Secondary button
  */
 export const Secondary: Story = {
   args: {
@@ -83,7 +83,7 @@ export const Outline: Story = {
 };
 
 /**
- * Botão ghost (transparente)
+ * Ghost button (transparente)
  */
 export const Ghost: Story = {
   args: {
@@ -103,11 +103,11 @@ export const Danger: Story = {
 };
 
 /**
- * Botão com ícone à esquerda
+ * Button with icon à esquerda
  */
 export const WithIconLeft: Story = {
   args: {
-    label: 'Buscar Voos',
+    label: 'Search Flights',
     variant: 'primary',
     icon: 'search',
     iconPosition: 'left',
@@ -115,7 +115,7 @@ export const WithIconLeft: Story = {
 };
 
 /**
- * Botão com ícone à direita
+ * Button with icon à direita
  */
 export const WithIconRight: Story = {
   args: {
@@ -138,7 +138,7 @@ export const Loading: Story = {
 };
 
 /**
- * Botão desabilitado
+ * Disabled button
  */
 export const Disabled: Story = {
   args: {
@@ -149,7 +149,7 @@ export const Disabled: Story = {
 };
 
 /**
- * Botão pequeno
+ * Small button
  */
 export const Small: Story = {
   args: {
@@ -160,7 +160,7 @@ export const Small: Story = {
 };
 
 /**
- * Botão grande
+ * Large button
  */
 export const Large: Story = {
   args: {
@@ -171,7 +171,7 @@ export const Large: Story = {
 };
 
 /**
- * Botão com largura total
+ * Full width button
  */
 export const FullWidth: Story = {
   args: {
@@ -182,7 +182,7 @@ export const FullWidth: Story = {
 };
 
 /**
- * Todas as variantes lado a lado
+ * All variants lado a lado
  */
 export const AllVariants: Story = {
   render: (args) => ({
@@ -200,7 +200,7 @@ export const AllVariants: Story = {
 };
 
 /**
- * Todos os tamanhos
+ * All sizes
  */
 export const AllSizes: Story = {
   render: (args) => ({
@@ -223,7 +223,7 @@ export const WithIcons: Story = {
     props: args,
     template: `
       <div style="display: flex; flex-direction: column; gap: 12px; max-width: 300px;">
-        <atom-button label="Buscar Voos" variant="primary" icon="search" />
+        <atom-button label="Search Flights" variant="primary" icon="search" />
         <atom-button label="Reservar" variant="primary" icon="check" />
         <atom-button label="Cancelar" variant="outline" icon="x" />
         <atom-button label="Ver Detalhes" variant="ghost" icon="arrow-right" iconPosition="right" />
@@ -257,19 +257,19 @@ export const AirlineActions: Story = {
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px;">
         <atom-button
-          label="Buscar Voos Azul"
+          label="Search Flights Azul"
           variant="primary"
           icon="plane"
           style="background-color: #0033A0;"
         />
         <atom-button
-          label="Buscar Voos Gol"
+          label="Search Flights Gol"
           variant="primary"
           icon="plane"
           style="background-color: #FF6600;"
         />
         <atom-button
-          label="Buscar Voos Latam"
+          label="Search Flights Latam"
           variant="primary"
           icon="plane"
           style="background-color: #E31837;"

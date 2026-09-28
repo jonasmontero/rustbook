@@ -36,11 +36,11 @@ export default meta;
 type Story = StoryObj<SearchFieldMolecule>;
 
 /**
- * Campo de busca padrão
+ * Search field padrão
  */
 export const Default: Story = {
   args: {
-    placeholder: 'Buscar...',
+    placeholder: 'Search...',
   },
 };
 
@@ -69,7 +69,7 @@ export const DestinationSearch: Story = {
  */
 export const WithValue: Story = {
   args: {
-    placeholder: 'Buscar destino...',
+    placeholder: 'Search destino...',
     value: 'São Paulo - GRU',
   },
 };
@@ -90,7 +90,7 @@ export const Loading: Story = {
  */
 export const Small: Story = {
   args: {
-    placeholder: 'Buscar...',
+    placeholder: 'Search...',
     size: 'sm',
   },
 };
@@ -100,7 +100,7 @@ export const Small: Story = {
  */
 export const Large: Story = {
   args: {
-    placeholder: 'Buscar destino...',
+    placeholder: 'Search destino...',
     size: 'lg',
   },
 };
@@ -114,15 +114,15 @@ export const AllSizes: Story = {
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px; max-width: 400px;">
         <molecule-search-field
-          placeholder="Buscar (Small)"
+          placeholder="Search (Small)"
           size="sm"
         />
         <molecule-search-field
-          placeholder="Buscar (Medium)"
+          placeholder="Search (Medium)"
           size="md"
         />
         <molecule-search-field
-          placeholder="Buscar (Large)"
+          placeholder="Search (Large)"
           size="lg"
         />
       </div>
@@ -138,11 +138,11 @@ export const FlightSearchForm: Story = {
     props: args,
     template: `
       <div style="padding: 24px; max-width: 600px;">
-        <h3 style="margin-bottom: 16px;">Buscar Voos</h3>
+        <h3 style="margin-bottom: 16px;">Search Flights</h3>
 
         <div style="display: flex; flex-direction: column; gap: 16px;">
           <div>
-            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Origem</label>
+            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Origin</label>
             <molecule-search-field
               placeholder="Digite o aeroporto de origem..."
               value="São Paulo - GRU"
@@ -150,7 +150,7 @@ export const FlightSearchForm: Story = {
           </div>
 
           <div>
-            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Destino</label>
+            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Destination</label>
             <molecule-search-field
               placeholder="Digite o aeroporto de destino..."
             />
@@ -172,14 +172,14 @@ export const InteractiveStates: Story = {
         <div>
           <h4 style="margin-bottom: 8px;">Vazio</h4>
           <molecule-search-field
-            placeholder="Buscar destino..."
+            placeholder="Search destino..."
           />
         </div>
 
         <div>
           <h4 style="margin-bottom: 8px;">Com Valor (mostra botão X)</h4>
           <molecule-search-field
-            placeholder="Buscar destino..."
+            placeholder="Search destino..."
             value="Rio de Janeiro - GIG"
           />
         </div>
@@ -205,7 +205,7 @@ export const AirlineSearch: Story = {
     props: args,
     template: `
       <div style="padding: 24px; max-width: 400px;">
-        <h3 style="margin-bottom: 16px;">Filtrar por Companhia</h3>
+        <h3 style="margin-bottom: 16px;">Filtrar por Airline</h3>
 
         <molecule-search-field
           placeholder="Azul, Gol, Latam..."

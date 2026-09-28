@@ -17,7 +17,7 @@ describe('SearchFieldMolecule', () => {
   it('should have default values', () => {
     const fixture = TestBed.createComponent(SearchFieldMolecule);
     const component = fixture.componentInstance;
-    expect(component.placeholder).toBe('Buscar...');
+    expect(component.placeholder).toBe('Search...');
     expect(component.value).toBe('');
     expect(component.loading).toBe(false);
     expect(component.size).toBe('md');

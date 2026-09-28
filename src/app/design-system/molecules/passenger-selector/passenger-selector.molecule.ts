@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { LabelAtom, ButtonAtom, TextAtom } from '../../atoms';
 
 /**
- * assengerSelectorMolecule - Seletor de Passageiros
+ * assengerSelectorMolecule - Seletor de Passengers
  *
  * olécula que permite incrementar/decrementar número de passageiros.
- * sado para selecionar adultos, crianças e bebês.
+ * sado para selecionar adults, children e infants.
  *
  * @example
  * <molecule-passenger-selector
- *   label="Adultos"
+ *   label="Adults"
  *   [value]="2"
  *   (valueChange)="handleChange($event)"
  * />

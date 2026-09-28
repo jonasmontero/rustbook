@@ -9,7 +9,7 @@ const meta: Meta<AirlineLogoMolecule> = {
     airline: {
       control: 'select',
       options: ['azul', 'gol', 'latam'],
-      description: 'Companhia aérea',
+      description: 'Airline aérea',
     },
     size: {
       control: 'radio',
@@ -228,7 +228,7 @@ export const InFlightCard: Story = {
               <div style="text-align: center; color: #64748B;">
                 <div style="font-size: 12px;">2h 15min</div>
                 <div style="margin: 8px 0;">→</div>
-                <div style="font-size: 12px;">Direto</div>
+                <div style="font-size: 12px;">Direct</div>
               </div>
 
               <div style="text-align: right;">
@@ -244,7 +244,7 @@ export const InFlightCard: Story = {
               R$ 450,00
             </div>
             <button style="padding: 12px 24px; background: #2563EB; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-              Selecionar
+              Select
             </button>
           </div>
         </div>
@@ -261,7 +261,7 @@ export const AirlineComparison: Story = {
     props: args,
     template: `
       <div style="padding: 24px;">
-        <h3 style="margin-bottom: 24px;">Comparar Companhias</h3>
+        <h3 style="margin-bottom: 24px;">Comparar Airlines</h3>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
           <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 20px; text-align: center;">

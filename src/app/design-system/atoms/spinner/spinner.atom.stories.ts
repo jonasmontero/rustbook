@@ -9,7 +9,7 @@ const meta: Meta<SpinnerAtom> = {
     size: {
       control: 'radio',
       options: ['sm', 'md', 'lg'],
-      description: 'Tamanho do spinner',
+      description: 'Spinner size',
     },
     color: {
       control: 'color',
@@ -25,7 +25,7 @@ export default meta;
 type Story = StoryObj<SpinnerAtom>;
 
 /**
- * Spinner padrão (médio)
+ * Default spinner (medium)
  */
 export const Default: Story = {
   args: {
@@ -34,7 +34,7 @@ export const Default: Story = {
 };
 
 /**
- * Spinner pequeno (16px)
+ * Small spinner (16px)
  */
 export const Small: Story = {
   args: {
@@ -43,7 +43,7 @@ export const Small: Story = {
 };
 
 /**
- * Spinner grande (32px)
+ * Large spinner (32px)
  */
 export const Large: Story = {
   args: {

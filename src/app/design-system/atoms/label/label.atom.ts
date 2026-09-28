@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * abelAtom - Rótulo de campo
- *
- * omponente base para labels de formulário.
- * ostra asterisco quando required.
- *
- * @example
- * <atom-label text="Nome" htmlFor="name-input" />
- * <atom-label text="Email" [required]="true" htmlFor="email-input" />
- */
+undefined
 @Component({
   selector: 'atom-label',
   standalone: true,

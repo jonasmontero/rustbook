@@ -4,7 +4,7 @@
  *
  * @description
  * emplate responsivo com HeaderOrganism e navegação por tabs para diferentes
- * visões de comparação (Preços, Benefícios, Histórico).
+ * visões de comparação (Prices, Benefits, History).
  *
  * @example
  * ```html
@@ -52,13 +52,13 @@ export class ComparisonLayoutTemplate {
   @Input() activeTab: ComparisonTab = 'prices';
 
   /** ome do usuário para exibir no header */
-  @Input() userName?: string = 'Usuário';
+  @Input() userName?: string = 'User';
 
   /** vatar do usuário */
   @Input() userAvatar?: string;
 
   /** ítulo da página */
-  @Input() title: string = 'Comparação de Voos';
+  @Input() title: string = 'Flight Comparison';
 
   /** ubtítulo opcional */
   @Input() subtitle?: string;
@@ -73,9 +73,9 @@ export class ComparisonLayoutTemplate {
   @Output() menuClick = new EventEmitter<void>();
 
   tabs: TabConfig[] = [
-    { id: 'prices', label: 'Preços', icon: 'price' },
-    { id: 'benefits', label: 'Benefícios', icon: 'star' },
-    { id: 'history', label: 'Histórico', icon: 'chart' },
+    { id: 'prices', label: 'Prices', icon: 'price' },
+    { id: 'benefits', label: 'Benefits', icon: 'star' },
+    { id: 'history', label: 'History', icon: 'chart' },
   ];
 
   onTabClick(tabId: ComparisonTab): void {

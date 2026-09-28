@@ -25,8 +25,8 @@ export class ComparisonTableOrganism {
 
   getBenefitsList(): Array<{key: keyof FlightModel['benefits']; label: string}> {
     return [
-      { key: 'baggage', label: 'Bagagem' },
-      { key: 'meal', label: 'Refeição' },
+      { key: 'baggage', label: 'Baggage' },
+      { key: 'meal', label: 'Meal' },
       { key: 'wifi', label: 'Wi-Fi' },
       { key: 'entertainment', label: 'Entretenimento' },
       { key: 'seatSelection', label: 'Escolha de assento' },

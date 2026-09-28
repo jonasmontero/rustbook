@@ -1,5 +1,6 @@
 /**
- * Modelo de dados para estatísticas
+ * Statistics Data Model
+ * Interface for summary statistical metrics and trends.
  */
 
 export interface StatModel {

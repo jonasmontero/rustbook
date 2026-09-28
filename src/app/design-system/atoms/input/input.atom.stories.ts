@@ -18,15 +18,15 @@ const meta: Meta<InputAtom> = {
     },
     value: {
       control: 'text',
-      description: 'Valor do input',
+      description: 'Input value',
     },
     disabled: {
       control: 'boolean',
-      description: 'Estado desabilitado',
+      description: 'Disabled state',
     },
     error: {
       control: 'boolean',
-      description: 'Estado de erro',
+      description: 'Error state',
     },
     errorMessage: {
       control: 'text',
@@ -92,17 +92,17 @@ export const Date: Story = {
 };
 
 /**
- * Input de senha
+ * Password input
  */
 export const Password: Story = {
   args: {
     type: 'password',
-    placeholder: 'Digite sua senha',
+    placeholder: 'Enter your password',
   },
 };
 
 /**
- * Input com erro
+ * Input with error state
  */
 export const WithError: Story = {
   args: {
@@ -115,7 +115,7 @@ export const WithError: Story = {
 };
 
 /**
- * Input desabilitado
+ * Disabled input
  */
 export const Disabled: Story = {
   args: {

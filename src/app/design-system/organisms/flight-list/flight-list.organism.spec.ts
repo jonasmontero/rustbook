@@ -38,13 +38,13 @@ describe('FlightListOrganism', () => {
     const component = fixture.componentInstance;
 
     component.totalCount = 0;
-    expect(component.getResultsText()).toBe('Nenhum voo encontrado');
+    expect(component.getResultsText()).toBe('No flights found');
 
     component.totalCount = 1;
-    expect(component.getResultsText()).toBe('1 voo encontrado');
+    expect(component.getResultsText()).toBe('1 flight found');
 
     component.totalCount = 5;
-    expect(component.getResultsText()).toBe('5 voos encontrados');
+    expect(component.getResultsText()).toBe('5 flights found');
   });
 
   it('should emit sortChange event', () => {

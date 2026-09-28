@@ -39,9 +39,9 @@ export class FlightListOrganism {
   @Output() flightSelect = new EventEmitter<string>();
 
   sortOptions: Array<{ value: SortOption; label: string }> = [
-    { value: 'price', label: 'Menor Preço' },
-    { value: 'duration', label: 'Menor Duração' },
-    { value: 'departure', label: 'Horário' },
+    { value: 'price', label: 'Lowest Price' },
+    { value: 'duration', label: 'Shortest Duration' },
+    { value: 'departure', label: 'Schedule' },
   ];
 
   onSortChange(sort: SortOption): void {
@@ -61,9 +61,9 @@ export class FlightListOrganism {
   }
 
   getResultsText(): string {
-    if (this.totalCount === 0) return 'Nenhum voo encontrado';
-    if (this.totalCount === 1) return '1 voo encontrado';
-    return `${this.totalCount} voos encontrados`;
+    if (this.totalCount === 0) return 'No flights found';
+    if (this.totalCount === 1) return '1 flight found';
+    return `${this.totalCount} flights found`;
   }
 
   getSortButtonVariant(option: SortOption): 'primary' | 'ghost' {

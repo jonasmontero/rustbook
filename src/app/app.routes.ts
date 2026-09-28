@@ -1,8 +1,8 @@
 /**
- * pplication Routes Configuration
+ * Application Routes Configuration
  *
- * onfiguração de rotas da aplicação SkyCompare.
- * odas as rotas usam lazy loading para otimização de performance.
+ * Route definitions for the SkyCompare application.
+ * All route components are loaded lazily for optimal performance.
  */
 
 import { Routes } from '@angular/router';
@@ -27,14 +27,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./design-system/pages/search-page/search-page.component')
         .then(m => m.SearchPageComponent),
-    title: 'Buscar Voos - SkyCompare'
+    title: 'Search Flights - SkyCompare'
   },
   {
     path: 'compare',
     loadComponent: () =>
       import('./design-system/pages/comparison-page/comparison-page.component')
         .then(m => m.ComparisonPageComponent),
-    title: 'Comparar Voos - SkyCompare'
+    title: 'Compare Flights - SkyCompare'
   },
   {
     path: 'analytics',

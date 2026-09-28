@@ -1,5 +1,5 @@
 <div class="organism-search-form">
-  <h2 class="organism-search-form__title">Buscar Voos</h2>
+  <h2 class="organism-search-form__title">Search Flights</h2>
 
   <!-- Trip Type Toggle -->
   <div class="organism-search-form__trip-type">
@@ -9,7 +9,7 @@
       (click)="onTripTypeChange('roundtrip')"
       class="organism-search-form__trip-button"
     >
-      Ida e Volta
+      Round trip
     </button>
     <button
       type="button"
@@ -17,7 +17,7 @@
       (click)="onTripTypeChange('oneway')"
       class="organism-search-form__trip-button"
     >
-      Somente Ida
+      One-way
     </button>
   </div>
 
@@ -40,7 +40,7 @@
     <!-- Origin -->
     <div class="organism-search-form__field">
       <molecule-search-field
-        [placeholder]="'Origem (ex: GRU)'"
+        [placeholder]="'Origin (ex: GRU)'"
         [value]="origin"
         (search)="onOriginSearch($event)"
       />
@@ -49,7 +49,7 @@
     <!-- Destination -->
     <div class="organism-search-form__field">
       <molecule-search-field
-        [placeholder]="'Destino (ex: GIG)'"
+        [placeholder]="'Destination (ex: GIG)'"
         [value]="destination"
         (search)="onDestinationSearch($event)"
       />
@@ -58,7 +58,7 @@
     <!-- Departure Date -->
     <div class="organism-search-form__field">
       <molecule-date-picker
-        [label]="'Data de Ida'"
+        [label]="'Departure Date'"
         [value]="formatDateForPicker(departureDate)"
         (dateChange)="onDepartureDateChange($event)"
       />
@@ -67,7 +67,7 @@
     <!-- Return Date -->
     <div class="organism-search-form__field">
       <molecule-date-picker
-        [label]="'Data de Volta'"
+        [label]="'Return Date'"
         [value]="formatDateForPicker(returnDate)"
         [disabled]="tripType === 'oneway'"
         [minDate]="getMinReturnDateString()"
@@ -77,11 +77,11 @@
 
     <!-- Passengers -->
     <div class="organism-search-form__passengers">
-      <h3 class="organism-search-form__passengers-title">Passageiros</h3>
+      <h3 class="organism-search-form__passengers-title">Passengers</h3>
 
       <div class="organism-search-form__passengers-grid">
         <molecule-passenger-selector
-          [label]="'Adultos'"
+          [label]="'Adults'"
           [value]="adults"
           [min]="1"
           [max]="9"
@@ -89,7 +89,7 @@
         />
 
         <molecule-passenger-selector
-          [label]="'Crianças'"
+          [label]="'Children'"
           [value]="children"
           [min]="0"
           [max]="9"
@@ -97,7 +97,7 @@
         />
 
         <molecule-passenger-selector
-          [label]="'Bebês'"
+          [label]="'Infants'"
           [value]="infants"
           [min]="0"
           [max]="adults"
@@ -110,7 +110,7 @@
   <!-- Submit Button -->
   <div class="organism-search-form__actions">
     <atom-button
-      [label]="'Buscar Voos'"
+      [label]="'Search Flights'"
       [variant]="'primary'"
       [size]="'lg'"
       [loading]="loading"

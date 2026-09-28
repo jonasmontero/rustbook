@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TextAtom, IconAtom } from '../../atoms';
 
 /**
- * lightTimeMolecule - Horário de Voo
+ * lightTimeMolecule - Schedule de Voo
  *
  * olécula que exibe horários de partida/chegada e duração do voo.
  *

@@ -33,7 +33,7 @@ type Story = StoryObj<PieChartOrganism>;
  */
 export const Default: Story = {
   args: {
-    title: 'Distribuição de Voos por Companhia',
+    title: 'Distribuição de Voos por Airline',
     showPercentages: true,
     radius: 100,
     data: [
@@ -83,9 +83,9 @@ export const Small: Story = {
     title: 'Distribuição Compacta',
     radius: 80,
     data: [
-      { label: 'Classe Econômica', value: 70, color: '#10B981' },
-      { label: 'Classe Executiva', value: 25, color: '#3B82F6' },
-      { label: 'Primeira Classe', value: 5, color: '#F59E0B' },
+      { label: 'Classe Economy', value: 70, color: '#10B981' },
+      { label: 'Classe Business', value: 25, color: '#3B82F6' },
+      { label: 'First Class', value: 5, color: '#F59E0B' },
     ],
   },
 };
@@ -105,10 +105,10 @@ export const Empty: Story = {
  */
 export const TwoValues: Story = {
   args: {
-    title: 'Ida e Volta',
+    title: 'Round trip',
     data: [
-      { label: 'Ida', value: 50, color: '#3B82F6' },
-      { label: 'Volta', value: 50, color: '#10B981' },
+      { label: 'Departure', value: 50, color: '#3B82F6' },
+      { label: 'Return', value: 50, color: '#10B981' },
     ],
   },
 };

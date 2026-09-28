@@ -44,7 +44,7 @@ export class DashboardLayoutTemplate implements OnInit {
   @Input() stats: StatModel[] = [];
 
   /** ome do usuário para exibir no header */
-  @Input() userName?: string = 'Usuário';
+  @Input() userName?: string = 'User';
 
   /** vatar do usuário */
   @Input() userAvatar?: string;

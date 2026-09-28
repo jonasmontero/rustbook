@@ -30,7 +30,7 @@ export const Default: Story = {
 
 export const Top5: Story = {
   args: {
-    title: 'Top 5 Destinos',
+    title: 'Top 5 Destinations',
     data: [
       { label: 'Rio de Janeiro', value: 2400 },
       { label: 'Salvador', value: 1800 },

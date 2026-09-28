@@ -26,9 +26,9 @@ export class SidebarOrganism {
   @Input() activeRoute: string = '';
   @Input() menuItems: MenuItem[] = [
     { id: '1', label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
-    { id: '2', label: 'Buscar Voos', icon: 'search', route: '/search' },
+    { id: '2', label: 'Search Flights', icon: 'search', route: '/search' },
     { id: '3', label: 'Comparar', icon: 'compare', route: '/compare' },
-    { id: '4', label: 'Histórico', icon: 'history', route: '/history' },
+    { id: '4', label: 'History', icon: 'history', route: '/history' },
   ];
 
   @Output() navigate = new EventEmitter<string>();

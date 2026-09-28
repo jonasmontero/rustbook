@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * conAtom - Ícones SVG inline
- *
- * omponente base para renderizar ícones SVG usando um registry interno.
- * sado por 20+ componentes (Button, SearchField, StatCard, etc.)
- *
- * @example
- * <atom-icon name="search" size="md" />
- * <atom-icon name="plane" size="lg" color="#0033A0" />
- */
+undefined
 @Component({
   selector: 'atom-icon',
   standalone: true,

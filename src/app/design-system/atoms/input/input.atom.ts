@@ -2,16 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-/**
- * nputAtom - Campo de entrada
- *
- * omponente base para inputs de formulário.
- * uporta diferentes tipos e estados (error, disabled).
- *
- * @example
- * <atom-input type="text" placeholder="Digite seu nome" />
- * <atom-input type="email" [error]="true" errorMessage="Email inválido" />
- */
+undefined
 @Component({
   selector: 'atom-input',
   standalone: true,

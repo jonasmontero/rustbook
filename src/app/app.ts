@@ -1,8 +1,8 @@
 /**
- * pp Root Component
+ * App Root Component
  *
- * omponente raiz da aplicação SkyCompare Design System.
- * enderiza o RouterOutlet para navegação entre páginas.
+ * Root component of the SkyCompare application.
+ * Hosts the primary RouterOutlet for view navigation.
  */
 
 import { Component } from '@angular/core';
@@ -16,6 +16,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  // Componente principal - apenas renderiza o router-outlet
-}
+export class App {}

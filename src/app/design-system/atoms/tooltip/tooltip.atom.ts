@@ -1,17 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * ooltipAtom - Dica/Tooltip
- *
- * omponente para exibir dicas contextuais ao passar o mouse.
- * uporta 4 posições: top, bottom, left, right.
- *
- * @example
- * <atom-tooltip text="Informação adicional" position="top">
- *   <button>Hover me</button>
- * </atom-tooltip>
- */
+undefined
 @Component({
   selector: 'atom-tooltip',
   standalone: true,

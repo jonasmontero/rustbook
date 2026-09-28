@@ -3,16 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IconAtom } from '../icon/icon.atom';
 import { SpinnerAtom } from '../spinner/spinner.atom';
 
-/**
- * uttonAtom - Botão base
- *
- * omponente de botão com múltiplas variantes e estados.
- * uporta ícones e loading state.
- *
- * @example
- * <atom-button label="Clique aqui" variant="primary" />
- * <atom-button label="Buscar" icon="search" [loading]="true" />
- */
+undefined
 @Component({
   selector: 'atom-button',
   standalone: true,

@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * vatarAtom - Avatar/Logo
- *
- * omponente para exibir avatares ou logos de companhias aéreas.
- * uporta imagem ou fallback com iniciais.
- *
- * @example
- * <atom-avatar src="azul-logo.png" alt="Azul" />
- * <atom-avatar fallback="AZ" [size]="lg" />
- */
+undefined
 @Component({
   selector: 'atom-avatar',
   standalone: true,

@@ -1,5 +1,5 @@
 /**
- * Modelo de dados para histórico de preços
+ * Price History and Seasonal Data Models
  */
 
 export interface PriceHistoryModel {

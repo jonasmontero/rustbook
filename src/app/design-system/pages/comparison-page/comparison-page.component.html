@@ -1,11 +1,11 @@
-<!-- ComparisonPage - Comparação Detalhada de Voos -->
+<!-- ComparisonPage - Detailed Comparison de Voos -->
 <template-comparison-layout
   [activeTab]="activeTab"
-  [title]="'Comparação de Voos'"
-  [subtitle]="selectedFlights.length + ' voos selecionados'"
+  [title]="'Flight Comparison'"
+  [subtitle]="selectedFlights.length + ' flights selected'"
   (tabChange)="onTabChange($event)">
 
-  <!-- Tab 1: Preços - Gráfico de histórico de preços -->
+  <!-- Tab 1: Prices - Gráfico de histórico de preços -->
   <div prices class="page-comparison__tab-content">
     <organism-price-chart
       [data]="priceHistory"
@@ -13,44 +13,44 @@
     />
 
     <div class="page-comparison__insights">
-      <h3 class="page-comparison__insights-title"> Insights de Preços</h3>
+      <h3 class="page-comparison__insights-title"> Insights de Prices</h3>
       <ul class="page-comparison__insights-list">
         <li>Azul oferece o menor preço médio (R$ 320)</li>
-        <li>Melhor dia para comprar: terça-feira (-15% em média)</li>
-        <li>Tendência de alta nos próximos 7 dias (+8%)</li>
+        <li>Best day to book: Tuesday (-15% on average)</li>
+        <li>Trend de alta nos próximos 7 dias (+8%)</li>
       </ul>
     </div>
   </div>
 
-  <!-- Tab 2: Benefícios - Grid comparativo de benefícios -->
+  <!-- Tab 2: Benefits - Grid comparativo de benefícios -->
   <div benefits class="page-comparison__tab-content">
     <organism-benefits-grid [benefits]="benefitsData" />
 
     <div class="page-comparison__summary">
-      <h3 class="page-comparison__summary-title"> Resumo da Comparação</h3>
+      <h3 class="page-comparison__summary-title"> Comparison Summary</h3>
       <div class="page-comparison__summary-cards">
         <div class="page-comparison__summary-card">
-          <span class="page-comparison__summary-label">Melhor Preço</span>
+          <span class="page-comparison__summary-label">Best Price</span>
           <span class="page-comparison__summary-value">Azul - R$ 320</span>
         </div>
         <div class="page-comparison__summary-card">
-          <span class="page-comparison__summary-label">Mais Benefícios</span>
+          <span class="page-comparison__summary-label">Mais Benefits</span>
           <span class="page-comparison__summary-value">Latam - 6/6</span>
         </div>
         <div class="page-comparison__summary-card">
-          <span class="page-comparison__summary-label">Melhor Custo-Benefício</span>
+          <span class="page-comparison__summary-label">Best Overall Value</span>
           <span class="page-comparison__summary-value">Gol - 5/6 por R$ 380</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Tab 3: Histórico - Tabela comparativa detalhada -->
+  <!-- Tab 3: History - Tabela comparativa detalhada -->
   <div history class="page-comparison__tab-content">
     <organism-comparison-table [flights]="selectedFlights" />
 
     <div class="page-comparison__recommendation">
-      <h3 class="page-comparison__recommendation-title"> Nossa Recomendação</h3>
+      <h3 class="page-comparison__recommendation-title"> Our Recommendation</h3>
       <p class="page-comparison__recommendation-text">
         Com base na sua busca, <strong>Gol</strong> oferece o melhor custo-benefício:
         preço intermediário (R$ 380) com 5 dos 6 benefícios inclusos.

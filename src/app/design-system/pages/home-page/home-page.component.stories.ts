@@ -14,7 +14,7 @@ const meta: Meta<HomePageComponent> = {
 
 Página inicial do SkyCompare com dashboard completo.
 
-## Características
+## Features
 -  Dashboard layout com sidebar e header
 -  Cards de estatísticas (voos pesquisados, menor preço, favoritos)
 -  Formulário de busca completo
@@ -24,7 +24,7 @@ Página inicial do SkyCompare com dashboard completo.
 -  Dados mock realistas
 -  Layout totalmente responsivo
 
-## Componentes Usados
+## Components Used
 - DashboardLayoutTemplate
 - StatsRowOrganism
 - SearchFormOrganism

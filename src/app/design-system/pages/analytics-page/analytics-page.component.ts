@@ -30,13 +30,13 @@ import { PriceHistoryModel } from '../../../core/models';
   styleUrls: ['./analytics-page.component.scss'],
 })
 export class AnalyticsPageComponent implements OnInit {
-  // Chart 1: Line Chart - Histórico de Reservas (últimos 90 dias)
+  // Chart 1: Line Chart - History de Reservas (últimos 90 dias)
   reservationHistory: PriceHistoryModel[] = [];
 
-  // Chart 2: Pie Chart - Distribuição de Voos por Companhia
+  // Chart 2: Pie Chart - Distribuição de Voos por Airline
   distributionData: PieChartDataModel[] = [];
 
-  // Chart 3: Column Chart - Voos por Mês (12 meses)
+  // Chart 3: Column Chart - Voos por Month (12 meses)
   monthlyFlightsData: ColumnChartDataModel[] = [];
 
   // Chart 4: Bar Chart - Top 10 Rotas Mais Vendidas

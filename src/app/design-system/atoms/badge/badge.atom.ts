@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * adgeAtom - Etiqueta/Tag
- *
- * omponente para exibir tags, labels e indicadores.
- * sado para companhias aéreas, status de preço, etc.
- *
- * @example
- * <atom-badge text="Azul" variant="azul" />
- * <atom-badge text="Menor Preço" variant="success" />
- */
+undefined
 @Component({
   selector: 'atom-badge',
   standalone: true,

@@ -17,7 +17,7 @@ export const Info: Story = {
 };
 
 export const Success: Story = {
-  args: { type: 'success', message: 'Operação realizada com sucesso!' },
+  args: { type: 'success', message: 'Operation completed successfully!' },
 };
 
 export const Warning: Story = {

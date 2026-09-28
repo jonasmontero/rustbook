@@ -1,6 +1,6 @@
 /**
- * light Model
- * nterface principal para dados de voos
+ * Flight Data Model
+ * Primary interface for flight entity representations.
  */
 export interface FlightModel {
   id: string;

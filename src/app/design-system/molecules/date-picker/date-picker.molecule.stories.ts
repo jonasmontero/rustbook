@@ -49,7 +49,7 @@ type Story = StoryObj<DatePickerMolecule>;
  */
 export const Default: Story = {
   args: {
-    label: 'Selecione a data',
+    label: 'Select date',
   },
 };
 
@@ -120,7 +120,7 @@ export const WithError: Story = {
  */
 export const WithoutLabel: Story = {
   args: {
-    placeholder: 'Selecione a data',
+    placeholder: 'Select date',
   },
 };
 
@@ -215,7 +215,7 @@ export const FlightComparison: Story = {
     props: args,
     template: `
       <div style="padding: 24px; max-width: 800px;">
-        <h3 style="margin-bottom: 24px;">Compare Preços por Data</h3>
+        <h3 style="margin-bottom: 24px;">Compare Prices por Data</h3>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
           <div style="border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px;">
@@ -230,7 +230,7 @@ export const FlightComparison: Story = {
 
           <div style="border: 2px solid #2563EB; border-radius: 8px; padding: 16px;">
             <molecule-date-picker
-              label="Melhor Preço"
+              label="Best Price"
               value="2024-03-15"
             />
             <div style="margin-top: 12px; font-size: 24px; font-weight: 600; color: #2563EB;">
@@ -276,7 +276,7 @@ export const SeasonCalendar: Story = {
               value="2024-04-15"
             />
             <div style="margin-top: 8px; font-size: 14px; color: #64748B;">
-              Preços até 40% mais baratos
+              Prices até 40% mais baratos
             </div>
           </div>
 

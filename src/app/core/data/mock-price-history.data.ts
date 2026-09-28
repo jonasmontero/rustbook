@@ -1,13 +1,12 @@
 /**
- * ock Data - Price History
- * unções para gerar histórico de preços mockado
+ * Mock Data - Price History
+ * Utility functions for generating historical flight pricing series.
  */
 
 import { PriceHistoryModel } from '../models';
 
 /**
- * era histórico de preços para o dashboard (30 dias)
- * reços base mais altos para simulação realista
+ * Generates 30-day historical pricing trends for dashboard charts.
  */
 export function generateDashboardPriceHistory(): PriceHistoryModel[] {
   const today = new Date();
@@ -31,8 +30,7 @@ export function generateDashboardPriceHistory(): PriceHistoryModel[] {
 }
 
 /**
- * era histórico de preços para comparação (30 dias)
- * reços base mais baixos alinhados com voos de comparação
+ * Generates 30-day price comparison historical trends.
  */
 export function generateComparisonPriceHistory(): PriceHistoryModel[] {
   const today = new Date();

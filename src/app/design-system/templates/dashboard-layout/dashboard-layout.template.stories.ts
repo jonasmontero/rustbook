@@ -5,9 +5,9 @@ import { StatModel } from '../../../core/models';
 
 const mockStats: StatModel[] = [
   { icon: 'plane', value: '1,234', label: 'Voos Pesquisados', trend: 'up', trendValue: '+12%' },
-  { icon: 'price', value: 'R$ 450', label: 'Menor Preço', trend: 'down', trendValue: '-5%' },
+  { icon: 'price', value: 'R$ 450', label: 'Lowest Price', trend: 'down', trendValue: '-5%' },
   { icon: 'star', value: '89', label: 'Favoritos' },
-  { icon: 'user', value: '3.2K', label: 'Usuários Ativos', trend: 'up', trendValue: '+18%' },
+  { icon: 'user', value: '3.2K', label: 'Users Ativos', trend: 'up', trendValue: '+18%' },
 ];
 
 const meta: Meta<DashboardLayoutTemplate> = {
@@ -29,12 +29,12 @@ const meta: Meta<DashboardLayoutTemplate> = {
 
 Template principal para páginas de dashboard com sidebar, header, stats e área de conteúdo.
 
-## Características
+## Features
 -  Sidebar responsiva com collapse
 -  Header sticky com busca e perfil
 -  Stats row para métricas principais
 -  Área de conteúdo com projeção via ng-content
--  Layout responsivo (mobile, tablet, desktop)
+-  Responsive layout (mobile, tablet, desktop)
 
 ## Uso
 \`\`\`html

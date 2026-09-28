@@ -1,16 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * extAtom - Tipografia consistente
- *
- * omponente base para renderizar texto com variantes tipográficas.
- * arante consistência visual em todo o design system.
- *
- * @example
- * <atom-text variant="h1">Título Principal</atom-text>
- * <atom-text variant="body" color="var(--text-secondary)">Texto do corpo</atom-text>
- */
+undefined
 @Component({
   selector: 'atom-text',
   standalone: true,

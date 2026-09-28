@@ -11,7 +11,7 @@ export * from './search-field';
 export * from './date-picker';
 export * from './passenger-selector';
 
-// Batch 2B: Companhias e Preços
+// Batch 2B: Airlines e Prices
 export * from './airline-logo';
 export * from './price-tag';
 export * from './price-range';

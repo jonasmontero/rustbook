@@ -1,12 +1,12 @@
 /**
- * ock Data - Flights
- * ados mockados de voos para o SkyCompare
+ * Mock Data - Flights
+ * Flight fixtures for SkyCompare dashboard, search, and comparison.
  */
 
 import { FlightModel } from '../models';
 
 /**
- * oos recentes para o dashboard (3 voos)
+ * Recent flights for dashboard overview (3 flights).
  */
 export const MOCK_RECENT_FLIGHTS: FlightModel[] = [
   {
@@ -68,7 +68,7 @@ export const MOCK_RECENT_FLIGHTS: FlightModel[] = [
 ];
 
 /**
- * ista completa de voos para página de busca (12 voos)
+ * Complete flight catalog for search results (12 flights).
  */
 export const MOCK_SEARCH_FLIGHTS: FlightModel[] = [
   {
@@ -292,7 +292,7 @@ export const MOCK_SEARCH_FLIGHTS: FlightModel[] = [
 ];
 
 /**
- * oos para comparação (3 voos selecionados)
+ * Pre-selected flights for comparison view (3 flights).
  */
 export const MOCK_COMPARISON_FLIGHTS: FlightModel[] = [
   {
@@ -302,7 +302,7 @@ export const MOCK_COMPARISON_FLIGHTS: FlightModel[] = [
     destination: 'GIG',
     departureTime: '08:00',
     arrivalTime: '09:15',
-    duration: '1h15',
+    duration: '1h 15min',
     price: 320,
     originalPrice: 450,
     benefits: {
@@ -322,7 +322,7 @@ export const MOCK_COMPARISON_FLIGHTS: FlightModel[] = [
     destination: 'GIG',
     departureTime: '10:30',
     arrivalTime: '11:45',
-    duration: '1h15',
+    duration: '1h 15min',
     price: 380,
     originalPrice: 480,
     benefits: {
@@ -342,7 +342,7 @@ export const MOCK_COMPARISON_FLIGHTS: FlightModel[] = [
     destination: 'GIG',
     departureTime: '14:00',
     arrivalTime: '15:15',
-    duration: '1h15',
+    duration: '1h 15min',
     price: 450,
     benefits: {
       baggage: true,

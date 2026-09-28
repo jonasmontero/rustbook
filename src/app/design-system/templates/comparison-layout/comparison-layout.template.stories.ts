@@ -20,33 +20,33 @@ const meta: Meta<ComparisonLayoutTemplate> = {
 
 Template para páginas de comparação com navegação por tabs.
 
-## Características
--  Header com perfil do usuário
+## Features
+-  Header with user profile
 -  Seção de título e subtítulo
--  Navegação por tabs sticky (Preços, Benefícios, Histórico)
+-  Navegação por tabs sticky (Prices, Benefits, History)
 -  Content slots nomeados para cada tab
 -  Transições suaves entre tabs
--  Layout responsivo com tabs scrolláveis em mobile
+-  Responsive layout com tabs scrolláveis em mobile
 
 ## Uso
 \`\`\`html
 <template-comparison-layout
   [activeTab]="currentTab"
   [title]="'Comparação: GRU → GIG'"
-  [subtitle]="'3 voos selecionados'"
+  [subtitle]="'3 flights selected'"
   (tabChange)="handleTabChange($event)">
 
-  <!-- Tab Preços -->
+  <!-- Tab Prices -->
   <div prices>
     <organism-price-chart [data]="priceHistory" />
   </div>
 
-  <!-- Tab Benefícios -->
+  <!-- Tab Benefits -->
   <div benefits>
     <organism-benefits-grid [benefits]="allBenefits" />
   </div>
 
-  <!-- Tab Histórico -->
+  <!-- Tab History -->
   <div history>
     <organism-comparison-table [flights]="selectedFlights" />
   </div>
@@ -64,8 +64,8 @@ type Story = StoryObj<ComparisonLayoutTemplate>;
 export const PricesTab: Story = {
   args: {
     activeTab: 'prices' as ComparisonTab,
-    title: 'Comparação de Voos',
-    subtitle: 'GRU → GIG • 3 voos selecionados',
+    title: 'Flight Comparison',
+    subtitle: 'GRU → GIG • 3 flights selected',
     userName: 'João Silva',
   },
   render: (args) => ({
@@ -82,10 +82,10 @@ export const PricesTab: Story = {
 
         <div prices style="padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <h2 style="margin: 0 0 1rem 0; color: #0F172A; font-size: 20px; font-weight: 600;">
-             Comparação de Preços
+             Price Comparison
           </h2>
           <p style="margin: 0; color: #64748B; line-height: 1.6;">
-            Gráfico de histórico de preços dos últimos 90 dias para as 3 companhias selecionadas.
+            90-day price history chart for the 3 selected partner airlines.
           </p>
           <div style="margin-top: 2rem; padding: 3rem; background: #F8FAFC; border-radius: 8px; text-align: center;">
             <p style="margin: 0; color: #94A3B8;">Aqui seria exibido o PriceChartOrganism</p>
@@ -102,8 +102,8 @@ export const PricesTab: Story = {
 export const BenefitsTab: Story = {
   args: {
     activeTab: 'benefits' as ComparisonTab,
-    title: 'Comparação de Voos',
-    subtitle: 'GRU → GIG • 3 voos selecionados',
+    title: 'Flight Comparison',
+    subtitle: 'GRU → GIG • 3 flights selected',
     userName: 'Maria Santos',
   },
   render: (args) => ({
@@ -120,18 +120,18 @@ export const BenefitsTab: Story = {
 
         <div benefits style="padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
           <h2 style="margin: 0 0 1rem 0; color: #0F172A; font-size: 20px; font-weight: 600;">
-            ⭐ Comparação de Benefícios
+            ⭐ Benefits Comparison
           </h2>
           <p style="margin: 0 0 1.5rem 0; color: #64748B; line-height: 1.6;">
-            Compare os benefícios inclusos em cada companhia aérea.
+            Compare amenities and benefits included across each partner airline.
           </p>
 
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
             <div style="padding: 1.5rem; background: #EFF6FF; border: 2px solid #2563EB; border-radius: 8px;">
               <h3 style="margin: 0 0 1rem 0; color: #1E40AF; font-size: 16px;">Azul</h3>
               <ul style="margin: 0; padding-left: 1.5rem; color: #475569;">
-                <li>Bagagem 23kg </li>
-                <li>Refeição </li>
+                <li>Baggage 23kg </li>
+                <li>Meal </li>
                 <li>Wi-Fi </li>
                 <li>Entretenimento </li>
               </ul>
@@ -140,8 +140,8 @@ export const BenefitsTab: Story = {
             <div style="padding: 1.5rem; background: #FFF0E6; border: 2px solid #FF6600; border-radius: 8px;">
               <h3 style="margin: 0 0 1rem 0; color: #C2410C; font-size: 16px;">Gol</h3>
               <ul style="margin: 0; padding-left: 1.5rem; color: #475569;">
-                <li>Bagagem 20kg </li>
-                <li>Refeição </li>
+                <li>Baggage 20kg </li>
+                <li>Meal </li>
                 <li>Wi-Fi </li>
                 <li>Entretenimento </li>
               </ul>
@@ -150,8 +150,8 @@ export const BenefitsTab: Story = {
             <div style="padding: 1.5rem; background: #FCE8EB; border: 2px solid #E31837; border-radius: 8px;">
               <h3 style="margin: 0 0 1rem 0; color: #BE123C; font-size: 16px;">Latam</h3>
               <ul style="margin: 0; padding-left: 1.5rem; color: #475569;">
-                <li>Bagagem 25kg </li>
-                <li>Refeição </li>
+                <li>Baggage 25kg </li>
+                <li>Meal </li>
                 <li>Wi-Fi </li>
                 <li>Entretenimento </li>
               </ul>
@@ -168,8 +168,8 @@ export const BenefitsTab: Story = {
 export const HistoryTab: Story = {
   args: {
     activeTab: 'history' as ComparisonTab,
-    title: 'Comparação de Voos',
-    subtitle: 'GRU → GIG • 3 voos selecionados',
+    title: 'Flight Comparison',
+    subtitle: 'GRU → GIG • 3 flights selected',
     userName: 'Carlos Oliveira',
   },
   render: (args) => ({
@@ -190,7 +190,7 @@ export const HistoryTab: Story = {
              Tabela Comparativa
           </h2>
           <p style="margin: 0 0 1.5rem 0; color: #64748B; line-height: 1.6;">
-            Compare lado a lado as características de cada voo.
+            Compare flight attributes, schedules, and pricing side by side.
           </p>
 
           <div style="overflow-x: auto;">
@@ -205,19 +205,19 @@ export const HistoryTab: Story = {
               </thead>
               <tbody>
                 <tr style="border-bottom: 1px solid #E2E8F0;">
-                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Preço</td>
+                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Price</td>
                   <td style="padding: 1rem; text-align: center;">R$ 450</td>
                   <td style="padding: 1rem; text-align: center;">R$ 380</td>
                   <td style="padding: 1rem; text-align: center;">R$ 520</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #E2E8F0;">
-                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Horário</td>
+                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Schedule</td>
                   <td style="padding: 1rem; text-align: center;">08:00 - 09:15</td>
                   <td style="padding: 1rem; text-align: center;">10:30 - 11:45</td>
                   <td style="padding: 1rem; text-align: center;">14:00 - 15:15</td>
                 </tr>
                 <tr>
-                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Duração</td>
+                  <td style="padding: 1rem; font-weight: 600; color: #475569;">Duration</td>
                   <td style="padding: 1rem; text-align: center;">1h 15min</td>
                   <td style="padding: 1rem; text-align: center;">1h 15min</td>
                   <td style="padding: 1rem; text-align: center;">1h 15min</td>
@@ -234,7 +234,7 @@ export const HistoryTab: Story = {
 export const WithoutSubtitle: Story = {
   args: {
     activeTab: 'prices' as ComparisonTab,
-    title: 'Comparação de Voos',
+    title: 'Flight Comparison',
     subtitle: undefined,
     userName: 'Ana Paula',
   },
@@ -247,7 +247,7 @@ export const WithoutSubtitle: Story = {
         [userName]="userName">
 
         <div prices style="padding: 2rem; background: white; border-radius: 12px;">
-          <p style="margin: 0; color: #64748B;">Conteúdo da tab Preços</p>
+          <p style="margin: 0; color: #64748B;">Conteúdo da tab Prices</p>
         </div>
 
         <div benefits></div>
