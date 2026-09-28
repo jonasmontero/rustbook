@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "crates/rustbook-core",
+    "crates/rustbook-server",
+    "crates/rustbook-codegen",
+    "crates/rustbook-cli",
+]
+resolver = "2"

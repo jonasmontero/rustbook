@@ -1,0 +1,17 @@
+[package]
+name = "rustbook-server"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jonas Monteiro"]
+license = "MIT"
+description = "High-performance Axum HTTP/WebSocket server and Native Model Context Protocol (MCP) server for Rustbook."
+
+[dependencies]
+rustbook-core = { path = "../rustbook-core" }
+tokio = { version = "1.38", features = ["full"] }
+axum = "0.7"
+tower-http = { version = "0.5", features = ["cors", "fs", "trace"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"

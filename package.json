@@ -10,7 +10,12 @@
     "test": "ng test",
     "serve:ssr:design-system": "node dist/design-system/server/server.mjs",
     "storybook": "ng run design-system:storybook",
-    "build-storybook": "ng run design-system:build-storybook"
+    "build-storybook": "ng run design-system:build-storybook",
+    "rust:test": "cargo test --workspace",
+    "rust:dev": "cargo run -p rustbook-cli -- dev --port 6006",
+    "rust:audit": "cargo run -p rustbook-cli -- audit",
+    "rust:palette": "cargo run -p rustbook-cli -- palette",
+    "rust:export": "cargo run -p rustbook-cli -- export"
   },
   "prettier": {
     "printWidth": 100,

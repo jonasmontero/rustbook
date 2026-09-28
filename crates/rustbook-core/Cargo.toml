@@ -1,0 +1,18 @@
+[package]
+name = "rustbook-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jonas Monteiro"]
+license = "MIT"
+description = "Core color science, OKLCH perceptual math, APCA contrast auditing, and design token engine for Rustbook."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+wasm-bindgen = "0.2"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

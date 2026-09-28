@@ -1,0 +1,19 @@
+[package]
+name = "rustbook-cli"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jonas Monteiro"]
+license = "MIT"
+description = "Command-line interface for Rustbook: The AI-native, blazing-fast Storybook alternative."
+
+[[bin]]
+name = "rustbook"
+path = "src/main.rs"
+
+[dependencies]
+rustbook-core = { path = "../rustbook-core" }
+rustbook-server = { path = "../rustbook-server" }
+rustbook-codegen = { path = "../rustbook-codegen" }
+tokio = { version = "1.38", features = ["full"] }
+clap = { version = "4.5", features = ["derive"] }
+serde_json = "1.0"
