@@ -63,6 +63,20 @@ Pages are routed views that bind templates with real or mock data stores and man
 * `SearchPageComponent`: Flight exploration view with real-time filtering by airline, stops, and price range.
 * `ComparisonPageComponent`: Detailed side-by-side flight comparison with analytical insights.
 * `AnalyticsPageComponent`: Comprehensive metric dashboard including market share, monthly fare evolutions, and volume stats.
+* `WorkbenchPageComponent`: Interactive design system gallery and testbed for all atoms, molecules, and organisms.
+
+### 6. Live Studio & Theme Customizer (`src/app/design-system/studio`)
+* `LiveStudioComponent`: In-browser visual customizer drawer allowing real-time color picking, border radius tuning, font selection, dark/light theme switching, and live component knob manipulation.
+* `ThemeStudioService`: Reactive token engine using Angular Signals to dynamically mutate CSS custom properties on `document.documentElement` and export CSS/JSON configurations.
+
+## Multi-Domain Isolation Architecture
+
+The repository isolates foundational elements from domain-specific kits:
+* `@core-ui`: Foundational atoms (buttons, inputs, badges, avatars, icons, tooltips), theme tokens, layout templates, and live studio tooling.
+* `@travel-ui` (Active): Travel-specific molecules and organisms (flight cards, search forms, season calendars, comparison matrices, airline branding).
+* Future Domain Kits (Incremental Evolution):
+  * `@finance-ui`: Payment methods, transaction lists, invoice cards, financial statement summaries.
+  * `@ecommerce-ui`: Product cards, price competitor radars, inventory badges, cart drawers.
 
 ## Design Tokens and Styling System
 
@@ -80,4 +94,9 @@ The routing configuration in `src/app/app.routes.ts` uses Angular standalone rou
 * `/search`: Loads `SearchPageComponent`.
 * `/compare`: Loads `ComparisonPageComponent`.
 * `/analytics`: Loads `AnalyticsPageComponent`.
+* `/workbench`: Loads `WorkbenchPageComponent`.
 * `/**`: Wildcard route redirecting to root.
+
+## License
+
+MIT License (c) 2026 Jonas Monteiro.
