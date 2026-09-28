@@ -1,23 +1,19 @@
-/**
- * earchFieldMolecule Styles
- * EM: .molecule-search-field
- */
-
 .molecule-search-field {
   position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   background-color: var(--bg-primary);
-  border: 1px solid var(--bg-tertiary);
+  border: 1px solid #D1D5DB;
   border-radius: var(--radius-md);
   padding: 0 var(--space-md);
   transition: var(--transition-fast);
+  width: 100%;
+  box-sizing: border-box;
 
   &:focus-within {
     border-color: var(--color-primary);
-    outline: 2px solid rgba(37, 99, 235, 0.1);
-    outline-offset: 0;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   }
 
   // Sizes
@@ -43,29 +39,46 @@
   &__icon {
     flex-shrink: 0;
     color: var(--text-secondary);
+    display: flex;
+    align-items: center;
   }
 
   &__input {
     flex: 1;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    height: auto !important;
-    background: transparent !important;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background: transparent;
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+    min-width: 0;
 
-    &:focus {
-      border: none !important;
-      outline: none !important;
-      box-shadow: none !important;
+    &::placeholder {
+      color: var(--text-muted);
     }
   }
 
-  &__clear {
+  &__clear-btn {
     flex-shrink: 0;
-    min-width: auto !important;
-    padding: var(--space-xs) !important;
-    height: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
   }
 
   &__loading {

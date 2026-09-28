@@ -57,7 +57,7 @@ describe('TooltipAtom', () => {
     expect(component.getTooltipClasses()).toContain('atom-tooltip__content--right');
   });
 
-  it('should show tooltip after delay', (done) => {
+  it('should show tooltip after delay', async () => {
     const fixture = TestBed.createComponent(TooltipAtom);
     const component = fixture.componentInstance;
     component.delay = 100;
@@ -65,10 +65,8 @@ describe('TooltipAtom', () => {
     expect(component.isVisible).toBe(false);
     component.show();
 
-    setTimeout(() => {
-      expect(component.isVisible).toBe(true);
-      done();
-    }, 150);
+    await new Promise(r => setTimeout(r, 150));
+    expect(component.isVisible).toBe(true);
   });
 
   it('should hide tooltip immediately', () => {
@@ -80,7 +78,7 @@ describe('TooltipAtom', () => {
     expect(component.isVisible).toBe(false);
   });
 
-  it('should cancel show timeout when hiding', (done) => {
+  it('should cancel show timeout when hiding', async () => {
     const fixture = TestBed.createComponent(TooltipAtom);
     const component = fixture.componentInstance;
     component.delay = 200;
@@ -88,23 +86,19 @@ describe('TooltipAtom', () => {
     component.show();
     component.hide();
 
-    setTimeout(() => {
-      expect(component.isVisible).toBe(false);
-      done();
-    }, 250);
+    await new Promise(r => setTimeout(r, 250));
+    expect(component.isVisible).toBe(false);
   });
 
-  it('should show tooltip with zero delay', (done) => {
+  it('should show tooltip with zero delay', async () => {
     const fixture = TestBed.createComponent(TooltipAtom);
     const component = fixture.componentInstance;
     component.delay = 0;
 
     component.show();
 
-    setTimeout(() => {
-      expect(component.isVisible).toBe(true);
-      done();
-    }, 10);
+    await new Promise(r => setTimeout(r, 10));
+    expect(component.isVisible).toBe(true);
   });
 
   it('should render tooltip content when visible', () => {
