@@ -1,0 +1,801 @@
+.rustbook-studio {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg-secondary, #0F172A);
+  color: var(--text-primary, #F8FAFC);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 1. LEFT SIDEBAR */
+.rustbook-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: #0B1120;
+  border-right: 1px solid #1E293B;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #1E293B;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__logo {
+    font-size: 20px;
+  }
+
+  &__brand-text {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      color: #38BDF8;
+      letter-spacing: -0.3px;
+    }
+  }
+
+  &__version {
+    font-size: 10px;
+    color: #64748B;
+    font-weight: 600;
+  }
+
+  &__app-link {
+    color: #94A3B8;
+    padding: 6px;
+    border-radius: 6px;
+    background: #1E293B;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #FFFFFF;
+      background: #334155;
+    }
+  }
+
+  &__search {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1E293B;
+  }
+
+  &__search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1E293B;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+
+    input {
+      background: transparent;
+      border: none;
+      color: #F8FAFC;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+
+      &::placeholder {
+        color: #64748B;
+      }
+    }
+  }
+
+  &__kbd {
+    background: #0F172A;
+    border: 1px solid #334155;
+    color: #94A3B8;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-family: monospace;
+  }
+
+  &__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+
+  &__category-title {
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748B;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  &__tree {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4px;
+  }
+
+  &__node {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__node-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: #1E293B;
+    }
+  }
+
+  &__node-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #E2E8F0;
+  }
+
+  &__badge {
+    background: #1E293B;
+    color: #94A3B8;
+    border-radius: 9999px;
+    font-size: 10px;
+    padding: 2px 6px;
+    font-weight: 600;
+  }
+
+  &__substories {
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.6);
+    padding: 4px 0 6px 24px;
+  }
+
+  &__story-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #FFFFFF;
+      background: #1E293B;
+    }
+
+    &.active {
+      color: #38BDF8;
+      background: rgba(56, 189, 248, 0.12);
+      font-weight: 600;
+
+      .rustbook-sidebar__story-bullet {
+        background: #38BDF8;
+      }
+    }
+  }
+
+  &__story-bullet {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #475569;
+  }
+
+  &__footer {
+    padding: 12px 16px;
+    border-top: 1px solid #1E293B;
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  &__engine-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    code {
+      color: #38BDF8;
+      font-weight: 700;
+    }
+  }
+
+  &__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+  }
+}
+
+/* 2. MAIN WORKSPACE */
+.rustbook-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* TOP TOOLBAR */
+.rustbook-toolbar {
+  height: 48px;
+  min-height: 48px;
+  background: #0F172A;
+  border-bottom: 1px solid #1E293B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__category {
+    color: #64748B;
+    text-transform: capitalize;
+  }
+
+  &__sep {
+    color: #475569;
+  }
+
+  &__story-name {
+    color: #38BDF8;
+  }
+
+  &__viewports {
+    display: flex;
+    background: #1E293B;
+    padding: 3px;
+    border-radius: 6px;
+    gap: 2px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+
+    &.active {
+      background: #0F172A;
+      color: #38BDF8;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__tool-btn {
+    background: #1E293B;
+    border: 1px solid #334155;
+    color: #94A3B8;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #FFFFFF;
+      background: #334155;
+    }
+
+    &.active {
+      background: #38BDF8;
+      color: #0F172A;
+      border-color: #38BDF8;
+    }
+  }
+
+  &__zoom {
+    display: flex;
+    align-items: center;
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 11px;
+    gap: 6px;
+
+    button {
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
+
+      &:hover {
+        color: #FFFFFF;
+      }
+    }
+
+    span {
+      font-weight: 600;
+      color: #E2E8F0;
+    }
+  }
+}
+
+/* CENTER CANVAS SANDBOX */
+.rustbook-canvas {
+  flex: 1;
+  overflow: auto;
+  background: #131D31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  position: relative;
+
+  &--grid {
+    background-image: linear-gradient(#1E293B 1px, transparent 1px),
+      linear-gradient(90deg, #1E293B 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  &--outlines {
+    .rustbook-canvas__preview-box * {
+      outline: 1px dashed rgba(56, 189, 248, 0.6) !important;
+    }
+  }
+
+  &__stage {
+    background: var(--bg-primary, #FFFFFF);
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    min-height: 200px;
+    transition: width 0.25s ease;
+
+    &--mobile {
+      width: 375px;
+      height: 667px;
+    }
+
+    &--tablet {
+      width: 768px;
+      height: 500px;
+    }
+
+    &--desktop {
+      width: 1000px;
+      height: 600px;
+    }
+  }
+
+  &__preview-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 3. ADDONS & AI COPILOT PANEL */
+.rustbook-addons {
+  height: 280px;
+  min-height: 280px;
+  background: #0B1120;
+  border-top: 1px solid #1E293B;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    border-bottom: 1px solid #1E293B;
+    padding: 0 16px;
+    background: #0F172A;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__tab {
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #94A3B8;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+
+    &.active {
+      color: #38BDF8;
+      border-bottom-color: #38BDF8;
+    }
+
+    &--ai {
+      color: #A78BFA;
+
+      &.active {
+        color: #C084FC;
+        border-bottom-color: #C084FC;
+      }
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+}
+
+/* CONTROLS TABLE */
+.rustbook-controls {
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      color: #64748B;
+      font-weight: 600;
+      border-bottom: 1px solid #1E293B;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #1E293B;
+      color: #E2E8F0;
+
+      code {
+        background: #1E293B;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #38BDF8;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.rustbook-type {
+  color: #F59E0B;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.rustbook-input, .rustbook-select {
+  background: #1E293B;
+  border: 1px solid #334155;
+  color: #FFFFFF;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
+  min-width: 180px;
+}
+
+/* ACTIONS */
+.rustbook-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 6px 10px;
+    background: #1E293B;
+    border-radius: 4px;
+  }
+
+  &__time {
+    color: #64748B;
+  }
+
+  &__name {
+    color: #10B981;
+    font-weight: bold;
+  }
+
+  &__payload {
+    color: #94A3B8;
+  }
+}
+
+/* A11Y */
+.rustbook-a11y {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  &__card {
+    background: #1E293B;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+
+    h4 {
+      margin: 0 0 10px 0;
+      font-size: 13px;
+      color: #F8FAFC;
+    }
+  }
+
+  &__badges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.rustbook-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+
+  &--pass {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10B981;
+  }
+
+  &--engine {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38BDF8;
+  }
+}
+
+.rustbook-tonal-scale {
+  display: flex;
+  height: 32px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.rustbook-tonal-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.rustbook-btn-group {
+  display: flex;
+  gap: 4px;
+
+  button {
+    flex: 1;
+    padding: 6px 4px;
+    background: #0F172A;
+    border: 1px solid #334155;
+    color: #94A3B8;
+    font-size: 11px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.active {
+      background: #38BDF8;
+      color: #0F172A;
+      font-weight: bold;
+    }
+  }
+}
+
+/* CODEGEN */
+.rustbook-codegen {
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  &__item {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 10px;
+
+    pre {
+      margin: 6px 0 0 0;
+      font-size: 11px;
+      color: #38BDF8;
+      overflow-x: auto;
+    }
+  }
+
+  &__lang {
+    font-size: 12px;
+    font-weight: 700;
+    color: #F8FAFC;
+  }
+}
+
+/* AI CHAT */
+.rustbook-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 8px;
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__msg {
+    display: flex;
+    justify-content: flex-start;
+
+    &--user {
+      justify-content: flex-end;
+
+      .rustbook-chat__bubble {
+        background: #2563EB;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  &__bubble {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 14px;
+    max-width: 80%;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  &__author {
+    font-size: 11px;
+    font-weight: 700;
+    color: #C084FC;
+  }
+
+  &__time {
+    font-size: 10px;
+    color: #64748B;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 6px;
+  }
+
+  &__step {
+    font-size: 11px;
+    color: #10B981;
+    font-family: monospace;
+  }
+
+  &__chips {
+    display: flex;
+    gap: 6px;
+
+    button {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #94A3B8;
+      border-radius: 9999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: #334155;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  &__input-row {
+    display: flex;
+    gap: 8px;
+
+    input {
+      flex: 1;
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+
+      &:focus {
+        border-color: #38BDF8;
+      }
+    }
+  }
+}

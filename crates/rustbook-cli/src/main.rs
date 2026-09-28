@@ -43,6 +43,11 @@ enum Commands {
         #[arg(help = "Target platform: css, tailwind, swift, kotlin, dart", default_value = "css")]
         target: String,
     },
+    /// Run the native Model Context Protocol (MCP) server
+    Mcp {
+        #[arg(long, default_value_t = true, help = "Run in Stdio transport mode")]
+        stdio: bool,
+    },
 }
 
 #[tokio::main]
@@ -55,6 +60,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!(" 🦀 Rustbook — The AI-Native Storybook Alternative in Rust");
             println!("============================================================");
             rustbook_server::start_server(port).await?;
+        }
+        Commands::Mcp { .. } => {
+            rustbook_server::mcp::run_stdio_mcp_loop()?;
         }
         Commands::Audit { foreground, background } => {
             let fg = Rgb::from_hex(&foreground).expect("Invalid foreground hex");

@@ -51,6 +51,13 @@ export const routes: Routes = [
     title: 'Component Workbench - Design System'
   },
   {
+    path: 'studio',
+    loadComponent: () =>
+      import('./design-system/pages/studio-page/studio-page.component')
+        .then(m => m.StudioPageComponent),
+    title: 'Rustbook Studio — Component Explorer & AI Copilot'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

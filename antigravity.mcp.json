@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "rustbook": {
+      "command": "cargo",
+      "args": ["run", "-p", "rustbook-cli", "--", "mcp"],
+      "url": "http://localhost:6006/mcp",
+      "description": "Rustbook Native Design System MCP Engine (Colorust OKLCH, APCA Contrast, Codegen)"
+    }
+  }
+}

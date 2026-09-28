@@ -154,6 +154,11 @@ export class ThemeStudioService {
     this.updateTokens({ mode });
   }
 
+  toggleThemeMode(): void {
+    const nextMode = this.tokens().mode === 'light' ? 'dark' : 'light';
+    this.setThemeMode(nextMode);
+  }
+
   setActiveDomain(domain: DomainType): void {
     this.updateTokens({ activeDomain: domain });
   }

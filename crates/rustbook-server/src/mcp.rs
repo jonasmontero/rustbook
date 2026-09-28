@@ -149,3 +149,41 @@ pub fn execute_mcp_tool(name: &str, args: Option<serde_json::Value>) -> Result<s
         _ => Err(format!("Unknown tool: {}", name)),
     }
 }
+
+/// Runs a persistent JSON-RPC 2.0 loop reading from Stdin and writing to Stdout
+pub fn run_stdio_mcp_loop() -> Result<(), Box<dyn std::error::Error>> {
+    use std::io::{BufRead, Write};
+    let stdin = std::io::stdin();
+    let mut stdout = std::io::stdout();
+
+    for line in stdin.lock().lines() {
+        let line = line?;
+        if line.trim().is_empty() {
+            continue;
+        }
+
+        if let Ok(req) = serde_json::from_str::<JsonRpcRequest>(&line) {
+            let resp = match execute_mcp_tool(&req.method, req.params) {
+                Ok(val) => JsonRpcResponse {
+                    jsonrpc: "2.0".to_string(),
+                    id: req.id,
+                    result: Some(val),
+                    error: None,
+                },
+                Err(err_msg) => JsonRpcResponse {
+                    jsonrpc: "2.0".to_string(),
+                    id: req.id,
+                    result: None,
+                    error: Some(JsonRpcError {
+                        code: -32603,
+                        message: err_msg,
+                    }),
+                },
+            };
+            let resp_json = serde_json::to_string(&resp)?;
+            writeln!(stdout, "{}", resp_json)?;
+            stdout.flush()?;
+        }
+    }
+    Ok(())
+}

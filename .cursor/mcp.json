@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "rustbook": {
+      "command": "cargo",
+      "args": ["run", "-p", "rustbook-cli", "--", "mcp"],
+      "url": "http://localhost:6006/mcp"
+    }
+  }
+}

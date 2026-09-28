@@ -1,0 +1,636 @@
+<div class="rustbook-studio" [attr.data-theme]="studioService.tokens().mode">
+  <!-- 1. LEFT SIDEBAR: COMPONENT EXPLORER TREE -->
+  <aside class="rustbook-sidebar" [class.rustbook-sidebar--collapsed]="isManagerCollapsed()">
+    <!-- Brand Header -->
+    <div class="rustbook-sidebar__header">
+      <div class="rustbook-sidebar__brand">
+        <div class="rustbook-sidebar__logo">
+          <span>🦀</span>
+        </div>
+        <div class="rustbook-sidebar__brand-text">
+          <h2>Rustbook</h2>
+          <span class="rustbook-sidebar__version">v0.1.0 • Rust Engine</span>
+        </div>
+      </div>
+      <a href="/workbench" class="rustbook-sidebar__app-link" title="Open SkyCompare App">
+        <atom-icon name="plane" size="sm" />
+      </a>
+    </div>
+
+    <!-- Quick Search Input -->
+    <div class="rustbook-sidebar__search">
+      <div class="rustbook-sidebar__search-box">
+        <atom-icon name="search" size="sm" />
+        <input
+          id="story-search-input"
+          type="text"
+          placeholder="Find components..."
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+        />
+        <kbd class="rustbook-sidebar__kbd">/</kbd>
+      </div>
+    </div>
+
+    <!-- Tree Navigation -->
+    <nav class="rustbook-sidebar__nav">
+      <!-- Section Category -->
+      <div class="rustbook-sidebar__category">
+        <span class="rustbook-sidebar__category-title">LIBRARY COMPONENTS</span>
+
+        <div class="rustbook-sidebar__tree">
+          @for (comp of filteredComponents(); track comp.id) {
+            <div class="rustbook-sidebar__node" [class.active]="selectedComponentId() === comp.id">
+              <div
+                class="rustbook-sidebar__node-header"
+                (click)="selectStory(comp, comp.stories[0])"
+              >
+                <div class="rustbook-sidebar__node-title">
+                  <atom-icon name="sparkles" size="sm" />
+                  <span>{{ comp.name }}</span>
+                </div>
+                <span class="rustbook-sidebar__badge">{{ comp.stories.length }}</span>
+              </div>
+
+              <!-- Stories Sub-tree -->
+              @if (selectedComponentId() === comp.id) {
+                <div class="rustbook-sidebar__substories">
+                  @for (story of comp.stories; track story) {
+                    <button
+                      type="button"
+                      class="rustbook-sidebar__story-btn"
+                      [class.active]="selectedStory() === story"
+                      (click)="selectStory(comp, story)"
+                    >
+                      <span class="rustbook-sidebar__story-bullet"></span>
+                      <span>{{ story }}</span>
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="rustbook-sidebar__footer">
+      <div class="rustbook-sidebar__engine-status">
+        <span class="rustbook-sidebar__status-dot"></span>
+        <span>Rust Axum Server: <code>:6006</code></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. MAIN WORKSPACE (CANVAS + TOP TOOLBAR + ADDONS) -->
+  <main class="rustbook-main">
+    <!-- Top Toolbar (Viewports, Zoom, A11y, Tools) -->
+    <header class="rustbook-toolbar">
+      <!-- Breadcrumb path -->
+      <div class="rustbook-toolbar__breadcrumb">
+        <span class="rustbook-toolbar__category">{{ selectedComponentId() }}</span>
+        <span class="rustbook-toolbar__sep">/</span>
+        <span class="rustbook-toolbar__story-name">{{ selectedStory() }}</span>
+      </div>
+
+      <!-- Center Viewport Switcher -->
+      <div class="rustbook-toolbar__viewports">
+        <button
+          type="button"
+          class="rustbook-toolbar__btn"
+          [class.active]="selectedViewport() === 'fluid'"
+          (click)="selectedViewport.set('fluid')"
+          title="Fluid Viewport (100%)"
+        >
+          <atom-icon name="dashboard" size="sm" />
+          <span>Fluid</span>
+        </button>
+        <button
+          type="button"
+          class="rustbook-toolbar__btn"
+          [class.active]="selectedViewport() === 'desktop'"
+          (click)="selectedViewport.set('desktop')"
+          title="Desktop (1280px)"
+        >
+          <atom-icon name="settings" size="sm" />
+          <span>1280px</span>
+        </button>
+        <button
+          type="button"
+          class="rustbook-toolbar__btn"
+          [class.active]="selectedViewport() === 'tablet'"
+          (click)="selectedViewport.set('tablet')"
+          title="Tablet (768px)"
+        >
+          <atom-icon name="calendar" size="sm" />
+          <span>768px</span>
+        </button>
+        <button
+          type="button"
+          class="rustbook-toolbar__btn"
+          [class.active]="selectedViewport() === 'mobile'"
+          (click)="selectedViewport.set('mobile')"
+          title="Mobile (375px)"
+        >
+          <atom-icon name="tag" size="sm" />
+          <span>375px</span>
+        </button>
+      </div>
+
+      <!-- Right Inspection Actions -->
+      <div class="rustbook-toolbar__actions">
+        <!-- Grid Toggle -->
+        <button
+          type="button"
+          class="rustbook-toolbar__tool-btn"
+          [class.active]="showGrid()"
+          (click)="showGrid.set(!showGrid())"
+          title="Toggle Grid Canvas"
+        >
+          <atom-icon name="menu" size="sm" />
+        </button>
+
+        <!-- Outlines / Measurement Toggle -->
+        <button
+          type="button"
+          class="rustbook-toolbar__tool-btn"
+          [class.active]="showOutlines()"
+          (click)="showOutlines.set(!showOutlines())"
+          title="Toggle Measurement Outlines"
+        >
+          <atom-icon name="settings" size="sm" />
+        </button>
+
+        <!-- Theme Toggle -->
+        <button
+          type="button"
+          class="rustbook-toolbar__tool-btn"
+          (click)="studioService.toggleThemeMode()"
+          title="Toggle Dark/Light Mode"
+        >
+          <atom-icon [name]="studioService.tokens().mode === 'dark' ? 'sun' : 'moon'" size="sm" />
+        </button>
+
+        <!-- Zoom Controls -->
+        <div class="rustbook-toolbar__zoom">
+          <button (click)="zoomLevel.set(zoomLevel() > 50 ? zoomLevel() - 25 : 50)">-</button>
+          <span>{{ zoomLevel() }}%</span>
+          <button (click)="zoomLevel.set(zoomLevel() < 200 ? zoomLevel() + 25 : 200)">+</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Center Canvas Sandbox -->
+    <div
+      class="rustbook-canvas"
+      [class.rustbook-canvas--grid]="showGrid()"
+      [class.rustbook-canvas--outlines]="showOutlines()"
+    >
+      <div
+        class="rustbook-canvas__stage"
+        [class.rustbook-canvas__stage--mobile]="selectedViewport() === 'mobile'"
+        [class.rustbook-canvas__stage--tablet]="selectedViewport() === 'tablet'"
+        [class.rustbook-canvas__stage--desktop]="selectedViewport() === 'desktop'"
+        [style.transform]="'scale(' + zoomLevel() / 100 + ')'"
+      >
+        <!-- RENDERED STORY ISOLATION -->
+        <div class="rustbook-canvas__preview-box">
+          <!-- ButtonAtom Story -->
+          @if (selectedComponentId() === 'button') {
+            <atom-button
+              [label]="buttonProps.label()"
+              [variant]="buttonProps.variant()"
+              [size]="buttonProps.size()"
+              [loading]="buttonProps.loading()"
+              [disabled]="buttonProps.disabled()"
+              (clicked)="onButtonClicked()"
+            />
+          }
+
+          <!-- BadgeAtom Story -->
+          @if (selectedComponentId() === 'badge') {
+            <atom-badge
+              [text]="badgeProps.text()"
+              [variant]="badgeProps.variant()"
+              [size]="badgeProps.size()"
+            />
+          }
+
+          <!-- InputAtom Story -->
+          @if (selectedComponentId() === 'input') {
+            <div style="width: 320px;">
+              <atom-input
+                [placeholder]="inputProps.placeholder()"
+                [type]="inputProps.type()"
+                [value]="inputProps.value()"
+                [error]="inputProps.error()"
+                [errorMessage]="inputProps.errorMessage()"
+                [disabled]="inputProps.disabled()"
+                (valueChange)="onInputValueChange($event)"
+              />
+            </div>
+          }
+
+          <!-- PriceTagMolecule Story -->
+          @if (selectedComponentId() === 'price-tag') {
+            <molecule-price-tag
+              [price]="priceTagProps.price()"
+              [currency]="priceTagProps.currency()"
+              [trend]="priceTagProps.trend()"
+              [discount]="priceTagProps.discount()"
+            />
+          }
+
+          <!-- AlertMessageMolecule Story -->
+          @if (selectedComponentId() === 'alert') {
+            <div style="width: 100%; max-width: 500px;">
+              <molecule-alert-message
+                [message]="alertProps.message()"
+                [type]="alertProps.type()"
+                [dismissible]="alertProps.dismissible()"
+                (dismissed)="onAlertDismissed()"
+              />
+            </div>
+          }
+
+          <!-- StatCardMolecule Story -->
+          @if (selectedComponentId() === 'stat-card') {
+            <div style="width: 280px;">
+              <molecule-stat-card
+                [value]="statCardProps.value()"
+                [label]="statCardProps.label()"
+                [icon]="statCardProps.icon()"
+                [iconColor]="statCardProps.iconColor()"
+              />
+            </div>
+          }
+
+          <!-- PieChartOrganism Story -->
+          @if (selectedComponentId() === 'pie-chart') {
+            <div style="width: 380px;">
+              <organism-pie-chart
+                title="Flight Distribution"
+                [data]="pieData"
+                [showPercentages]="true"
+              />
+            </div>
+          }
+
+          <!-- ColumnChartOrganism Story -->
+          @if (selectedComponentId() === 'column-chart') {
+            <div style="width: 480px;">
+              <organism-column-chart
+                title="Weekly Traffic Volume"
+                [data]="columnData"
+              />
+            </div>
+          }
+
+          <!-- BarChartOrganism Story -->
+          @if (selectedComponentId() === 'bar-chart') {
+            <div style="width: 480px;">
+              <organism-bar-chart
+                title="Airline Bookings"
+                [data]="barData"
+              />
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BOTTOM/RIGHT ADDONS PANEL -->
+    <section class="rustbook-addons">
+      <!-- Addons Tab Header -->
+      <div class="rustbook-addons__header">
+        <div class="rustbook-addons__tabs">
+          <button
+            type="button"
+            class="rustbook-addons__tab"
+            [class.active]="activeAddonTab() === 'controls'"
+            (click)="activeAddonTab.set('controls')"
+          >
+            🎛️ Controls
+          </button>
+          <button
+            type="button"
+            class="rustbook-addons__tab"
+            [class.active]="activeAddonTab() === 'actions'"
+            (click)="activeAddonTab.set('actions')"
+          >
+            ⚡ Actions ({{ actionsLog().length }})
+          </button>
+          <button
+            type="button"
+            class="rustbook-addons__tab"
+            [class.active]="activeAddonTab() === 'a11y'"
+            (click)="activeAddonTab.set('a11y')"
+          >
+            ♿ Colorust & A11y
+          </button>
+          <button
+            type="button"
+            class="rustbook-addons__tab"
+            [class.active]="activeAddonTab() === 'codegen'"
+            (click)="activeAddonTab.set('codegen')"
+          >
+            📱 Multi-Codegen
+          </button>
+          <button
+            type="button"
+            class="rustbook-addons__tab rustbook-addons__tab--ai"
+            [class.active]="activeAddonTab() === 'chat'"
+            (click)="activeAddonTab.set('chat')"
+          >
+            🤖 AI Copilot (Storybook MCP)
+          </button>
+        </div>
+      </div>
+
+      <!-- Addon Body Content -->
+      <div class="rustbook-addons__body">
+        <!-- TAB 1: CONTROLS TABLE (KNOBS) -->
+        @if (activeAddonTab() === 'controls') {
+          <div class="rustbook-controls">
+            <table class="rustbook-controls__table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Control</th>
+                  <th>Current Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                @if (selectedComponentId() === 'button') {
+                  <tr>
+                    <td><code>label</code></td>
+                    <td><span class="rustbook-type">string</span></td>
+                    <td>
+                      <input
+                        type="text"
+                        [value]="buttonProps.label()"
+                        (input)="buttonProps.label.set($any($event.target).value)"
+                        class="rustbook-input"
+                      />
+                    </td>
+                    <td><code>"{{ buttonProps.label() }}"</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>variant</code></td>
+                    <td><span class="rustbook-type">'primary' | 'secondary' | 'danger' | 'ghost'</span></td>
+                    <td>
+                      <select
+                        [value]="buttonProps.variant()"
+                        (change)="buttonProps.variant.set($any($event.target).value)"
+                        class="rustbook-select"
+                      >
+                        <option value="primary">primary</option>
+                        <option value="secondary">secondary</option>
+                        <option value="danger">danger</option>
+                        <option value="ghost">ghost</option>
+                      </select>
+                    </td>
+                    <td><code>"{{ buttonProps.variant() }}"</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>size</code></td>
+                    <td><span class="rustbook-type">'sm' | 'md' | 'lg'</span></td>
+                    <td>
+                      <select
+                        [value]="buttonProps.size()"
+                        (change)="buttonProps.size.set($any($event.target).value)"
+                        class="rustbook-select"
+                      >
+                        <option value="sm">sm</option>
+                        <option value="md">md</option>
+                        <option value="lg">lg</option>
+                      </select>
+                    </td>
+                    <td><code>"{{ buttonProps.size() }}"</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>loading</code></td>
+                    <td><span class="rustbook-type">boolean</span></td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        [checked]="buttonProps.loading()"
+                        (change)="buttonProps.loading.set($any($event.target).checked)"
+                      />
+                    </td>
+                    <td><code>{{ buttonProps.loading() }}</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>disabled</code></td>
+                    <td><span class="rustbook-type">boolean</span></td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        [checked]="buttonProps.disabled()"
+                        (change)="buttonProps.disabled.set($any($event.target).checked)"
+                      />
+                    </td>
+                    <td><code>{{ buttonProps.disabled() }}</code></td>
+                  </tr>
+                }
+
+                @if (selectedComponentId() === 'badge') {
+                  <tr>
+                    <td><code>text</code></td>
+                    <td><span class="rustbook-type">string</span></td>
+                    <td>
+                      <input
+                        type="text"
+                        [value]="badgeProps.text()"
+                        (input)="badgeProps.text.set($any($event.target).value)"
+                        class="rustbook-input"
+                      />
+                    </td>
+                    <td><code>"{{ badgeProps.text() }}"</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>variant</code></td>
+                    <td><span class="rustbook-type">'default' | 'primary' | 'success' | 'warning' | 'danger'</span></td>
+                    <td>
+                      <select
+                        [value]="badgeProps.variant()"
+                        (change)="badgeProps.variant.set($any($event.target).value)"
+                        class="rustbook-select"
+                      >
+                        <option value="default">default</option>
+                        <option value="primary">primary</option>
+                        <option value="success">success</option>
+                        <option value="warning">warning</option>
+                        <option value="danger">danger</option>
+                        <option value="azul">azul</option>
+                        <option value="gol">gol</option>
+                        <option value="latam">latam</option>
+                      </select>
+                    </td>
+                    <td><code>"{{ badgeProps.variant() }}"</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>size</code></td>
+                    <td><span class="rustbook-type">'sm' | 'md'</span></td>
+                    <td>
+                      <select
+                        [value]="badgeProps.size()"
+                        (change)="badgeProps.size.set($any($event.target).value)"
+                        class="rustbook-select"
+                      >
+                        <option value="sm">sm</option>
+                        <option value="md">md</option>
+                      </select>
+                    </td>
+                    <td><code>"{{ badgeProps.size() }}"</code></td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+
+        <!-- TAB 2: ACTIONS LOG -->
+        @if (activeAddonTab() === 'actions') {
+          <div class="rustbook-actions">
+            @for (log of actionsLog(); track log.id) {
+              <div class="rustbook-actions__row">
+                <span class="rustbook-actions__time">{{ log.timestamp }}</span>
+                <span class="rustbook-actions__name">{{ log.name }}</span>
+                <span class="rustbook-actions__payload">{{ log.payload }}</span>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- TAB 3: COLORUST & ACCESSIBILITY -->
+        @if (activeAddonTab() === 'a11y') {
+          <div class="rustbook-a11y">
+            <div class="rustbook-a11y__grid">
+              <div class="rustbook-a11y__card">
+                <h4>🦀 Colorust APCA & WCAG Contrast Engine</h4>
+                <div class="rustbook-a11y__badges">
+                  <span class="rustbook-badge rustbook-badge--pass">
+                    WCAG {{ wasmService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).wcagRatio }}:1 PASS
+                  </span>
+                  <span class="rustbook-badge rustbook-badge--pass">
+                    APCA Lc {{ wasmService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).apcaLc }} PASS
+                  </span>
+                  <span class="rustbook-badge rustbook-badge--engine">
+                    Engine: {{ wasmService.wasmEngine() }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="rustbook-a11y__card">
+                <h4>OKLCH Tonal Scale (50-950)</h4>
+                <div class="rustbook-tonal-scale">
+                  @for (step of wasmService.generateTonalScale(studioService.tokens().primaryColor); track step.step) {
+                    <div
+                      class="rustbook-tonal-step"
+                      [style.background]="step.hex"
+                      [title]="'Step ' + step.step + ': ' + step.hex"
+                    >
+                      <span>{{ step.step }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <div class="rustbook-a11y__card">
+                <h4>Daltonism Simulator (CVD)</h4>
+                <div class="rustbook-btn-group">
+                  <button [class.active]="studioService.activeCvd() === 'normal'" (click)="studioService.setCvd('normal')">Normal</button>
+                  <button [class.active]="studioService.activeCvd() === 'protanopia'" (click)="studioService.setCvd('protanopia')">Protan</button>
+                  <button [class.active]="studioService.activeCvd() === 'deuteranopia'" (click)="studioService.setCvd('deuteranopia')">Deuter</button>
+                  <button [class.active]="studioService.activeCvd() === 'tritanopia'" (click)="studioService.setCvd('tritanopia')">Tritan</button>
+                  <button [class.active]="studioService.activeCvd() === 'achromatopsia'" (click)="studioService.setCvd('achromatopsia')">Mono</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- TAB 4: MULTI-TARGET CODEGEN -->
+        @if (activeAddonTab() === 'codegen') {
+          <div class="rustbook-codegen">
+            <div class="rustbook-codegen__cards">
+              <div class="rustbook-codegen__item">
+                <span class="rustbook-codegen__lang">Tailwind CSS (theme.colors)</span>
+                <pre><code>{{ studioService.exportTailwind() }}</code></pre>
+              </div>
+              <div class="rustbook-codegen__item">
+                <span class="rustbook-codegen__lang">iOS SwiftUI (Color+Theme.swift)</span>
+                <pre><code>{{ studioService.exportSwift() }}</code></pre>
+              </div>
+              <div class="rustbook-codegen__item">
+                <span class="rustbook-codegen__lang">Android Jetpack Compose (Color.kt)</span>
+                <pre><code>{{ studioService.exportKotlin() }}</code></pre>
+              </div>
+              <div class="rustbook-codegen__item">
+                <span class="rustbook-codegen__lang">Flutter (ThemeData.dart)</span>
+                <pre><code>{{ studioService.exportFlutter() }}</code></pre>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- TAB 5: AI COPILOT CHAT (STORYBOOK MCP) -->
+        @if (activeAddonTab() === 'chat') {
+          <div class="rustbook-chat">
+            <div class="rustbook-chat__messages">
+              @for (msg of chatMessages(); track msg.id) {
+                <div class="rustbook-chat__msg" [class.rustbook-chat__msg--user]="msg.sender === 'user'">
+                  <div class="rustbook-chat__bubble">
+                    <div class="rustbook-chat__meta">
+                      <span class="rustbook-chat__author">{{ msg.sender === 'user' ? 'You' : '🦀 Rustbook MCP Copilot' }}</span>
+                      <span class="rustbook-chat__time">{{ msg.timestamp }}</span>
+                    </div>
+                    <p class="rustbook-chat__text">{{ msg.text }}</p>
+
+                    @if (msg.steps && msg.steps.length > 0) {
+                      <div class="rustbook-chat__steps">
+                        @for (step of msg.steps; track step) {
+                          <div class="rustbook-chat__step">
+                            <span>{{ step }}</span>
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+
+            <!-- Chat Suggestions Chips -->
+            <div class="rustbook-chat__chips">
+              <button (click)="chatInput.set('Audit APCA contrast for current button'); sendAiMessage()">🔍 Audit APCA Contrast</button>
+              <button (click)="chatInput.set('Toggle loading spinner state'); sendAiMessage()">⚡ Set Loading State</button>
+              <button (click)="chatInput.set('Change variant to danger'); sendAiMessage()">🚨 Set Danger Variant</button>
+            </div>
+
+            <!-- Chat Input Box -->
+            <div class="rustbook-chat__input-row">
+              <input
+                type="text"
+                placeholder="Ask AI to mutate props, audit APCA contrast, or test component via MCP..."
+                [value]="chatInput()"
+                (input)="chatInput.set($any($event.target).value)"
+                (keyup.enter)="sendAiMessage()"
+              />
+              <atom-button
+                label="Send"
+                variant="primary"
+                size="sm"
+                [loading]="isAiProcessing()"
+                (clicked)="sendAiMessage()"
+              />
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>
