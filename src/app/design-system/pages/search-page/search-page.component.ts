@@ -12,12 +12,13 @@
  * ```
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchFormModel, FlightModel } from '../../../core/models';
 import { MOCK_SEARCH_FLIGHTS } from '../../../core/data';
 import { SearchResultsLayoutTemplate } from '../../templates';
 import { FlightListOrganism } from '../../organisms';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 type SortOption = 'price' | 'duration' | 'departure';
 
@@ -29,6 +30,8 @@ type SortOption = 'price' | 'duration' | 'departure';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
+  private navigationService = inject(NavigationService);
+
   showFilters = true;
   loading = false;
   userName = 'Demo User';
@@ -96,13 +99,12 @@ export class SearchPageComponent implements OnInit {
   onSearch(searchData: SearchFormModel): void {
     this.searchValues = searchData;
     this.loading = true;
-    console.log('Nova busca:', searchData);
 
     // Simulate search
     setTimeout(() => {
       this.loadFlights();
       this.loading = false;
-    }, 1000);
+    }, 600);
   }
 
   onSortChange(sort: SortOption): void {
@@ -112,7 +114,7 @@ export class SearchPageComponent implements OnInit {
 
   onFlightSelect(flightId: string): void {
     this.selectedFlightId = flightId;
-    console.log('Flight selected:', flightId);
+    this.navigationService.navigateTo('/compare');
   }
 
   onAirlineToggle(airline: string): void {

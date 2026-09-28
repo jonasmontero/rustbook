@@ -1,8 +1,8 @@
-<!-- AnalyticsPage - Dashboard de Analytics com 5 Gráficos -->
-<template-dashboard-layout>
+<!-- AnalyticsPage - Analytics Dashboard with 5 Charts -->
+<template-dashboard-layout [activeRoute]="'/analytics'">
 
   <div class="page-analytics">
-    <!-- Chart 1: Line Chart - History de Reservas (Full Width) -->
+    <!-- Chart 1: Line Chart - Reservation History (Full Width) -->
     <div class="page-analytics__chart page-analytics__chart--full">
       <organism-price-chart
         [data]="reservationHistory"
@@ -13,7 +13,7 @@
     <!-- Charts 2 & 3: Pie Chart + Column Chart (Side by Side) -->
     <div class="page-analytics__chart page-analytics__chart--half">
       <organism-pie-chart
-        [title]="'Distribuição de Voos por Airline'"
+        [title]="'Flight Distribution by Airline'"
         [data]="distributionData"
         [showPercentages]="true"
       />
@@ -21,23 +21,23 @@
 
     <div class="page-analytics__chart page-analytics__chart--half">
       <organism-column-chart
-        [title]="'Voos por Month'"
+        [title]="'Flights per Month'"
         [data]="monthlyFlightsData"
       />
     </div>
 
-    <!-- Chart 4: Bar Chart - Top 10 Rotas (Full Width) -->
+    <!-- Chart 4: Bar Chart - Top 10 Routes (Full Width) -->
     <div class="page-analytics__chart page-analytics__chart--full">
       <organism-bar-chart
-        [title]="'Top 10 Rotas Mais Vendidas'"
+        [title]="'Top 10 Most Booked Routes'"
         [data]="topRoutesData"
       />
     </div>
 
-    <!-- Chart 5: Area Chart - Receita Acumulada (Full Width) -->
+    <!-- Chart 5: Area Chart - Monthly Cumulative Revenue (Full Width) -->
     <div class="page-analytics__chart page-analytics__chart--full">
       <organism-area-chart
-        [title]="'Receita Acumulada Mensal'"
+        [title]="'Monthly Cumulative Revenue'"
         [data]="cumulativeRevenueData"
         [fillColor]="'#10B981'"
       />

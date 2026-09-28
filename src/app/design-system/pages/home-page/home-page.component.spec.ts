@@ -20,7 +20,7 @@ describe('HomePageComponent', () => {
     component.ngOnInit();
 
     expect(component.stats.length).toBe(4);
-    expect(component.stats[0].label).toBe('Voos Pesquisados');
+    expect(component.stats[0].label).toBe('Searched Flights');
   });
 
   it('should load recent flights on init', () => {

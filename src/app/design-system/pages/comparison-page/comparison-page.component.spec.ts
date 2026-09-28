@@ -94,9 +94,9 @@ describe('ComparisonPageComponent', () => {
     const azulBenefits = component.benefitsData[0].items.filter((b) => b.included);
     expect(azulBenefits.length).toBe(3);
 
-    // Gol: 5/6 benefícios
+    // Gol: 4/6 benefícios
     const golBenefits = component.benefitsData[1].items.filter((b) => b.included);
-    expect(golBenefits.length).toBe(5);
+    expect(golBenefits.length).toBe(4);
 
     // Latam: 6/6 benefícios (todos)
     const latamBenefits = component.benefitsData[2].items.filter((b) => b.included);

@@ -12,7 +12,7 @@
  * ```
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatModel, FlightModel, PriceHistoryModel, SeasonDataModel } from '../../../core/models';
 import {
@@ -28,6 +28,7 @@ import {
   PriceChartOrganism,
   SeasonCalendarOrganism,
 } from '../../organisms';
+import { NavigationService } from '../../../core/services/navigation.service';
 
 @Component({
   selector: 'page-home',
@@ -44,6 +45,8 @@ import {
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
+  private navigationService = inject(NavigationService);
+
   sidebarCollapsed = false;
   userName = 'Demo User';
   activeRoute = '/dashboard';
@@ -84,28 +87,22 @@ export class HomePageComponent implements OnInit {
 
   onNavigate(route: string): void {
     this.activeRoute = route;
-    console.log('Navigating to:', route);
+    this.navigationService.navigateTo(route);
   }
 
   onSearch(searchData: any): void {
-    console.log('Search executed:', searchData);
-    this.loading = true;
-    // Simulate search
-    setTimeout(() => {
-      this.loading = false;
-    }, 1500);
+    this.navigationService.navigateTo('/search');
   }
 
   onFlightSelect(flightId: string): void {
-    console.log('Flight selected:', flightId);
+    this.navigationService.navigateTo('/compare');
   }
 
   onPeriodChange(period: '7d' | '30d' | '90d'): void {
     this.selectedPeriod = period;
-    console.log('Period changed:', period);
   }
 
   onMonthClick(month: number): void {
-    console.log('Month clicado:', month);
+    console.log('Month selected:', month);
   }
 }

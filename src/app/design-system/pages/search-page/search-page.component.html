@@ -40,7 +40,7 @@
     <!-- Price -->
     <div class="page-search__filter-group">
       <h4 class="page-search__filter-title">Price Range</h4>
-      <p class="page-search__filter-value">Até R$ {{ maxPrice }}</p>
+      <p class="page-search__filter-value">Up to ${{ maxPrice }}</p>
       <input
         type="range"
         min="200"
@@ -61,7 +61,7 @@
           [checked]="directOnly"
           (change)="onDirectOnlyToggle()"
         />
-        <span>Apenas voos diretos</span>
+        <span>Direct flights only</span>
       </label>
     </div>
   </div>
