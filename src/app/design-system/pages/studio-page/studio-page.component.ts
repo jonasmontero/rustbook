@@ -88,6 +88,36 @@ export class StudioPageComponent {
   isManagerCollapsed = signal<boolean>(false);
   activeAddonTab = signal<'controls' | 'actions' | 'a11y' | 'codegen' | 'chat'>('controls');
 
+  // A11y & Contrast Interactive State
+  contrastBg = signal<'#FFFFFF' | '#0F172A'>('#FFFFFF');
+  copiedTonalStep = signal<number | null>(null);
+
+  currentContrast = computed(() => {
+    return this.wasmService.calcContrast(this.contrastBg(), this.studioService.tokens().primaryColor);
+  });
+
+  setContrastBg(bg: '#FFFFFF' | '#0F172A'): void {
+    this.contrastBg.set(bg);
+    this.logAction('contrastTargetChanged', `background: "${bg}"`);
+  }
+
+  inspectMetric(metric: string, val: number): void {
+    this.logAction('auditInspect', `metric: "${metric}", value: ${val}`);
+  }
+
+  copyTonalStep(hex: string, step: number): void {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(hex);
+    }
+    this.copiedTonalStep.set(step);
+    this.logAction('colorCopied', `step: ${step}, hex: "${hex}"`);
+    setTimeout(() => {
+      if (this.copiedTonalStep() === step) {
+        this.copiedTonalStep.set(null);
+      }
+    }, 2000);
+  }
+
   // Interactive Component Knobs (Live Props)
   buttonProps = {
     label: signal<string>('Confirm Booking'),

@@ -192,6 +192,10 @@
         [class.rustbook-canvas__stage--mobile]="selectedViewport() === 'mobile'"
         [class.rustbook-canvas__stage--tablet]="selectedViewport() === 'tablet'"
         [class.rustbook-canvas__stage--desktop]="selectedViewport() === 'desktop'"
+        [class.cvd-protanopia]="studioService.activeCvd() === 'protanopia'"
+        [class.cvd-deuteranopia]="studioService.activeCvd() === 'deuteranopia'"
+        [class.cvd-tritanopia]="studioService.activeCvd() === 'tritanopia'"
+        [class.cvd-achromatopsia]="studioService.activeCvd() === 'achromatopsia'"
         [style.transform]="'scale(' + zoomLevel() / 100 + ')'"
       >
         <!-- RENDERED STORY ISOLATION -->
@@ -514,14 +518,47 @@
         @if (activeAddonTab() === 'a11y') {
           <div class="rustbook-a11y">
             <div class="rustbook-a11y__grid">
+              <!-- CARD 1: CONTRAST ENGINE -->
               <div class="rustbook-a11y__card">
-                <h4>Colorust APCA & WCAG Contrast Engine</h4>
+                <div class="rustbook-a11y__card-header">
+                  <h4>Colorust APCA & WCAG Contrast Engine</h4>
+                  <div class="rustbook-contrast-toggle">
+                    <button
+                      type="button"
+                      [class.active]="contrastBg() === '#FFFFFF'"
+                      (click)="setContrastBg('#FFFFFF')"
+                      title="Test contrast on Light Background (#FFFFFF)"
+                    >
+                      Light Bg
+                    </button>
+                    <button
+                      type="button"
+                      [class.active]="contrastBg() === '#0F172A'"
+                      (click)="setContrastBg('#0F172A')"
+                      title="Test contrast on Dark Background (#0F172A)"
+                    >
+                      Dark Bg
+                    </button>
+                  </div>
+                </div>
                 <div class="rustbook-a11y__badges">
-                  <span class="rustbook-badge rustbook-badge--pass">
-                    WCAG {{ wasmService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).wcagRatio }}:1 PASS
+                  <span
+                    class="rustbook-badge"
+                    [class.rustbook-badge--pass]="currentContrast().wcagPass"
+                    [class.rustbook-badge--fail]="!currentContrast().wcagPass"
+                    (click)="inspectMetric('WCAG', currentContrast().wcagRatio)"
+                    [title]="'Click to log audit details. Ratio: ' + currentContrast().wcagRatio + ':1'"
+                  >
+                    WCAG {{ currentContrast().wcagRatio }}:1 {{ currentContrast().wcagPass ? 'PASS (AA/AAA)' : 'FAIL' }}
                   </span>
-                  <span class="rustbook-badge rustbook-badge--pass">
-                    APCA Lc {{ wasmService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).apcaLc }} PASS
+                  <span
+                    class="rustbook-badge"
+                    [class.rustbook-badge--pass]="currentContrast().apcaPass"
+                    [class.rustbook-badge--fail]="!currentContrast().apcaPass"
+                    (click)="inspectMetric('APCA', currentContrast().apcaLc)"
+                    [title]="'APCA Lightness Contrast: Lc ' + currentContrast().apcaLc"
+                  >
+                    APCA Lc {{ currentContrast().apcaLc }} {{ currentContrast().apcaPass ? 'PASS' : 'FAIL' }}
                   </span>
                   <span class="rustbook-badge rustbook-badge--engine">
                     Engine: {{ wasmService.wasmEngine() }}
@@ -529,23 +566,35 @@
                 </div>
               </div>
 
+              <!-- CARD 2: TONAL SCALE -->
               <div class="rustbook-a11y__card">
-                <h4>OKLCH Tonal Scale (50-950)</h4>
+                <div class="rustbook-a11y__card-header">
+                  <h4>OKLCH Tonal Scale (50-950)</h4>
+                  @if (copiedTonalStep() !== null) {
+                    <span class="rustbook-copied-pill">Copied Step {{ copiedTonalStep() }}!</span>
+                  }
+                </div>
                 <div class="rustbook-tonal-scale">
                   @for (step of wasmService.generateTonalScale(studioService.tokens().primaryColor); track step.step) {
-                    <div
+                    <button
+                      type="button"
                       class="rustbook-tonal-step"
                       [style.background]="step.hex"
-                      [title]="'Step ' + step.step + ': ' + step.hex"
+                      [style.color]="step.step > 400 ? '#FFFFFF' : '#0F172A'"
+                      (click)="copyTonalStep(step.hex, step.step)"
+                      [title]="'Step ' + step.step + ': ' + step.hex + ' (Click to copy)'"
                     >
                       <span>{{ step.step }}</span>
-                    </div>
+                    </button>
                   }
                 </div>
               </div>
 
+              <!-- CARD 3: DALTONISM SIMULATOR -->
               <div class="rustbook-a11y__card">
-                <h4>Daltonism Simulator (CVD)</h4>
+                <div class="rustbook-a11y__card-header">
+                  <h4>Daltonism Simulator (CVD)</h4>
+                </div>
                 <div class="rustbook-btn-group">
                   <button [class.active]="studioService.activeCvd() === 'normal'" (click)="studioService.setCvd('normal')">Normal</button>
                   <button [class.active]="studioService.activeCvd() === 'protanopia'" (click)="studioService.setCvd('protanopia')">Protan</button>
