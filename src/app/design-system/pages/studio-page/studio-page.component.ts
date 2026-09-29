@@ -86,7 +86,58 @@ export class StudioPageComponent {
   showGrid = signal<boolean>(false);
   showOutlines = signal<boolean>(false);
   isManagerCollapsed = signal<boolean>(false);
-  activeAddonTab = signal<'controls' | 'actions' | 'a11y' | 'codegen' | 'chat'>('controls');
+  activeAddonTab = signal<'controls' | 'actions' | 'tokens' | 'a11y' | 'codegen' | 'chat'>('controls');
+
+  // Brand Presets & Custom Color Pickers
+  applyBrandPreset(presetId: string): void {
+    this.studioService.applyPreset(presetId);
+    this.logAction('brandPresetApplied', `presetId: "${presetId}"`);
+  }
+
+  onPrimaryColorInput(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.studioService.setPrimaryColor(val);
+  }
+
+  onPrimaryColorChange(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+      this.studioService.setPrimaryColor(val);
+      this.logAction('primaryColorChanged', `color: "${val}"`);
+    }
+  }
+
+  onSecondaryColorInput(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.studioService.setSecondaryColor(val);
+  }
+
+  onSecondaryColorChange(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+      this.studioService.setSecondaryColor(val);
+      this.logAction('secondaryColorChanged', `color: "${val}"`);
+    }
+  }
+
+  onAccentColorInput(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    this.studioService.setAccentColor(val);
+  }
+
+  onAccentColorChange(event: Event): void {
+    const val = (event.target as HTMLInputElement).value;
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+      this.studioService.setAccentColor(val);
+      this.logAction('accentColorChanged', `color: "${val}"`);
+    }
+  }
+
+  onRadiusInput(event: Event): void {
+    const val = parseInt((event.target as HTMLInputElement).value, 10);
+    this.studioService.setBorderRadius(val);
+    this.logAction('borderRadiusChanged', `radius: ${val}px`);
+  }
 
   // A11y & Contrast Interactive State
   contrastBg = signal<'#FFFFFF' | '#0F172A'>('#FFFFFF');
@@ -172,12 +223,12 @@ export class StudioPageComponent {
     },
   ]);
 
-  // AI Chat Copilot Feed
+  // AI Chat Feed
   chatMessages = signal<ChatMessage[]>([
     {
       id: '1',
       sender: 'assistant',
-      text: 'Hello! I am your native Rustbook AI Copilot. I can inspect tokens, run microsecond APCA contrast audits, mutate component props, and generate multi-platform code via the native MCP server.',
+      text: 'Hello! I am Rustbook AI. I can inspect design tokens, run microsecond APCA contrast audits, mutate component props, switch brand palettes, and generate multi-platform code via the native MCP server.',
       timestamp: '17:35',
     },
   ]);

@@ -55,7 +55,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./design-system/pages/studio-page/studio-page.component')
         .then(m => m.StudioPageComponent),
-    title: 'Rustbook Studio — Component Explorer & AI Copilot'
+    title: 'Rustbook Studio — Component Explorer & Rustbook AI'
   },
   {
     path: '**',

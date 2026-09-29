@@ -83,6 +83,20 @@ export const THEME_PRESETS: ThemePreset[] = [
     },
   },
   {
+    id: 'sunset-coral',
+    name: 'Sunset Coral (Lifestyle)',
+    domain: 'ecommerce',
+    tokens: {
+      primaryColor: '#F43F5E',
+      secondaryColor: '#FB7185',
+      accentColor: '#F59E0B',
+      borderRadius: 10,
+      fontFamily: 'Inter, system-ui, sans-serif',
+      mode: 'light',
+      activeDomain: 'ecommerce',
+    },
+  },
+  {
     id: 'dark-obsidian',
     name: 'Obsidian Night (Dark Mode)',
     domain: 'core',
@@ -117,6 +131,7 @@ export class ThemeStudioService {
   private platformId = inject(PLATFORM_ID);
   private storageKey = 'skycompare_theme_tokens_v1';
 
+  presets = THEME_PRESETS;
   tokens = signal<ThemeTokens>(this.loadInitialTokens());
   isStudioOpen = signal<boolean>(false);
 

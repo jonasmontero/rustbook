@@ -402,6 +402,36 @@
     }
   }
 
+  &__presets {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--studio-bg-card);
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--studio-border);
+  }
+
+  &__preset-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    padding: 0;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &.active {
+      border-color: var(--studio-text-primary);
+      transform: scale(1.15);
+      box-shadow: 0 0 0 1px var(--studio-border);
+    }
+  }
+
   &__zoom {
     display: flex;
     align-items: center;
@@ -671,6 +701,208 @@
   &__payload {
     color: var(--studio-text-primary);
   }
+}
+
+/* BRAND PRESETS & COLOR PICKER */
+.rustbook-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+
+    h4 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--studio-text-primary);
+    }
+  }
+
+  &__section-sub {
+    font-size: 11px;
+    color: var(--studio-text-muted);
+  }
+}
+
+.rustbook-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.rustbook-preset-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--studio-bg-card);
+  border: 1px solid var(--studio-border);
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+
+  &:hover {
+    border-color: var(--studio-text-secondary);
+    background: var(--studio-bg-hover);
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    border-color: var(--studio-active-border);
+    background: var(--studio-active-bg);
+    box-shadow: 0 0 0 1px var(--studio-active-border);
+  }
+
+  &__colors {
+    display: flex;
+    height: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &__swatch {
+    flex: 1;
+    height: 100%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--studio-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__hex {
+    font-size: 10px;
+    font-family: monospace;
+    color: var(--studio-text-muted);
+  }
+}
+
+.rustbook-pickers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.rustbook-picker-card {
+  background: var(--studio-bg-card);
+  border: 1px solid var(--studio-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--studio-text-primary);
+    }
+
+    code {
+      font-size: 11px;
+      font-family: monospace;
+      color: var(--studio-text-secondary);
+      background: var(--studio-bg-panel);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--studio-border);
+    }
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &--slider {
+      padding-top: 4px;
+    }
+  }
+}
+
+.rustbook-color-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--studio-border);
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+.rustbook-hex-input {
+  flex: 1;
+  height: 32px;
+  background: var(--studio-bg-panel);
+  border: 1px solid var(--studio-border);
+  border-radius: 6px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--studio-text-primary);
+  text-transform: uppercase;
+  outline: none;
+
+  &:focus {
+    border-color: var(--studio-active-border);
+  }
+}
+
+.rustbook-range-input {
+  width: 100%;
+  accent-color: var(--color-primary);
+  cursor: pointer;
 }
 
 /* A11Y */

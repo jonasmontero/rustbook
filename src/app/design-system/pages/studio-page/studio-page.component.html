@@ -162,6 +162,20 @@
           <atom-icon name="settings" size="sm" />
         </button>
 
+        <!-- Brand Palette Quick Switcher -->
+        <div class="rustbook-toolbar__presets" title="Quick Brand Palette Switcher">
+          @for (preset of studioService.presets; track preset.id) {
+            <button
+              type="button"
+              class="rustbook-toolbar__preset-dot"
+              [class.active]="studioService.tokens().primaryColor === preset.tokens.primaryColor"
+              [style.background]="preset.tokens.primaryColor"
+              (click)="applyBrandPreset(preset.id)"
+              [title]="'Switch to ' + preset.name + ' (' + preset.tokens.primaryColor + ')'"
+            ></button>
+          }
+        </div>
+
         <!-- Theme Toggle -->
         <button
           type="button"
@@ -330,6 +344,15 @@
           <button
             type="button"
             class="rustbook-addons__tab"
+            [class.active]="activeAddonTab() === 'tokens'"
+            (click)="activeAddonTab.set('tokens')"
+          >
+            <atom-icon name="tag" size="sm" />
+            <span>Brand & Color Picker</span>
+          </button>
+          <button
+            type="button"
+            class="rustbook-addons__tab"
             [class.active]="activeAddonTab() === 'a11y'"
             (click)="activeAddonTab.set('a11y')"
           >
@@ -352,7 +375,7 @@
             (click)="activeAddonTab.set('chat')"
           >
             <atom-icon name="sparkles" size="sm" />
-            <span>AI Copilot (Storybook MCP)</span>
+            <span>Rustbook AI (Native MCP)</span>
           </button>
         </div>
       </div>
@@ -514,7 +537,138 @@
           </div>
         }
 
-        <!-- TAB 3: COLORUST & ACCESSIBILITY -->
+        <!-- TAB 3: BRAND PRESETS & COLOR PICKER -->
+        @if (activeAddonTab() === 'tokens') {
+          <div class="rustbook-tokens">
+            <!-- 1-Click Brand Presets Grid -->
+            <div class="rustbook-tokens__section">
+              <div class="rustbook-tokens__section-header">
+                <h4>1-Click Brand Palettes</h4>
+                <span class="rustbook-tokens__section-sub">Switch entire design system palette instantly</span>
+              </div>
+              <div class="rustbook-presets-grid">
+                @for (preset of studioService.presets; track preset.id) {
+                  <button
+                    type="button"
+                    class="rustbook-preset-card"
+                    [class.active]="studioService.tokens().primaryColor === preset.tokens.primaryColor"
+                    (click)="applyBrandPreset(preset.id)"
+                  >
+                    <div class="rustbook-preset-card__colors">
+                      <span class="rustbook-preset-card__swatch" [style.background]="preset.tokens.primaryColor" title="Primary"></span>
+                      <span class="rustbook-preset-card__swatch" [style.background]="preset.tokens.secondaryColor" title="Secondary"></span>
+                      <span class="rustbook-preset-card__swatch" [style.background]="preset.tokens.accentColor" title="Accent"></span>
+                    </div>
+                    <div class="rustbook-preset-card__info">
+                      <span class="rustbook-preset-card__name">{{ preset.name }}</span>
+                      <span class="rustbook-preset-card__hex">{{ preset.tokens.primaryColor }}</span>
+                    </div>
+                  </button>
+                }
+              </div>
+            </div>
+
+            <!-- Custom Color Pickers -->
+            <div class="rustbook-tokens__section">
+              <div class="rustbook-tokens__section-header">
+                <h4>Custom Brand Color Pickers</h4>
+                <span class="rustbook-tokens__section-sub">Fine-tune OKLCH tokens with live preview</span>
+              </div>
+              <div class="rustbook-pickers-grid">
+                <!-- Primary Color -->
+                <div class="rustbook-picker-card">
+                  <div class="rustbook-picker-card__header">
+                    <label for="primary-color-picker">Primary Color (Brand Core)</label>
+                    <code>{{ studioService.tokens().primaryColor }}</code>
+                  </div>
+                  <div class="rustbook-picker-card__body">
+                    <input
+                      id="primary-color-picker"
+                      type="color"
+                      class="rustbook-color-input"
+                      [value]="studioService.tokens().primaryColor"
+                      (input)="onPrimaryColorInput($event)"
+                    />
+                    <input
+                      type="text"
+                      class="rustbook-hex-input"
+                      [value]="studioService.tokens().primaryColor"
+                      (change)="onPrimaryColorChange($event)"
+                    />
+                  </div>
+                </div>
+
+                <!-- Secondary Color -->
+                <div class="rustbook-picker-card">
+                  <div class="rustbook-picker-card__header">
+                    <label for="secondary-color-picker">Secondary Color</label>
+                    <code>{{ studioService.tokens().secondaryColor }}</code>
+                  </div>
+                  <div class="rustbook-picker-card__body">
+                    <input
+                      id="secondary-color-picker"
+                      type="color"
+                      class="rustbook-color-input"
+                      [value]="studioService.tokens().secondaryColor"
+                      (input)="onSecondaryColorInput($event)"
+                    />
+                    <input
+                      type="text"
+                      class="rustbook-hex-input"
+                      [value]="studioService.tokens().secondaryColor"
+                      (change)="onSecondaryColorChange($event)"
+                    />
+                  </div>
+                </div>
+
+                <!-- Accent Color -->
+                <div class="rustbook-picker-card">
+                  <div class="rustbook-picker-card__header">
+                    <label for="accent-color-picker">Accent / Highlights</label>
+                    <code>{{ studioService.tokens().accentColor }}</code>
+                  </div>
+                  <div class="rustbook-picker-card__body">
+                    <input
+                      id="accent-color-picker"
+                      type="color"
+                      class="rustbook-color-input"
+                      [value]="studioService.tokens().accentColor"
+                      (input)="onAccentColorInput($event)"
+                    />
+                    <input
+                      type="text"
+                      class="rustbook-hex-input"
+                      [value]="studioService.tokens().accentColor"
+                      (change)="onAccentColorChange($event)"
+                    />
+                  </div>
+                </div>
+
+                <!-- Border Radius Slider -->
+                <div class="rustbook-picker-card">
+                  <div class="rustbook-picker-card__header">
+                    <label for="radius-slider">Border Radius Scale</label>
+                    <code>{{ studioService.tokens().borderRadius }}px</code>
+                  </div>
+                  <div class="rustbook-picker-card__body rustbook-picker-card__body--slider">
+                    <input
+                      id="radius-slider"
+                      type="range"
+                      min="0"
+                      max="24"
+                      step="2"
+                      class="rustbook-range-input"
+                      [value]="studioService.tokens().borderRadius"
+                      (input)="onRadiusInput($event)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- TAB 4: COLORUST & ACCESSIBILITY -->
         @if (activeAddonTab() === 'a11y') {
           <div class="rustbook-a11y">
             <div class="rustbook-a11y__grid">
@@ -631,7 +785,7 @@
           </div>
         }
 
-        <!-- TAB 5: AI COPILOT CHAT (STORYBOOK MCP) -->
+        <!-- TAB 6: RUSTBOOK AI CHAT (NATIVE MCP) -->
         @if (activeAddonTab() === 'chat') {
           <div class="rustbook-chat">
             <div class="rustbook-chat__messages">
@@ -639,7 +793,7 @@
                 <div class="rustbook-chat__msg" [class.rustbook-chat__msg--user]="msg.sender === 'user'">
                   <div class="rustbook-chat__bubble">
                     <div class="rustbook-chat__meta">
-                      <span class="rustbook-chat__author">{{ msg.sender === 'user' ? 'You' : 'Rustbook MCP Copilot' }}</span>
+                      <span class="rustbook-chat__author">{{ msg.sender === 'user' ? 'You' : 'Rustbook AI' }}</span>
                       <span class="rustbook-chat__time">{{ msg.timestamp }}</span>
                     </div>
                     <p class="rustbook-chat__text">{{ msg.text }}</p>
