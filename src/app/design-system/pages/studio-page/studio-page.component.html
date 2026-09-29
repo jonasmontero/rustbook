@@ -94,6 +94,30 @@
         <span class="rustbook-toolbar__story-name">{{ selectedStory() }}</span>
       </div>
 
+      <!-- Storybook Mode Switcher (Canvas vs Docs) -->
+      <div class="rustbook-toolbar__viewmode">
+        <button
+          type="button"
+          class="rustbook-toolbar__viewmode-btn"
+          [class.active]="viewMode() === 'canvas'"
+          (click)="viewMode.set('canvas')"
+          title="Component Story Canvas"
+        >
+          <atom-icon name="sparkles" size="sm" />
+          <span>Canvas</span>
+        </button>
+        <button
+          type="button"
+          class="rustbook-toolbar__viewmode-btn"
+          [class.active]="viewMode() === 'docs'"
+          (click)="viewMode.set('docs')"
+          title="Autodocs & Component API Reference"
+        >
+          <atom-icon name="copy" size="sm" />
+          <span>Docs</span>
+        </button>
+      </div>
+
       <!-- Center Viewport Switcher -->
       <div class="rustbook-toolbar__viewports">
         <button
@@ -195,9 +219,10 @@
       </div>
     </header>
 
-    <!-- Center Canvas Sandbox -->
-    <div
-      class="rustbook-canvas"
+    @if (viewMode() === 'canvas') {
+      <!-- Center Canvas Sandbox -->
+      <div
+        class="rustbook-canvas"
       [class.rustbook-canvas--grid]="showGrid()"
       [class.rustbook-canvas--outlines]="showOutlines()"
     >
@@ -849,5 +874,262 @@
         }
       </div>
     </section>
+  } @else {
+    <!-- AUTODOCS / COMPONENT DOCUMENTATION PAGE -->
+    <section class="rustbook-docs">
+      <div class="rustbook-docs__container">
+        <!-- Docs Header -->
+        <header class="rustbook-docs__header">
+          <div class="rustbook-docs__badge-row">
+            <span class="rustbook-docs__category-badge">{{ activeDocMetadata().category }}</span>
+            <span class="rustbook-docs__status-badge">{{ activeDocMetadata().status }}</span>
+            <span class="rustbook-docs__pkg-badge">{{ activeDocMetadata().package }}</span>
+          </div>
+          <h1 class="rustbook-docs__title">{{ activeDocMetadata().name }}</h1>
+          <p class="rustbook-docs__summary">{{ activeDocMetadata().summary }}</p>
+        </header>
+
+        <!-- Primary Live Story & Code Box -->
+        <section class="rustbook-docs__section">
+          <div class="rustbook-docs__section-title-row">
+            <h2 class="rustbook-docs__section-title">Interactive Story Sandbox</h2>
+            <div class="rustbook-docs__code-actions">
+              <button
+                type="button"
+                class="rustbook-docs__btn"
+                (click)="showDocsCode.set(!showDocsCode())"
+              >
+                <atom-icon name="settings" size="sm" />
+                <span>{{ showDocsCode() ? 'Hide Code' : 'Show Code' }}</span>
+              </button>
+              <button
+                type="button"
+                class="rustbook-docs__btn rustbook-docs__btn--primary"
+                (click)="copyDocsCode(generateActiveStoryCode())"
+              >
+                <atom-icon name="copy" size="sm" />
+                <span>{{ copiedDocsCode() ? 'Copied to Clipboard!' : 'Copy Template Code' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Sandbox Stage -->
+          <div class="rustbook-docs__preview-box">
+            @if (selectedComponentId() === 'button') {
+              <atom-button
+                [label]="buttonProps.label()"
+                [variant]="buttonProps.variant()"
+                [size]="buttonProps.size()"
+                [loading]="buttonProps.loading()"
+                [disabled]="buttonProps.disabled()"
+                (clicked)="onButtonClicked()"
+              />
+            }
+            @if (selectedComponentId() === 'badge') {
+              <atom-badge
+                [text]="badgeProps.text()"
+                [variant]="badgeProps.variant()"
+                [size]="badgeProps.size()"
+              />
+            }
+            @if (selectedComponentId() === 'input') {
+              <atom-input
+                [placeholder]="inputProps.placeholder()"
+                [type]="inputProps.type()"
+                [error]="inputProps.error()"
+                [errorMessage]="inputProps.errorMessage()"
+                [disabled]="inputProps.disabled()"
+                [ngModel]="inputProps.value()"
+                (ngModelChange)="onInputValueChange($event)"
+              />
+            }
+            @if (selectedComponentId() === 'price-tag') {
+              <molecule-price-tag
+                [price]="priceTagProps.price()"
+                [currency]="priceTagProps.currency()"
+                [trend]="priceTagProps.trend()"
+                [discount]="priceTagProps.discount()"
+              />
+            }
+            @if (selectedComponentId() === 'alert') {
+              <molecule-alert-message
+                [message]="alertProps.message()"
+                [type]="alertProps.type()"
+                [dismissible]="alertProps.dismissible()"
+                (dismissed)="onAlertDismissed()"
+              />
+            }
+            @if (selectedComponentId() === 'stat-card') {
+              <molecule-stat-card
+                [value]="statCardProps.value()"
+                [label]="statCardProps.label()"
+                [icon]="statCardProps.icon()"
+                [iconColor]="statCardProps.iconColor()"
+              />
+            }
+            @if (selectedComponentId() === 'pie-chart') {
+              <div style="width: 360px;">
+                <organism-pie-chart
+                  title="Flight Distribution"
+                  [data]="pieData"
+                  [showPercentages]="true"
+                />
+              </div>
+            }
+            @if (selectedComponentId() === 'column-chart') {
+              <div style="width: 440px;">
+                <organism-column-chart
+                  title="Weekly Traffic Volume"
+                  [data]="columnData"
+                />
+              </div>
+            }
+            @if (selectedComponentId() === 'bar-chart') {
+              <div style="width: 440px;">
+                <organism-bar-chart
+                  title="Airline Bookings"
+                  [data]="barData"
+                />
+              </div>
+            }
+          </div>
+
+          @if (showDocsCode()) {
+            <div class="rustbook-docs__code-block">
+              <pre><code>{{ generateActiveStoryCode() }}</code></pre>
+            </div>
+          }
+        </section>
+
+        <!-- Component API Reference (Autodocs) -->
+        <section class="rustbook-docs__section">
+          <h2 class="rustbook-docs__section-title">API Reference & Inputs / Outputs</h2>
+          <div class="rustbook-docs__table-wrap">
+            <table class="rustbook-docs__api-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (prop of activeDocMetadata().props; track prop.name) {
+                  <tr>
+                    <td class="rustbook-docs__prop-name"><code>{{ prop.name }}</code></td>
+                    <td class="rustbook-docs__prop-type"><code>{{ prop.type }}</code></td>
+                    <td class="rustbook-docs__prop-default"><code>{{ prop.defaultValue }}</code></td>
+                    <td class="rustbook-docs__prop-desc">{{ prop.description }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Component Variations Gallery -->
+        <section class="rustbook-docs__section">
+          <h2 class="rustbook-docs__section-title">Component States & Variations</h2>
+          <div class="rustbook-docs__gallery">
+            @if (selectedComponentId() === 'button') {
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Primary Variant</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Primary Action" variant="primary" size="md" />
+                </div>
+                <code>variant="primary"</code>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Secondary Variant</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Secondary Action" variant="secondary" size="md" />
+                </div>
+                <code>variant="secondary"</code>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Danger Variant</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Delete Booking" variant="danger" size="md" />
+                </div>
+                <code>variant="danger"</code>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Ghost Variant</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Cancel" variant="ghost" size="md" />
+                </div>
+                <code>variant="ghost"</code>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Loading State</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Processing..." variant="primary" size="md" [loading]="true" />
+                </div>
+                <code>[loading]="true"</code>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Disabled State</span>
+                <div class="rustbook-docs__gallery-render">
+                  <atom-button label="Unavailable" variant="primary" size="md" [disabled]="true" />
+                </div>
+                <code>[disabled]="true"</code>
+              </div>
+            }
+
+            @if (selectedComponentId() === 'badge') {
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Success</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Confirmed" variant="success" /></div>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Warning</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Delayed 20m" variant="warning" /></div>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Danger</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Cancelled" variant="danger" /></div>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Azul Airlines</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Azul Linhas" variant="azul" /></div>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Gol Airlines</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Gol Linhas" variant="gol" /></div>
+              </div>
+              <div class="rustbook-docs__gallery-item">
+                <span class="rustbook-docs__gallery-label">Latam Airlines</span>
+                <div class="rustbook-docs__gallery-render"><atom-badge text="Latam Airlines" variant="latam" /></div>
+              </div>
+            }
+          </div>
+        </section>
+
+        <!-- Usage Guidelines (Dos & Don'ts) -->
+        <section class="rustbook-docs__section">
+          <h2 class="rustbook-docs__section-title">Design Guidelines & Best Practices</h2>
+          <div class="rustbook-docs__guidelines-grid">
+            <div class="rustbook-docs__guideline-card rustbook-docs__guideline-card--do">
+              <h3>Recommended (Do)</h3>
+              <ul>
+                @for (item of activeDocMetadata().dos; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </div>
+            <div class="rustbook-docs__guideline-card rustbook-docs__guideline-card--dont">
+              <h3>Prohibited (Don't)</h3>
+              <ul>
+                @for (item of activeDocMetadata().donts; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  }
   </main>
 </div>

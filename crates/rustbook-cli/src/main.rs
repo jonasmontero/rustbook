@@ -6,14 +6,17 @@
 //! - `rustbook palette <hex>` -> Generates 11-step OKLCH tonal scale
 //! - `rustbook export <target>` -> Compiles tokens to target language (css, tailwind, swift, kotlin, dart)
 
+mod init;
+
 use clap::{Parser, Subcommand};
+use init::init_project;
 use rustbook_codegen::{compile_tokens, TargetPlatform};
 use rustbook_core::color::{audit_contrast, generate_tonal_palette, Rgb};
 use rustbook_core::tokens::ThemeTokens;
 
 #[derive(Parser)]
 #[command(name = "rustbook")]
-#[command(about = "🦀 The blazing-fast, AI-native Storybook alternative in Rust", long_about = None)]
+#[command(about = "Rustbook: The blazing-fast, AI-native Storybook alternative in Rust", long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
@@ -21,6 +24,11 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    /// Initialize Rustbook in a new or existing project (zero-config scaffolding)
+    Init {
+        #[arg(short, long, help = "Explicit framework: angular, react, next, vue, svelte, web-components")]
+        framework: Option<String>,
+    },
     /// Start the native Rustbook development & MCP server
     Dev {
         #[arg(short, long, default_value_t = 6006)]
@@ -55,9 +63,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     match cli.command {
+        Commands::Init { framework } => {
+            init_project(framework)?;
+        }
         Commands::Dev { port } => {
             println!("============================================================");
-            println!(" 🦀 Rustbook — The AI-Native Storybook Alternative in Rust");
+            println!(" Rustbook — The AI-Native Storybook Alternative in Rust");
             println!("============================================================");
             rustbook_server::start_server(port).await?;
         }
