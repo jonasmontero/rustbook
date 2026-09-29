@@ -2,12 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>DesignSystem</title>
+  <title>Rustbook Studio — Design System</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <!-- SVG Color Vision Deficiency (CVD) Filters -->
+  <svg id="cvd-filters" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <!-- Protanopia (Red-Blind / L-Cone defect) -->
+      <filter id="cvd-protanopia">
+        <feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0  0.558, 0.442, 0, 0, 0  0, 0.242, 0.758, 0, 0  0, 0, 0, 1, 0" />
+      </filter>
+
+      <!-- Deuteranopia (Green-Blind / M-Cone defect) -->
+      <filter id="cvd-deuteranopia">
+        <feColorMatrix type="matrix" values="0.625, 0.375, 0, 0, 0  0.700, 0.300, 0, 0, 0  0, 0.300, 0.700, 0, 0  0, 0, 0, 1, 0" />
+      </filter>
+
+      <!-- Tritanopia (Blue-Blind / S-Cone defect) -->
+      <filter id="cvd-tritanopia">
+        <feColorMatrix type="matrix" values="0.950, 0.050, 0, 0, 0  0, 0.433, 0.567, 0, 0  0, 0.475, 0.525, 0, 0  0, 0, 0, 1, 0" />
+      </filter>
+
+      <!-- Achromatopsia (Total Monochromacy / Grayscale) -->
+      <filter id="cvd-achromatopsia">
+        <feColorMatrix type="matrix" values="0.299, 0.587, 0.114, 0, 0  0.299, 0.587, 0.114, 0, 0  0.299, 0.587, 0.114, 0, 0  0, 0, 0, 1, 0" />
+      </filter>
+    </defs>
+  </svg>
+
   <app-root></app-root>
 </body>
 </html>

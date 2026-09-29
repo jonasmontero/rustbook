@@ -483,6 +483,22 @@
       width: 1000px;
       height: 600px;
     }
+
+    &.cvd-protanopia {
+      filter: url('#cvd-protanopia') !important;
+    }
+
+    &.cvd-deuteranopia {
+      filter: url('#cvd-deuteranopia') !important;
+    }
+
+    &.cvd-tritanopia {
+      filter: url('#cvd-tritanopia') !important;
+    }
+
+    &.cvd-achromatopsia {
+      filter: grayscale(100%) !important;
+    }
   }
 
   &__preview-box {
