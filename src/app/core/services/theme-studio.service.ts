@@ -229,19 +229,22 @@ export class ThemeStudioService {
     root.style.setProperty('--font-family', tokens.fontFamily);
 
     // Theme Mode (Light / Dark)
+    root.setAttribute('data-theme', tokens.mode);
     if (tokens.mode === 'dark') {
       root.classList.add('dark-theme');
       root.style.setProperty('--bg-primary', '#0F172A');
       root.style.setProperty('--bg-secondary', '#1E293B');
       root.style.setProperty('--text-primary', '#F8FAFC');
-      root.style.setProperty('--text-secondary', '#94A3B8');
+      root.style.setProperty('--text-secondary', '#CBD5E1');
+      root.style.setProperty('--text-muted', '#94A3B8');
       root.style.setProperty('--border-color', '#334155');
     } else {
       root.classList.remove('dark-theme');
       root.style.setProperty('--bg-primary', '#FFFFFF');
       root.style.setProperty('--bg-secondary', '#F8FAFC');
       root.style.setProperty('--text-primary', '#0F172A');
-      root.style.setProperty('--text-secondary', '#64748B');
+      root.style.setProperty('--text-secondary', '#475569');
+      root.style.setProperty('--text-muted', '#64748B');
       root.style.setProperty('--border-color', '#E2E8F0');
     }
   }

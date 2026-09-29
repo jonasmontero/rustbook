@@ -5,7 +5,7 @@
     <div class="rustbook-sidebar__header">
       <div class="rustbook-sidebar__brand">
         <div class="rustbook-sidebar__logo">
-          <span>🦀</span>
+          <atom-icon name="sparkles" size="md" />
         </div>
         <div class="rustbook-sidebar__brand-text">
           <h2>Rustbook</h2>
@@ -78,7 +78,7 @@
     <div class="rustbook-sidebar__footer">
       <div class="rustbook-sidebar__engine-status">
         <span class="rustbook-sidebar__status-dot"></span>
-        <span>Rust Axum Server: <code>:6006</code></span>
+        <span>Rust Engine: <code>:6006</code></span>
       </div>
     </div>
   </aside>
@@ -311,7 +311,8 @@
             [class.active]="activeAddonTab() === 'controls'"
             (click)="activeAddonTab.set('controls')"
           >
-            🎛️ Controls
+            <atom-icon name="settings" size="sm" />
+            <span>Controls</span>
           </button>
           <button
             type="button"
@@ -319,7 +320,8 @@
             [class.active]="activeAddonTab() === 'actions'"
             (click)="activeAddonTab.set('actions')"
           >
-            ⚡ Actions ({{ actionsLog().length }})
+            <atom-icon name="chart" size="sm" />
+            <span>Actions ({{ actionsLog().length }})</span>
           </button>
           <button
             type="button"
@@ -327,7 +329,8 @@
             [class.active]="activeAddonTab() === 'a11y'"
             (click)="activeAddonTab.set('a11y')"
           >
-            ♿ Colorust & A11y
+            <atom-icon name="star" size="sm" />
+            <span>Colorust & A11y</span>
           </button>
           <button
             type="button"
@@ -335,7 +338,8 @@
             [class.active]="activeAddonTab() === 'codegen'"
             (click)="activeAddonTab.set('codegen')"
           >
-            📱 Multi-Codegen
+            <atom-icon name="copy" size="sm" />
+            <span>Multi-Codegen</span>
           </button>
           <button
             type="button"
@@ -343,7 +347,8 @@
             [class.active]="activeAddonTab() === 'chat'"
             (click)="activeAddonTab.set('chat')"
           >
-            🤖 AI Copilot (Storybook MCP)
+            <atom-icon name="sparkles" size="sm" />
+            <span>AI Copilot (Storybook MCP)</span>
           </button>
         </div>
       </div>
@@ -510,7 +515,7 @@
           <div class="rustbook-a11y">
             <div class="rustbook-a11y__grid">
               <div class="rustbook-a11y__card">
-                <h4>🦀 Colorust APCA & WCAG Contrast Engine</h4>
+                <h4>Colorust APCA & WCAG Contrast Engine</h4>
                 <div class="rustbook-a11y__badges">
                   <span class="rustbook-badge rustbook-badge--pass">
                     WCAG {{ wasmService.calcContrast('#FFFFFF', studioService.tokens().primaryColor).wcagRatio }}:1 PASS
@@ -585,7 +590,7 @@
                 <div class="rustbook-chat__msg" [class.rustbook-chat__msg--user]="msg.sender === 'user'">
                   <div class="rustbook-chat__bubble">
                     <div class="rustbook-chat__meta">
-                      <span class="rustbook-chat__author">{{ msg.sender === 'user' ? 'You' : '🦀 Rustbook MCP Copilot' }}</span>
+                      <span class="rustbook-chat__author">{{ msg.sender === 'user' ? 'You' : 'Rustbook MCP Copilot' }}</span>
                       <span class="rustbook-chat__time">{{ msg.timestamp }}</span>
                     </div>
                     <p class="rustbook-chat__text">{{ msg.text }}</p>
@@ -606,9 +611,18 @@
 
             <!-- Chat Suggestions Chips -->
             <div class="rustbook-chat__chips">
-              <button (click)="chatInput.set('Audit APCA contrast for current button'); sendAiMessage()">🔍 Audit APCA Contrast</button>
-              <button (click)="chatInput.set('Toggle loading spinner state'); sendAiMessage()">⚡ Set Loading State</button>
-              <button (click)="chatInput.set('Change variant to danger'); sendAiMessage()">🚨 Set Danger Variant</button>
+              <button (click)="chatInput.set('Audit APCA contrast for current button'); sendAiMessage()">
+                <atom-icon name="search" size="sm" />
+                <span>Audit APCA Contrast</span>
+              </button>
+              <button (click)="chatInput.set('Toggle loading spinner state'); sendAiMessage()">
+                <atom-icon name="refresh" size="sm" />
+                <span>Set Loading State</span>
+              </button>
+              <button (click)="chatInput.set('Change variant to danger'); sendAiMessage()">
+                <atom-icon name="x" size="sm" />
+                <span>Set Danger Variant</span>
+              </button>
             </div>
 
             <!-- Chat Input Box -->

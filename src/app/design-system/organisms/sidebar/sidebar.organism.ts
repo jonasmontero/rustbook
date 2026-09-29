@@ -25,7 +25,7 @@ export class SidebarOrganism {
     { id: '3', label: 'Compare Flights', icon: 'compare', route: '/compare' },
     { id: '4', label: 'Analytics', icon: 'analytics', route: '/analytics' },
     { id: '5', label: 'Component Workbench', icon: 'settings', route: '/workbench' },
-    { id: '6', label: '🦀 Rustbook Studio', icon: 'sparkles', route: '/studio' },
+    { id: '6', label: 'Rustbook Studio', icon: 'sparkles', route: '/studio' },
   ];
 
   @Output() navigate = new EventEmitter<string>();

@@ -1,6 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs/operators';
 import { ThemeStudioService, THEME_PRESETS, ThemePreset } from '../../core/services/theme-studio.service';
 import { IconAtom, ButtonAtom } from '../atoms';
 
@@ -13,6 +16,20 @@ import { IconAtom, ButtonAtom } from '../atoms';
 })
 export class LiveStudioComponent {
   studioService = inject(ThemeStudioService);
+  private router = inject(Router);
+
+  readonly currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => e.urlAfterRedirects)
+    ),
+    { initialValue: this.router.url }
+  );
+
+  readonly isStudioRoute = computed(() => {
+    const url = this.currentUrl();
+    return url ? url.includes('/studio') : false;
+  });
 
   activeTab = signal<'theme' | 'colorust' | 'knobs' | 'export'>('theme');
   presets = THEME_PRESETS;

@@ -363,22 +363,22 @@ export class StudioPageComponent {
 
     if (q.includes('contrast') || q.includes('apca') || q.includes('wcag')) {
       const contrast = this.wasmService.calcContrast('#FFFFFF', this.studioService.tokens().primaryColor);
-      steps.push('👁️ Searched active tokens and computed OKLCH space');
-      steps.push('✓ Ran audit_color_contrast — Rustbook MCP (0.01ms)');
+      steps.push('[Inspect] Searched active tokens and computed OKLCH space');
+      steps.push('[MCP Tool] Ran audit_color_contrast (0.01ms)');
       replyText = `Audited foreground #FFFFFF against ${this.studioService.tokens().primaryColor}: WCAG Ratio is ${contrast.wcagRatio}:1 (${contrast.wcagPass ? 'PASS AA' : 'FAIL'}), APCA Lc is ${contrast.apcaLc} (${contrast.apcaPass ? 'PASS' : 'FAIL'}).`;
     } else if (q.includes('loading') || q.includes('spin')) {
       this.buttonProps.loading.set(true);
-      steps.push('👁️ Inspected ButtonAtom schema');
-      steps.push('✓ Ran mutate_component_prop — Rustbook MCP');
-      steps.push('✓ Updated buttonLoading to true in Canvas');
+      steps.push('[Inspect] Inspected ButtonAtom schema');
+      steps.push('[MCP Tool] Ran mutate_component_prop');
+      steps.push('[Success] Updated buttonLoading to true in Canvas');
       replyText = `I have toggled the loading state on the ButtonAtom component.`;
     } else if (q.includes('danger') || q.includes('delete') || q.includes('red')) {
       this.buttonProps.variant.set('danger');
-      steps.push('✓ Ran set_variant("danger") — Rustbook MCP');
+      steps.push('[MCP Tool] Ran set_variant("danger")');
       replyText = `Set ButtonAtom variant to danger.`;
     } else {
-      steps.push('👁️ Queried Rustbook Native MCP Server');
-      steps.push('✓ Ran list_design_tokens — Rustbook MCP');
+      steps.push('[Inspect] Queried Rustbook Native MCP Server');
+      steps.push('[MCP Tool] Ran list_design_tokens');
       replyText = `I analyzed your request against the design token schema. All components are aligned with current OKLCH tokens.`;
     }
 

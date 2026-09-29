@@ -1,3 +1,4 @@
+@if (!isStudioRoute()) {
 <!-- Floating Trigger Button -->
 <button
   type="button"
@@ -210,7 +211,7 @@
     <!-- TAB 2: COLORUST ENGINE (RUST & SCIENCE) -->
     @if (activeTab() === 'colorust') {
       <div class="live-studio__section">
-        <h4 class="live-studio__section-title">🦀 Rustbook Engine: APCA & WCAG Contrast</h4>
+        <h4 class="live-studio__section-title">Colorust Engine: APCA & WCAG Contrast</h4>
         <p class="live-studio__section-desc">
           Real-time perceptual math computed by the <strong>Colorust Rust core</strong>.
         </p>
@@ -454,3 +455,4 @@
     </button>
   </div>
 </aside>
+}
